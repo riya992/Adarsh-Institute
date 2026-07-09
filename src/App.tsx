@@ -9,6 +9,7 @@ import FAQ from "./components/FAQ";
 import EnrollmentForm from "./components/EnrollmentForm";
 import Gallery from "./components/Gallery";
 import Chatbot from "./components/Chatbot";
+import RightFloatingBar from "./components/RightFloatingBar";
 import AutoEnquiryModal from "./components/AutoEnquiryModal";
 import Footer from "./components/Footer";
 import { ActiveTab } from "./types";
@@ -147,6 +148,9 @@ export default function App() {
 
       {/* 💬 Floating WhatsApp Button & AI Conversational Chatbot */}
       <Chatbot />
+
+      {/* ➡️ Sticky Right Action Sidebar Bar */}
+      <RightFloatingBar />
 
       {/* 🔮 Automatic Enquiry Modal on website open */}
       <AutoEnquiryModal onSuccess={handleLoginSuccess} isLoggedIn={isLoggedIn} />

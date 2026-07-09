@@ -193,6 +193,6 @@ export const CONTACT_INFO = {
   website: "www.adarshinstitute.edu",
   instagram: "https://www.instagram.com/adarsh_computereducationnarela?igsh=bnhodXlqbzB5Mnls",
   whatsappGroup: "https://chat.whatsapp.com/invite/AdarshComputerLegacyCircle",
-  facebook: "https://facebook.com/adarsh.computer.legacy",
+  facebook: "https://www.facebook.com/share/1DTAQXq9eC/",
   youtube: "https://youtube.com/c/AdarshInstituteLegacy"
 };

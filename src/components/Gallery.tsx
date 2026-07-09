@@ -2,6 +2,19 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Grid, Image, Eye, X, Laptop, Award, BookOpen, Building, Sparkles } from "lucide-react";
 
+// Resolve custom Adarsh Institute infrastructure images
+const adarshEntrance = new URL("../assets/images/adarsh_entrance_1783592081494.jpg", import.meta.url).href;
+const adarshReceptionDesk = new URL("../assets/images/adarsh_reception_desk_1783592098744.jpg", import.meta.url).href;
+const adarshCorridor = new URL("../assets/images/adarsh_corridor_hallway_1783592113063.jpg", import.meta.url).href;
+const adarshLabStudents1 = new URL("../assets/images/adarsh_lab_students_1_1783592129241.jpg", import.meta.url).href;
+const adarshClassroomTeacher = new URL("../assets/images/adarsh_classroom_teacher_1783592141446.jpg", import.meta.url).href;
+const adarshLabStudents2 = new URL("../assets/images/adarsh_lab_students_2_1783592152496.jpg", import.meta.url).href;
+const adarshClassroomProjector = new URL("../assets/images/adarsh_classroom_projector_1783592164564.jpg", import.meta.url).href;
+const adarshLabGroup = new URL("../assets/images/adarsh_lab_group_1783592196550.jpg", import.meta.url).href;
+const adarshStudentCollab = new URL("../assets/images/adarsh_student_collab_1783592209845.jpg", import.meta.url).href;
+const adarshSeminarHall = new URL("../assets/images/adarsh_seminar_hall_1783592222349.jpg", import.meta.url).href;
+const adarshAwardCeremony = new URL("../assets/images/adarsh_award_ceremony_1783592240914.jpg", import.meta.url).href;
+
 interface GalleryImage {
   id: string;
   category: "all" | "labs" | "classrooms" | "library" | "events";
@@ -12,60 +25,81 @@ interface GalleryImage {
 
 const GALLERY_IMAGES: GalleryImage[] = [
   {
-    id: "lab1",
-    category: "labs",
-    title: "Advanced Computer Lab",
-    description: "High-speed network and modern desktops running programming & financial software.",
-    imageUrl: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    id: "lab2",
-    category: "labs",
-    title: "Software Innovation Suite",
-    description: "Dedicated workstation space for coding, web development, and algorithmic legacy projects.",
-    imageUrl: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop"
-  },
-  {
-    id: "class1",
+    id: "entrance",
     category: "classrooms",
-    title: "Interactive Smart Class",
-    description: "Equipped with interactive display panels and visual aids for comfortable learning.",
-    imageUrl: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=800&auto=format&fit=crop"
+    title: "Adarsh Institute Entrance Staircase",
+    description: "Our professional welcoming entrance staircase displaying the Adarsh Computer Education board, courses, and credentials.",
+    imageUrl: adarshEntrance
   },
   {
-    id: "class2",
+    id: "reception_desk",
     category: "classrooms",
-    title: "Seminar & Conference Hall",
-    description: "Spacious seating designed for guest lectures, student presentations, and tech seminars.",
-    imageUrl: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop"
+    title: "Student Inquiry & Reception Desk",
+    description: "Our friendly reception lobby and admission inquiry counter helping students explore curriculum pathways and course schedules.",
+    imageUrl: adarshReceptionDesk
   },
   {
-    id: "lib1",
+    id: "corridor_hallway",
+    category: "classrooms",
+    title: "Academic Corridor Showcase",
+    description: "Bright, clean, and professional institute corridor with visible signboards for Counselling Office, Class Room 1, and emergency guides.",
+    imageUrl: adarshCorridor
+  },
+  {
+    id: "lab_students_1",
+    category: "labs",
+    title: "Main IT Computer Lab",
+    description: "Fully-equipped high-performance computing lab where students learn programming, accounting, and design on modern LCD monitors.",
+    imageUrl: adarshLabStudents1
+  },
+  {
+    id: "lab_group",
+    category: "labs",
+    title: "Practical Software Lab Workspace",
+    description: "Spacious laboratory seating for active student batches to practice coding challenges, financial modeling, and web design.",
+    imageUrl: adarshLabGroup
+  },
+  {
+    id: "student_collab",
     category: "library",
-    title: "Digital & Physical Library",
-    description: "Hundreds of curriculum resources, software guides, and tranquil quiet study pods.",
-    imageUrl: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=800&auto=format&fit=crop"
+    title: "Study Area & Reference Library",
+    description: "Dedicated study desks and resources encouraging student group learning, peer reference log checks, and interactive development discussions.",
+    imageUrl: adarshStudentCollab
   },
   {
-    id: "event1",
-    category: "events",
-    title: "Graduation & Cap Throwing",
-    description: "Students celebrating their high-achieving corporate legacy placement and certification.",
-    imageUrl: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=800&auto=format&fit=crop"
+    id: "lab_students_2",
+    category: "labs",
+    title: "Hands-on Technical Practice",
+    description: "Students diligently coding, practicing database queries, and keeping detailed reference logs during their software training.",
+    imageUrl: adarshLabStudents2
   },
   {
-    id: "event2",
-    category: "events",
-    title: "Collaborative Hackathons",
-    description: "Exciting group milestones, coding sprints, and local community legacy competitions.",
-    imageUrl: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop"
+    id: "classroom_teacher",
+    category: "classrooms",
+    title: "Interactive Interactive Lecture",
+    description: "Experienced faculty explaining logic, database structures, and office automation concepts on the board in a dedicated classroom.",
+    imageUrl: adarshClassroomTeacher
   },
   {
-    id: "event3",
+    id: "classroom_projector",
+    category: "classrooms",
+    title: "Smart Projector Classroom",
+    description: "Modern classroom featuring hybrid display capability, ceiling-mounted projectors, and clean workspaces for optimized attention.",
+    imageUrl: adarshClassroomProjector
+  },
+  {
+    id: "seminar_hall",
     category: "events",
-    title: "Award & Certificate Ceremony",
-    description: "Honoring top merit holders in advanced computer literacy and administrative diplomas.",
-    imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop"
+    title: "Student Seminars & Presentations",
+    description: "Spacious interactive presentation hall where students demonstrate project work, participate in workshops, and attend guest seminars.",
+    imageUrl: adarshSeminarHall
+  },
+  {
+    id: "award_ceremony",
+    category: "events",
+    title: "Achievements & Certification Awards",
+    description: "Celebrating student milestones, course completions, and diploma awards under high achievement benchmarks of Adarsh.",
+    imageUrl: adarshAwardCeremony
   }
 ];
 

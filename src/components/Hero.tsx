@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { ActiveTab } from "../types";
 
+const adarshClassroomProjector = new URL("../assets/images/adarsh_classroom_projector_1783592164564.jpg", import.meta.url).href;
+
 interface HeroProps {
   setActiveTab: (tab: ActiveTab) => void;
   isLoggedIn: boolean;
@@ -118,8 +120,8 @@ export default function Hero({ setActiveTab, isLoggedIn }: HeroProps) {
             {/* Main Styled Image Frame */}
             <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 group">
               <img
-                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=1000&auto=format&fit=crop"
-                alt="Adarsh Computer Lab Learning Environment"
+                src={adarshClassroomProjector}
+                alt="Adarsh Classroom Learning Environment"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
               />

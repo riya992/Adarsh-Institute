@@ -1,5 +1,5 @@
 import React from "react";
-import { Phone, Instagram, ShieldCheck } from "lucide-react";
+import { Phone, ShieldCheck } from "lucide-react";
 import { CONTACT_INFO } from "../data";
 
 export default function TopBar() {
@@ -26,19 +26,6 @@ export default function TopBar() {
       {/* Right Social Section */}
       <div id="topbar-socials" className="flex items-center gap-4">
         <span className="text-slate-700 dark:text-blue-300 font-display font-medium tracking-wide">Adarsh Institute</span>
-        <div className="w-px h-3 bg-slate-300 dark:bg-primary-800" />
-        <a
-          href={CONTACT_INFO.instagram}
-          target="_blank"
-          referrerPolicy="no-referrer"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 hover:text-slate-900 dark:hover:text-white text-slate-600 dark:text-blue-200 transition-colors duration-200"
-          title="Follow us on Instagram"
-          id="topbar-instagram-link"
-        >
-          <Instagram className="w-3.5 h-3.5 text-accent-600 dark:text-accent-400 hover:scale-110 transition-transform" />
-          <span className="hidden sm:inline">Instagram</span>
-        </a>
       </div>
     </div>
   );

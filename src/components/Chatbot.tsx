@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { MessageSquare, X, Send, Cpu, Trash2, Check, MessageCircle, HelpCircle, ArrowUpRight, ShieldAlert } from "lucide-react";
+import { MessageSquare, X, Send, Cpu, Trash2, Check, HelpCircle, ArrowUpRight, ShieldAlert } from "lucide-react";
 import { ChatMessage } from "../types";
 import { CONTACT_INFO } from "../data";
 
@@ -15,6 +15,7 @@ export default function Chatbot() {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [showBubble, setShowBubble] = useState(true);
   
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -231,32 +232,55 @@ export default function Chatbot() {
         </div>
       )}
 
-      {/* Tray of Buttons */}
-      <div className="flex items-center gap-3">
-        {/* Instant WhatsApp Link */}
-        <a
-          href={CONTACT_INFO.whatsappGroup}
-          target="_blank"
-          referrerPolicy="no-referrer"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-green-600/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer text-xs font-semibold group"
-          title="Join WhatsApp student circle"
-          id="btn-whatsapp-group"
-        >
-          <MessageCircle className="w-5 h-5 fill-white text-green-500 group-hover:scale-110 transition-transform" />
-          <span className="hidden sm:inline">Join WhatsApp Invite</span>
-        </a>
+      {/* Chatbot Trigger Container with Friendly Speech Bubble */}
+      <div className="flex items-center gap-3 relative">
+        
+        {/* Friendly speech bubble next to the trigger button */}
+        {!isOpen && showBubble && (
+          <div 
+            id="chatbot-greeting-bubble" 
+            className="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 px-4 py-2.5 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold animate-bounce shrink-0 relative mr-1 select-none"
+            style={{ animationDuration: "3s" }}
+          >
+            {/* Tiny arrow pointing to the button */}
+            <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white dark:bg-slate-900 border-t border-r border-slate-200 dark:border-slate-800 rotate-45" />
+            
+            <span>Hello! How can I help?</span>
+            
+            {/* Close button for the bubble */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowBubble(false);
+              }}
+              className="ml-1 p-0.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors cursor-pointer"
+              title="Dismiss greeting"
+              id="btn-close-bubble"
+            >
+              <X className="w-3 h-3" />
+            </button>
+          </div>
+        )}
 
         {/* AI Query Chatbot Trigger */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className={`flex items-center gap-2 bg-gradient-to-tr from-primary-600 to-accent-500 text-white p-3.5 rounded-full shadow-xl hover:shadow-primary-600/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer ${
-            isOpen ? "bg-slate-800 from-slate-800 to-slate-900 ring-2 ring-white/10" : ""
+          onClick={() => {
+            setIsOpen(!isOpen);
+            if (!isOpen) {
+              setShowBubble(false);
+            }
+          }}
+          className={`flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white rounded-full shadow-2xl hover:shadow-primary-600/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer ${
+            isOpen ? "bg-slate-800 from-slate-800 to-slate-900 ring-4 ring-white/10" : ""
           }`}
           title="Query AI Assistant"
           id="btn-chatbot-trigger"
         >
-          {isOpen ? <X className="w-5 h-5 text-white" /> : <MessageSquare className="w-5 h-5 text-white" />}
+          {isOpen ? (
+            <X className="w-6 h-6 text-white animate-in spin-in-90 duration-200" />
+          ) : (
+            <MessageSquare className="w-6 h-6 text-white fill-white/10 group-hover:scale-110 transition-transform" />
+          )}
         </button>
       </div>
 
