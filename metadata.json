@@ -1,0 +1,6 @@
+{
+  "name": "Adarsh Institute",
+  "description": "A premium educational institute portal with glassmorphism design, dynamic eligibility criteria, and a Gemini-powered AI chatbot.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
