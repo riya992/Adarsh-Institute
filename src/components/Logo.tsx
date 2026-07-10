@@ -17,7 +17,7 @@ export default function Logo({ className = "", variant = "light", compact = fals
 
   return (
     <div 
-      className={`flex items-center justify-center bg-white p-1 rounded-xl shadow-sm border border-slate-200/50 ${className}`} 
+      className={`flex items-center justify-center bg-white dark:bg-slate-950 p-1 rounded-xl shadow-sm border border-slate-200/50 dark:border-slate-850 ${className}`} 
       id={compact ? "adarsh-brand-logo-compact" : "adarsh-brand-logo"}
     >
       <img
