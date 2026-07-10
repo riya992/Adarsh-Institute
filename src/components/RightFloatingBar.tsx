@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MessageCircle, Phone, Instagram, Download, ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { MessageCircle, Phone, Instagram, Download, ChevronLeft, ChevronRight, Check, Facebook } from "lucide-react";
 import { CONTACT_INFO } from "../data";
 
 export default function RightFloatingBar() {
@@ -123,6 +123,23 @@ Join the Legacy of Professional Excellence!
             Instagram Page
           </span>
           <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+        </a>
+
+        {/* 4. Facebook Button (Facebook Blue #1877F2) */}
+        <a
+          href="https://www.facebook.com/share/1DTAQXq9eC/"
+          target="_blank"
+          referrerPolicy="no-referrer"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center w-14 h-14 bg-[#1877F2] hover:bg-[#166fe5] text-white transition-all duration-300 cursor-pointer"
+          title="Follow Facebook"
+          id="sidebar-facebook"
+        >
+          {/* Slide-out tooltip label */}
+          <span className="absolute right-14 top-0 h-full px-4 bg-[#1877F2] text-white text-xs font-bold items-center justify-center hidden group-hover:flex transition-all duration-300 rounded-l-xl whitespace-nowrap shadow-md border-r border-white/10">
+            Facebook Page
+          </span>
+          <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform fill-white text-[#1877F2]" />
         </a>
 
         {/* 4. Download Syllabus/Brochure (Red) */}

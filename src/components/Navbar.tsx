@@ -34,7 +34,6 @@ export default function Navbar({ activeTab, setActiveTab, isLoggedIn, username, 
     { id: "home", label: "Home" },
     { id: "about", label: "About Us" },
     { id: "programmes", label: "Programmes" },
-    { id: "academia", label: "Academia" },
     { id: "gallery", label: "Infrastructure & Gallery" },
   ];
 
