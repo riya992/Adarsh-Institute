@@ -1,554 +1,433 @@
-import React, { useState } from "react";
-import { BookOpen, Globe, GraduationCap, Trophy, BookCheck, ArrowRight, ArrowLeft, Plus, Minus, Calendar, Users, Award, Shield } from "lucide-react";
-import { COURSE_CATALOG_DATA, CatalogCategory, CourseDetail } from "../courseCatalogData";
+import React, { useState, useEffect } from "react";
+import { 
+  BookOpen, 
+  Globe, 
+  GraduationCap, 
+  Trophy, 
+  BookCheck, 
+  ArrowRight, 
+  ArrowLeft, 
+  Plus, 
+  Minus, 
+  Calendar, 
+  Users, 
+  Award, 
+  Shield, 
+  Check, 
+  ChevronRight,
+  Sparkles,
+  School,
+  HeartPulse,
+  Wrench,
+  BookMarked
+} from "lucide-react";
+import { CATEGORIES_DATA, getCourseDetails, CourseCategory, CourseBrief } from "../courseCatalogData";
+
+type CurrentView = 
+  | { type: "programs" }
+  | { type: "category"; categoryId: string }
+  | { type: "course"; categoryId: string; courseId: string; courseName: string };
 
 export default function Eligibility() {
-  const [activeCategoryId, setActiveCategoryId] = useState<string>("diploma");
-  const [selectedCourse, setSelectedCourse] = useState<CourseDetail | null>(null);
+  const [currentView, setCurrentView] = useState<CurrentView>({ type: "programs" });
 
-  // States for sub-selections within B.Tech and MBA
-  const [selectedBtechStream, setSelectedBtechStream] = useState<string>("Computer Science & Engineering");
-  const [selectedMbaSpecialization, setSelectedMbaSpecialization] = useState<string>("Financial Management");
+  // Scroll to the main section top whenever the view changes
+  useEffect(() => {
+    document.getElementById("programmes-section")?.scrollIntoView({ behavior: "smooth" });
+  }, [currentView]);
 
-  // Get active category
-  const activeCategory = COURSE_CATALOG_DATA.find(cat => cat.id === activeCategoryId) || COURSE_CATALOG_DATA[0];
+  // Categories mapping to quickly find category titles
+  const categoriesMap: Record<string, string> = {
+    regular: "Regular Courses",
+    distance: "Distance Learning",
+    ug: "Undergraduate (UG) Programmes",
+    pg: "Postgraduate (PG) Programmes",
+    diploma: "Diploma Programmes"
+  };
 
-  const getCategoryIcon = (id: string, active: boolean) => {
-    const baseClass = "w-7 h-7 transition-all duration-300";
-    const activeColorClass = active ? "text-white" : "";
-    
+  // Get active category object based on state
+  const activeCategory = currentView.type !== "programs" 
+    ? CATEGORIES_DATA.find(cat => cat.id === currentView.categoryId)
+    : null;
+
+  const getCategoryIcon = (id: string) => {
+    const baseClass = "w-8 h-8 transition-colors duration-300";
     switch (id) {
-      case "diploma":
-        return <BookCheck className={`${baseClass} ${activeColorClass || "text-amber-500 group-hover:text-amber-400"}`} />;
       case "regular":
-        return <BookOpen className={`${baseClass} ${activeColorClass || "text-red-500 group-hover:text-red-400"}`} />;
+        return <BookOpen className={`${baseClass} text-red-500`} />;
       case "distance":
-        return <Globe className={`${baseClass} ${activeColorClass || "text-emerald-500 group-hover:text-emerald-400 animate-pulse"}`} />;
+        return <Globe className={`${baseClass} text-emerald-500 animate-pulse`} />;
       case "ug":
-        return <GraduationCap className={`${baseClass} ${activeColorClass || "text-rose-500 group-hover:text-rose-400"}`} />;
+        return <GraduationCap className={`${baseClass} text-rose-500`} />;
       case "pg":
-        return <Trophy className={`${baseClass} ${activeColorClass || "text-sky-500 group-hover:text-sky-400"}`} />;
+        return <Trophy className={`${baseClass} text-sky-500`} />;
+      case "diploma":
+        return <BookCheck className={`${baseClass} text-amber-500`} />;
       default:
-        return <BookCheck className={`${baseClass} ${activeColorClass || "text-amber-500"}`} />;
+        return <BookCheck className={`${baseClass} text-amber-500`} />;
     }
   };
 
-  // Helper to handle course click from the sidebar
-  const handleCourseClick = (courseName: string, detail: CourseDetail) => {
-    setSelectedCourse(detail);
-    // Scroll to the course container
-    setTimeout(() => {
-      document.getElementById("programmes-section")?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+  const getHighlightIcon = (index: number) => {
+    const baseClass = "w-5 h-5";
+    switch (index) {
+      case 0: return <School className={`${baseClass} text-amber-500`} />;
+      case 1: return <BookMarked className={`${baseClass} text-blue-500`} />;
+      case 2: return <Sparkles className={`${baseClass} text-purple-500`} />;
+      case 3: return <Users className={`${baseClass} text-rose-500`} />;
+      case 4: return <Award className={`${baseClass} text-emerald-500`} />;
+      case 5: return <Wrench className={`${baseClass} text-sky-500`} />;
+      case 6: return <Shield className={`${baseClass} text-red-500`} />;
+      case 7: return <Calendar className={`${baseClass} text-indigo-500`} />;
+      default: return <Sparkles className={`${baseClass} text-amber-500`} />;
+    }
   };
 
-  // Define B.Tech streams lists and MBA specializations lists
-  const btechStreams = [
-    "Aerospace Engineering",
-    "Aeronautical Engineering",
-    "Aircraft Maintenance Engineering",
-    "Civil Engineering",
-    "Computer Science & Engineering",
-    "AI & ML",
-    "Cyber Security",
-    "Electrical Engineering",
-    "Mechanical Engineering",
-    "Electronics & Communication Engineering"
-  ];
-
-  const mbaSpecializations = [
-    "Aviation Management",
-    "Financial Management",
-    "Human Resource Management",
-    "Marketing Management",
-    "Operations Management"
-  ];
-
   return (
-    <section id="programmes-section" className="py-24 bg-slate-900 dark:bg-slate-950 relative transition-colors duration-300 overflow-hidden">
+    <section id="programmes-section" className="py-24 bg-slate-900 dark:bg-slate-950 relative transition-colors duration-300 overflow-hidden min-h-[700px]">
       {/* Background radial glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary-950/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Course Catalog Title */}
-        <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-semibold text-primary-500 dark:text-red-400 uppercase tracking-widest bg-primary-950/40 border border-primary-900/60 px-4 py-2 rounded-full">
-            Technical & Professional Education Legacy
-          </span>
-          <h2 className="font-display font-black text-4xl sm:text-5xl text-white tracking-tight">
-            Programmes & Courses
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto font-medium">
-            Unlock your potential with our multi-layered curriculum dashboard. Transition between study modes and engineering pathways.
-          </p>
-        </div>
+        {/* Breadcrumb Navigation (For Step 2 and 3) */}
+        {currentView.type !== "programs" && (
+          <nav className="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-8 select-none bg-slate-950/20 w-fit px-4 py-2 rounded-xl border border-slate-800/40">
+            <button 
+              onClick={() => setCurrentView({ type: "programs" })}
+              className="hover:text-primary-500 dark:hover:text-red-400 transition-colors cursor-pointer"
+            >
+              Programs
+            </button>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-650" />
+            <button 
+              onClick={() => setCurrentView({ type: "category", categoryId: currentView.categoryId })}
+              className={`hover:text-primary-500 dark:hover:text-red-400 transition-colors cursor-pointer ${
+                currentView.type === "category" ? "text-white pointer-events-none font-bold" : ""
+              }`}
+            >
+              {categoriesMap[currentView.categoryId]}
+            </button>
+            {currentView.type === "course" && (
+              <>
+                <ChevronRight className="w-3.5 h-3.5 text-slate-650" />
+                <span className="text-white font-bold">{currentView.courseName}</span>
+              </>
+            )}
+          </nav>
+        )}
 
-        {/* Dashboard Sequence Controller */}
-        {!selectedCourse ? (
-          /* LAYER 1 & 2: CATEGORY DASHBOARD AND SIDEBAR MENU */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch" id="catalog-dashboard-container">
+        {/* ---------------------------------------------------- */}
+        {/* STEP 1: LANDING PAGE VIEW (5 Category Cards Only) */}
+        {currentView.type === "programs" && (
+          <div className="space-y-16 animate-in fade-in duration-500">
             
-            {/* Left Column (lg:col-span-6): 5 Dashboard Category Cards */}
-            <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
-              <div className="space-y-4">
-                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">
-                  Select Educational Stream (Layer 1)
-                </h3>
-                
-                {COURSE_CATALOG_DATA.map((category) => {
-                  const isActive = activeCategoryId === category.id;
-                  return (
-                    <div
-                      key={category.id}
-                      onMouseEnter={() => setActiveCategoryId(category.id)}
-                      onClick={() => setActiveCategoryId(category.id)}
-                      className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer flex items-center justify-between group relative overflow-hidden ${
-                        isActive
-                          ? "bg-slate-800/80 border-primary-500/80 shadow-lg shadow-primary-950/30 translate-x-1.5"
-                          : "bg-slate-900/40 hover:bg-slate-800/40 border-slate-800 hover:border-slate-700"
-                      }`}
-                    >
-                      {/* Left accent bar */}
-                      <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${
-                        isActive ? "bg-primary-500" : "bg-transparent group-hover:bg-slate-700"
-                      }`} />
-
-                      <div className="flex items-center gap-4">
-                        <div className={`p-3 rounded-xl transition-all duration-300 ${
-                          isActive 
-                            ? "bg-primary-600 shadow-md shadow-primary-950/20" 
-                            : "bg-slate-900 dark:bg-slate-950"
-                        }`}>
-                          {getCategoryIcon(category.id, isActive)}
-                        </div>
-                        <div>
-                          <h4 className={`font-display font-bold text-sm transition-colors ${
-                            isActive ? "text-white" : "text-slate-200 group-hover:text-white"
-                          }`}>
-                            {category.title}
-                          </h4>
-                          <p className="text-[11px] text-slate-400 group-hover:text-slate-350 mt-1 max-w-sm line-clamp-1">
-                            {category.description}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <span className={`text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-md transition-all ${
-                          isActive
-                            ? "bg-primary-950/60 text-accent-400 border border-primary-900"
-                            : "bg-slate-900/80 text-slate-400 border border-slate-800 group-hover:border-slate-750"
-                        }`}>
-                          {category.courses.length} {category.courses.length === 1 ? "Program" : "Programs"}
-                        </span>
-                        <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${
-                          isActive ? "text-primary-400 translate-x-1" : "text-slate-500 group-hover:text-slate-350 group-hover:translate-x-0.5"
-                        }`} />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Call Counselor bar inside left column */}
-              <div className="p-5 rounded-2xl bg-gradient-to-tr from-slate-900 to-slate-850 border border-slate-800/80 flex items-center justify-between gap-4 mt-6">
-                <div className="flex items-center gap-3">
-                  <div className="bg-slate-850 p-2.5 rounded-xl text-primary-400 border border-slate-750">
-                    <BookCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h5 className="font-bold text-xs text-white">Need help choosing a program?</h5>
-                    <p className="text-[10px] text-slate-400">Speak directly with our counselor at the helpdesk.</p>
-                  </div>
-                </div>
-                <a
-                  href="tel:+919212621301"
-                  className="px-4 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-950 font-bold text-[10px] uppercase tracking-wider transition-colors shrink-0"
-                >
-                  Call Now
-                </a>
-              </div>
+            {/* Section Heading */}
+            <div className="text-center space-y-4">
+              <span className="text-xs font-bold text-primary-500 dark:text-red-400 uppercase tracking-widest bg-primary-950/50 border border-primary-900/60 px-4 py-2 rounded-full">
+                Course Catalog & Pathways
+              </span>
+              <h2 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
+                Eligibility Criteria & Programmes
+              </h2>
             </div>
 
-            {/* Right Column (lg:col-span-6): Dedicated Vertical Sidebar Menu */}
-            <div className="lg:col-span-6 flex flex-col">
-              <div className="bg-slate-900/60 border border-slate-800/80 rounded-3xl p-6 sm:p-8 flex-1 flex flex-col justify-between relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-primary-950/10 rounded-full blur-3xl pointer-events-none" />
+            {/* 5 Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" id="eligibility-cards-grid">
+              {CATEGORIES_DATA.map((category) => (
+                <div
+                  key={category.id}
+                  onClick={() => setCurrentView({ type: "category", categoryId: category.id })}
+                  className="bg-slate-900/40 hover:bg-slate-800/60 rounded-2xl p-6 border border-slate-800 hover:border-primary-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
+                  id={`eligibility-card-${category.id}`}
+                >
+                  {/* Top border line gradient on hover */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                <div className="space-y-6">
-                  {/* Sidebar Title */}
-                  <div className="flex items-center justify-between pb-4 border-b border-slate-800/60">
-                    <div>
-                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary-500">
-                        Active Sidebar Menu (Layer 2)
-                      </span>
-                      <h4 className="font-display font-black text-xl text-white mt-0.5">
-                        {activeCategory.title} Index
-                      </h4>
+                  <div className="space-y-4">
+                    {/* Visual Icon */}
+                    <div className="bg-slate-950 p-3.5 rounded-xl inline-block group-hover:bg-primary-950/40 transition-colors border border-slate-800">
+                      {getCategoryIcon(category.id)}
                     </div>
-                    <div className="bg-slate-850/80 px-3 py-1.5 rounded-xl border border-slate-750 text-[10px] text-slate-450 font-semibold flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                      Dynamic Sync
+
+                    {/* Card Title */}
+                    <h3 className="font-display font-bold text-base text-slate-200 group-hover:text-white transition-colors">
+                      {category.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-[11px] text-slate-400 leading-relaxed min-h-[50px]">
+                      {category.description}
+                    </p>
+                  </div>
+
+                  {/* Action Link */}
+                  <div className="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold text-primary-400 group-hover:text-white bg-slate-950 hover:bg-primary-600 transition-all duration-300 text-center border border-slate-850">
+                    Explore courses <ArrowRight className="w-3.5 h-3.5 inline-block ml-1 transition-transform group-hover:translate-x-0.5" />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        )}
+
+        {/* ---------------------------------------------------- */}
+        {/* STEP 2: CATEGORY VIEW (Courses List under Category) */}
+        {currentView.type === "category" && activeCategory && (
+          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-500">
+            
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                  {getCategoryIcon(activeCategory.id)}
+                </div>
+                <div>
+                  <h3 className="font-display font-black text-2xl text-white">
+                    {activeCategory.title}
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    {activeCategory.description}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setCurrentView({ type: "programs" })}
+                className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
+              >
+                <ArrowLeft className="w-4 h-4" /> All Programs
+              </button>
+            </div>
+
+            {/* Courses listing */}
+            {activeCategory.subGroups ? (
+              /* If Category has Subgroups (like Diploma) */
+              <div className="space-y-12">
+                {activeCategory.subGroups.map((group) => (
+                  <div key={group.name} className="space-y-5">
+                    <h4 className="font-display font-extrabold text-sm uppercase tracking-widest text-primary-500 dark:text-red-400 flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-primary-500 rounded-full animate-pulse" />
+                      {group.name}
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {group.courses.map((course) => (
+                        <div
+                          key={course.id}
+                          onClick={() => setCurrentView({ type: "course", categoryId: activeCategory.id, courseId: course.id, courseName: course.name })}
+                          className="bg-slate-900/30 hover:bg-slate-800/40 border border-slate-850 hover:border-slate-700 rounded-2xl p-6 flex flex-col justify-between hover:shadow-lg transition-all cursor-pointer group"
+                        >
+                          <div className="space-y-2">
+                            <span className="font-bold text-sm text-slate-200 group-hover:text-white transition-colors block">
+                              {course.name}
+                            </span>
+                            <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
+                              {course.description}
+                            </p>
+                          </div>
+                          
+                          <div className="mt-4 flex items-center text-[11px] font-semibold text-primary-400 group-hover:text-white transition-colors w-fit pt-2 border-t border-slate-850/60 w-full justify-between">
+                            <span>View Details</span>
+                            <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              /* Normal Flat Grid (for UG, PG, Regular, Distance) */
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {activeCategory.courses.map((course) => (
+                  <div
+                    key={course.id}
+                    onClick={() => setCurrentView({ type: "course", categoryId: activeCategory.id, courseId: course.id, courseName: course.name })}
+                    className="bg-slate-900/30 hover:bg-slate-800/40 border border-slate-850 hover:border-slate-700 rounded-2xl p-6 flex flex-col justify-between hover:shadow-lg transition-all cursor-pointer group"
+                  >
+                    <div className="space-y-2">
+                      <span className="font-bold text-sm text-slate-200 group-hover:text-white transition-colors block">
+                        {course.name}
+                      </span>
+                      <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
+                        {course.description}
+                      </p>
+                    </div>
+                    
+                    <div className="mt-4 flex items-center text-[11px] font-semibold text-primary-400 group-hover:text-white transition-colors w-fit pt-2 border-t border-slate-850/60 w-full justify-between">
+                      <span>View Details</span>
+                      <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+          </div>
+        )}
+
+        {/* ---------------------------------------------------- */}
+        {/* STEP 3: COURSE INFORMATION VIEW (Detailed Page Template) */}
+        {currentView.type === "course" && (
+          (() => {
+            const courseDetails = getCourseDetails(currentView.courseId, currentView.categoryId, currentView.courseName);
+            return (
+              <div className="space-y-8 animate-in fade-in zoom-in-98 duration-500" id="course-details-template-view">
+                
+                {/* Back Link Row */}
+                <div className="flex justify-start">
+                  <button
+                    onClick={() => setCurrentView({ type: "category", categoryId: currentView.categoryId })}
+                    className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-850 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+                  >
+                    <ArrowLeft className="w-4 h-4" /> Back to {categoriesMap[currentView.categoryId]} Index
+                  </button>
+                </div>
+
+                {/* Hero Section */}
+                <div className="bg-gradient-to-r from-blue-950/80 to-slate-900 rounded-3xl p-6 sm:p-8 border border-blue-900/40 shadow-xl relative overflow-hidden">
+                  <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-blue-500/5 to-transparent pointer-events-none" />
+                  
+                  <div className="space-y-3">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-950/80 border border-blue-900/50 px-3.5 py-1.5 rounded-full inline-block">
+                      {categoriesMap[currentView.categoryId]}
+                    </span>
+                    <h2 className="font-display font-black text-2xl sm:text-4xl text-blue-100 tracking-tight">
+                      {courseDetails.name}
+                    </h2>
+                    <div className="h-0.5 w-12 bg-primary-500 my-2" />
+                    <p className="text-xs sm:text-sm font-bold text-slate-350 tracking-wide uppercase italic">
+                      "{courseDetails.tagline}"
+                    </p>
+                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-2xl mt-2 font-medium">
+                      {courseDetails.introduction}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Split Details Row (About & Duration Card) */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  
+                  {/* About the Course (Crisp white bg, dark text) */}
+                  <div className="lg:col-span-8 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md text-slate-900">
+                    <h3 className="font-display font-black text-base uppercase tracking-wider mb-4 text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                      <BookOpen className="w-5 h-5 text-primary-600" /> About the Course
+                    </h3>
+                    <p className="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
+                      {courseDetails.about}
+                    </p>
+                  </div>
+
+                  {/* Duration Card (Crisp white bg, dark text) */}
+                  <div className="lg:col-span-4 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md text-slate-900 flex flex-col justify-center min-h-[150px]">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Duration & Structure</span>
+                    <h4 className="font-display font-black text-2xl text-slate-900">
+                      {courseDetails.duration.split(" (")[0]}
+                    </h4>
+                    <span className="text-[11px] font-bold text-slate-500 mt-1 block">
+                      {courseDetails.duration.split(" (")[1]?.replace(")", "") || "Full Academic Track"}
+                    </span>
+                  </div>
+
+                </div>
+
+                {/* Eligibility & Highlights Row */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  
+                  {/* Eligibility Card (Crisp white bg, dark text) */}
+                  <div className="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md text-slate-900">
+                    <h3 className="font-display font-black text-base uppercase tracking-wider mb-4 text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
+                      <Shield className="w-5 h-5 text-primary-600" /> Eligibility Criteria
+                    </h3>
+                    <ul className="space-y-3 list-none pl-0">
+                      {courseDetails.eligibility.map((req, idx) => (
+                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
+                          <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" strokeWidth={3} />
+                          <span>{req}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Highlights Grid (lg:col-span-7) */}
+                  <div className="lg:col-span-7 space-y-4">
+                    <h3 className="font-display font-black text-sm uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                      <Sparkles className="w-5 h-5 text-primary-500" /> Course Highlights
+                    </h3>
+                    
+                    <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
+                      {courseDetails.highlights.slice(0, 4).map((highlight, idx) => (
+                        <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm text-slate-900 flex flex-col justify-between hover:shadow-md transition-shadow">
+                          <div className="bg-slate-100 p-2 rounded-xl text-primary-600 inline-block w-fit mb-3 border border-slate-100">
+                            {getHighlightIcon(idx)}
+                          </div>
+                          <span className="text-xs font-bold text-slate-800 leading-snug">{highlight}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Course Index List */}
-                  <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
-                    {activeCategory.courses.map((course) => (
-                      <button
-                        key={course.name}
-                        onClick={() => handleCourseClick(course.name, course.detail)}
-                        className="w-full text-left p-4 bg-slate-950/40 hover:bg-slate-900 border border-slate-850 hover:border-slate-700/80 rounded-xl transition-all duration-300 flex items-center justify-between group/item cursor-pointer"
-                      >
-                        <div className="space-y-1">
-                          <span className="font-bold text-xs text-slate-200 group-hover/item:text-white transition-colors block">
-                            {course.name}
-                          </span>
-                          <div className="flex items-center gap-3">
-                            <span className="text-[10px] text-slate-450 flex items-center gap-1">
-                              <Calendar className="w-3 h-3 text-slate-500" /> {course.detail.duration}
-                            </span>
-                            <span className="text-[10px] text-slate-450">• {course.detail.modeOfStudy}</span>
-                          </div>
+                </div>
+
+                {/* Additional Highlights Cards (remaining 4) */}
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    {courseDetails.highlights.slice(4, 8).map((highlight, idx) => (
+                      <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm text-slate-900 flex flex-col justify-between hover:shadow-md transition-shadow">
+                        <div className="bg-slate-100 p-2 rounded-xl text-primary-600 inline-block w-fit mb-3 border border-slate-100">
+                          {getHighlightIcon(idx + 4)}
                         </div>
-                        
-                        <div className="flex items-center gap-2">
-                          {course.badge && (
-                            <span className="bg-emerald-950/60 text-emerald-400 border border-emerald-900/50 text-[9px] font-extrabold uppercase px-2 py-0.5 rounded">
-                              {course.badge}
-                            </span>
-                          )}
-                          <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover/item:text-white group-hover/item:translate-x-1 transition-all" />
-                        </div>
-                      </button>
+                        <span className="text-xs font-bold text-slate-800 leading-snug">{highlight}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Eligibility Summary Footer */}
-                <div className="mt-8 pt-4 border-t border-slate-800/40 bg-slate-950/30 p-4 rounded-2xl border border-slate-850 text-xs flex items-center justify-between gap-4">
-                  <div>
-                    <span className="block text-[9px] font-bold uppercase tracking-wider text-primary-500">
-                      Standard Eligibility Requirement
-                    </span>
-                    <span className="font-bold text-slate-200 block mt-0.5">
-                      {activeCategory.eligibilitySummary}
-                    </span>
-                  </div>
-                  <span className="text-[10px] text-slate-450 shrink-0">Click course to view syllabus</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        ) : (
-          /* LAYER 3: INDIVIDUAL COURSE INNER PAGE DEEP-DIVE TEMPLATE */
-          <div className="space-y-8 animate-in fade-in zoom-in-95 duration-500" id="course-deepdive-container">
-            
-            {/* Back Button */}
-            <div className="flex justify-start">
-              <button
-                onClick={() => setSelectedCourse(null)}
-                className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 hover:border-slate-700 transition-all font-bold text-xs uppercase tracking-wider cursor-pointer flex items-center gap-2"
-              >
-                <ArrowLeft className="w-4 h-4" /> Back to Catalog Dashboard
-              </button>
-            </div>
-
-            {/* Course Hero Header (Distinct bold dark-blue stylized title) */}
-            <div className="bg-gradient-to-r from-blue-950/90 to-slate-900 rounded-3xl p-6 sm:p-8 border border-blue-900/60 shadow-xl relative overflow-hidden">
-              <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-blue-500/5 to-transparent pointer-events-none" />
-              
-              <div className="space-y-2">
-                <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 bg-blue-950/80 border border-blue-800/40 px-3 py-1 rounded-full inline-block">
-                  {activeCategory.title} Catalog (Layer 3)
-                </span>
-                <h3 className="font-display font-black text-2xl sm:text-4xl text-blue-100 tracking-tight">
-                  {selectedCourse.name}
-                </h3>
-                <p className="text-slate-400 text-xs sm:text-sm font-medium">
-                  Comprehensive academic catalog profile, objectives, highlights, and semester breakdown syllabus.
-                </p>
-              </div>
-            </div>
-
-            {/* Quick-Facts Summary Card (Crisp white / ultra-light solid bg, sharp dark charcoal text) */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-lg text-slate-900">
-              <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-1.5">
-                <Shield className="w-4 h-4 text-slate-400" /> Course Specifications & Metadata
-              </h4>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="p-2.5 rounded-xl bg-slate-200/50 text-slate-800">
-                    <Calendar className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-500 block">Course Duration</span>
-                    <span className="font-black text-sm text-slate-900">{selectedCourse.duration}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="p-2.5 rounded-xl bg-slate-200/50 text-slate-800">
-                    <Award className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-500 block">Mode of Study</span>
-                    <span className="font-black text-sm text-slate-900">{selectedCourse.modeOfStudy}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="p-2.5 rounded-xl bg-slate-200/50 text-slate-800">
-                    <Users className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-500 block">Seat Intake & Batches</span>
-                    <span className="font-black text-sm text-slate-900">{selectedCourse.seatIntake}</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            {/* B.Tech Sub-Streams or MBA Specializations tab section if applicable */}
-            {selectedCourse.name.includes("B.Tech") && (
-              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white space-y-4">
-                <div>
-                  <h4 className="font-bold text-sm text-white flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
-                    Select B.Tech Specialization Stream (10 Sub-streams Available):
-                  </h4>
-                  <p className="text-slate-400 text-[11px] mt-0.5">Toggle streams to load targeted curriculum profiles.</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {btechStreams.map(stream => (
-                    <button
-                      key={stream}
-                      onClick={() => setSelectedBtechStream(stream)}
-                      className={`px-3 py-1.5 rounded-xl text-[11px] font-bold tracking-wide transition-all cursor-pointer border ${
-                        selectedBtechStream === stream
-                          ? "bg-primary-600 text-white border-transparent shadow-md"
-                          : "bg-slate-950/40 text-slate-400 hover:text-white border-slate-800 hover:border-slate-700"
-                      }`}
-                    >
-                      {stream}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {selectedCourse.name === "Master of Business Administration (MBA)" && (
-              <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 text-white space-y-4">
-                <div>
-                  <h4 className="font-bold text-sm text-white flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
-                    Select MBA Specialization (5 Tracks Available):
-                  </h4>
-                  <p className="text-slate-400 text-[11px] mt-0.5">Toggle tracks to explore dedicated curriculum focus.</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {mbaSpecializations.map(spec => (
-                    <button
-                      key={spec}
-                      onClick={() => setSelectedMbaSpecialization(spec)}
-                      className={`px-3.5 py-2 rounded-xl text-[11px] font-bold tracking-wide transition-all cursor-pointer border ${
-                        selectedMbaSpecialization === spec
-                          ? "bg-primary-600 text-white border-transparent shadow-md"
-                          : "bg-slate-950/40 text-slate-400 hover:text-white border-slate-800 hover:border-slate-700"
-                      }`}
-                    >
-                      {spec}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Four-Tier Expandable Accordion System (ELIGIBILITY, COURSE OBJECTIVE, PROGRAMME HIGHLIGHTS, PROGRAMME SYLLABUS) */}
-            <div className="space-y-4" id="course-accordions-group">
-              
-              {/* Accordion 1: ELIGIBILITY */}
-              <DeepDiveAccordionItem 
-                title="ELIGIBILITY" 
-                defaultOpen={true}
-              >
-                <div className="space-y-3">
-                  <span className="inline-block text-[9px] font-black uppercase tracking-widest text-slate-500 bg-slate-200/50 px-2.5 py-1 rounded">
-                    Board Requirements & Cut-offs
-                  </span>
-                  <p className="text-xs text-slate-700 font-bold leading-relaxed">
-                    {selectedCourse.name.includes("B.Tech") 
-                      ? `Minimum 60% aggregate marks in 10+2 with Physics, Chemistry, and Mathematics (PCM) as compulsory subjects. Admission via JEE Main ranking or college entrance test for ${selectedBtechStream}.` 
-                      : selectedCourse.name === "Master of Business Administration (MBA)"
-                      ? `Minimum 50% aggregate marks in Graduation in any stream from a recognized university. Valid scores in national exams like CAT, MAT, CMAT, or equivalent required for ${selectedMbaSpecialization}.`
-                      : selectedCourse.eligibility}
-                  </p>
-                </div>
-              </DeepDiveAccordionItem>
-
-              {/* Accordion 2: COURSE OBJECTIVE */}
-              <DeepDiveAccordionItem title="COURSE OBJECTIVE">
-                <p className="text-xs text-slate-750 font-medium leading-relaxed">
-                  {selectedCourse.name.includes("B.Tech")
-                    ? `Our B.Tech in ${selectedBtechStream} aims to build deep, state-of-the-art computational and engineering capabilities. Students undergo intensive sandbox training, design analysis, and laboratory validation protocols targeting modern technical positions.`
-                    : selectedCourse.name === "Master of Business Administration (MBA)"
-                    ? `The objective of this program is to build top-tier strategic management capabilities tailored for the ${selectedMbaSpecialization} domain, developing leadership skills, analytical problem solving, and global business models.`
-                    : selectedCourse.objective}
-                </p>
-              </DeepDiveAccordionItem>
-
-              {/* Accordion 3: PROGRAMME HIGHLIGHTS */}
-              <DeepDiveAccordionItem title="PROGRAMME HIGHLIGHTS">
-                <ul className="space-y-3 list-none pl-0">
-                  {selectedCourse.highlights.map((highlight, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-xs text-slate-750 font-medium leading-relaxed">
-                      <span className="w-5 h-5 rounded-full bg-slate-200/50 text-slate-800 flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                  {selectedCourse.name.includes("B.Tech") && (
-                    <li className="flex items-start gap-3 text-xs text-slate-750 font-medium leading-relaxed">
-                      <span className="w-5 h-5 rounded-full bg-slate-200/50 text-slate-800 flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">
-                        {selectedCourse.highlights.length + 1}
-                      </span>
-                      <span>Focused specialization labs and industry training for <strong>{selectedBtechStream}</strong>.</span>
-                    </li>
-                  )}
-                  {selectedCourse.name === "Master of Business Administration (MBA)" && (
-                    <li className="flex items-start gap-3 text-xs text-slate-750 font-medium leading-relaxed">
-                      <span className="w-5 h-5 rounded-full bg-slate-200/50 text-slate-800 flex items-center justify-center shrink-0 text-[10px] font-bold mt-0.5">
-                        {selectedCourse.highlights.length + 1}
-                      </span>
-                      <span>Hands-on case studies and industry mentorship specifically for <strong>{selectedMbaSpecialization}</strong>.</span>
-                    </li>
-                  )}
-                </ul>
-              </DeepDiveAccordionItem>
-
-              {/* Accordion 4: PROGRAMME SYLLABUS */}
-              <DeepDiveAccordionItem title="PROGRAMME SYLLABUS">
+                {/* Career Opportunities */}
                 <div className="space-y-5">
-                  <div className="p-3 bg-slate-100 rounded-xl border border-slate-200/40 text-[10px] font-extrabold uppercase tracking-widest text-slate-500 mb-2">
-                    Curriculum Timeline & Semester Breakdown
-                  </div>
-
-                  <div className="space-y-4">
-                    {/* Render active syllabus based on selected stream/spec if BTech/MBA */}
-                    {selectedCourse.name.includes("B.Tech") ? (
-                      <div className="space-y-4">
-                        <div className="text-xs text-slate-800 font-bold mb-3 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500" />
-                          Curriculum Track: B.Tech in {selectedBtechStream}
-                        </div>
-                        {selectedCourse.syllabus.map((sem, idx) => (
-                          <div key={idx} className="bg-slate-50 border border-slate-150 rounded-2xl p-4">
-                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">
-                              {sem.semester}
-                            </span>
-                            <div className="flex flex-wrap gap-1.5">
-                              {/* Inject stream-specific topics for sem 3-8, else general */}
-                              {idx >= 2 ? (
-                                <>
-                                  {sem.subjects.filter(s => !s.includes("Sub-Stream")).map(sub => (
-                                    <span key={sub} className="bg-white border border-slate-200 text-slate-800 px-3 py-1 rounded-lg text-[11px] font-bold">
-                                      {sub}
-                                    </span>
-                                  ))}
-                                  <span className="bg-blue-50 border border-blue-200 text-blue-800 px-3 py-1 rounded-lg text-[11px] font-black">
-                                    {selectedBtechStream} - Core Practice
-                                  </span>
-                                  <span className="bg-blue-50 border border-blue-200 text-blue-800 px-3 py-1 rounded-lg text-[11px] font-black">
-                                    {selectedBtechStream} - Elective Project
-                                  </span>
-                                </>
-                              ) : (
-                                sem.subjects.map(sub => (
-                                  <span key={sub} className="bg-white border border-slate-200 text-slate-800 px-3 py-1 rounded-lg text-[11px] font-bold">
-                                    {sub}
-                                  </span>
-                                ))
-                              )}
-                            </div>
-                          </div>
-                        ))}
+                  <h3 className="font-display font-black text-sm uppercase tracking-wider text-slate-350 flex items-center gap-2">
+                    <Users className="w-5 h-5 text-primary-500" /> Career Opportunities
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {courseDetails.careerOpportunities.map((career, idx) => (
+                      <div key={idx} className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm text-slate-900 hover:shadow-md transition-shadow flex items-center gap-3">
+                        <div className="w-2.5 h-2.5 rounded-full bg-primary-650 shrink-0" />
+                        <span className="text-xs font-bold text-slate-800">{career}</span>
                       </div>
-                    ) : selectedCourse.name === "Master of Business Administration (MBA)" ? (
-                      <div className="space-y-4">
-                        <div className="text-xs text-slate-800 font-bold mb-3 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary-500" />
-                          Curriculum Track: MBA in {selectedMbaSpecialization}
-                        </div>
-                        {selectedCourse.syllabus.map((sem, idx) => (
-                          <div key={idx} className="bg-slate-50 border border-slate-150 rounded-2xl p-4">
-                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">
-                              {sem.semester}
-                            </span>
-                            <div className="flex flex-wrap gap-1.5">
-                              {idx >= 2 ? (
-                                <>
-                                  {sem.subjects.filter(s => !s.includes("Specialization")).map(sub => (
-                                    <span key={sub} className="bg-white border border-slate-200 text-slate-800 px-3 py-1 rounded-lg text-[11px] font-bold">
-                                      {sub}
-                                    </span>
-                                  ))}
-                                  <span className="bg-blue-50 border border-blue-200 text-blue-800 px-3 py-1 rounded-lg text-[11px] font-black">
-                                    {selectedMbaSpecialization} Specialization I
-                                  </span>
-                                  <span className="bg-blue-50 border border-blue-200 text-blue-800 px-3 py-1 rounded-lg text-[11px] font-black">
-                                    {selectedMbaSpecialization} Specialization II
-                                  </span>
-                                </>
-                              ) : (
-                                sem.subjects.map(sub => (
-                                  <span key={sub} className="bg-white border border-slate-200 text-slate-800 px-3 py-1 rounded-lg text-[11px] font-bold">
-                                    {sub}
-                                  </span>
-                                ))
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      selectedCourse.syllabus.map((sem, idx) => (
-                        <div key={idx} className="bg-slate-50 border border-slate-150 rounded-2xl p-4">
-                          <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-2">
-                            {sem.semester}
-                          </span>
-                          <div className="flex flex-wrap gap-1.5">
-                            {sem.subjects.map(sub => (
-                              <span key={sub} className="bg-white border border-slate-200 text-slate-800 px-3 py-1 rounded-lg text-[11px] font-bold">
-                                {sub}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      ))
-                    )}
+                    ))}
                   </div>
                 </div>
-              </DeepDiveAccordionItem>
 
-            </div>
+                {/* FAQs (Accordion System at the bottom) */}
+                <div className="space-y-5 pt-8 border-t border-slate-800/80">
+                  <h3 className="font-display font-black text-sm uppercase tracking-wider text-slate-350 flex items-center gap-2">
+                    <BookCheck className="w-5 h-5 text-primary-500" /> Course FAQs
+                  </h3>
+                  <div className="space-y-3">
+                    {courseDetails.faqs.map((faq, index) => (
+                      <CourseFaqItem key={index} question={faq.question} answer={faq.answer} />
+                    ))}
+                  </div>
+                </div>
 
-            {/* Back Button Bottom */}
-            <div className="flex justify-end pt-4">
-              <button
-                onClick={() => setSelectedCourse(null)}
-                className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 hover:border-slate-700 transition-all font-bold text-xs uppercase tracking-wider cursor-pointer flex items-center gap-2"
-              >
-                <ArrowLeft className="w-4 h-4" /> Back to Dashboard
-              </button>
-            </div>
+                {/* Enrollment Call to Action */}
+                <div className="mt-12 bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <p className="text-xs text-slate-400 leading-relaxed">
+                    Ready to take the next step? Fill out the online registration form or call our support desk to finalize admissions.
+                  </p>
+                  <button
+                    onClick={() => {
+                      document.getElementById("enrollment-section")?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-accent-500 text-white font-semibold text-xs uppercase tracking-wider hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-md cursor-pointer self-start sm:self-auto"
+                  >
+                    Enroll Now
+                  </button>
+                </div>
 
-          </div>
+              </div>
+            );
+          })()
         )}
 
       </div>
@@ -556,24 +435,18 @@ export default function Eligibility() {
   );
 }
 
-interface AccordionProps {
-  title: string;
-  children: React.ReactNode;
-  defaultOpen?: boolean;
-}
-
-function DeepDiveAccordionItem({ title, children, defaultOpen = false }: AccordionProps) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+function CourseFaqItem({ question, answer }: { question: string; answer: string; key?: React.Key }) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border border-slate-800 rounded-2xl overflow-hidden transition-all bg-slate-950/40">
+    <div className="border border-slate-800 rounded-2xl overflow-hidden transition-all bg-slate-905/30 dark:bg-slate-900/20">
       
       {/* Header bar (Dark theme) */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left px-6 py-5 flex justify-between items-center text-xs font-black tracking-widest text-slate-200 hover:text-white hover:bg-slate-900/60 transition-all cursor-pointer"
+        className="w-full text-left px-6 py-4 flex justify-between items-center text-xs font-black tracking-widest text-slate-200 hover:text-white hover:bg-slate-800/40 transition-colors cursor-pointer gap-4"
       >
-        <span>[+] {title}</span>
-        <span className="text-primary-500 dark:text-red-400 shrink-0">
+        <span>Q. {question}</span>
+        <span className="text-primary-500 dark:text-red-400 transition-transform duration-300 shrink-0">
           {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
         </span>
       </button>
@@ -581,11 +454,11 @@ function DeepDiveAccordionItem({ title, children, defaultOpen = false }: Accordi
       {/* Expansion Body (Crisp white bg, dark charcoal font weights) */}
       <div 
         className={`transition-all duration-350 ease-in-out overflow-hidden ${
-          isOpen ? "max-h-[1200px] border-t border-slate-200" : "max-h-0"
+          isOpen ? "max-h-[300px] border-t border-slate-250" : "max-h-0"
         }`}
       >
-        <div className="p-6 sm:p-8 bg-white text-slate-800 font-medium">
-          {children}
+        <div className="p-6 bg-white text-slate-800 text-xs font-semibold leading-relaxed">
+          {answer}
         </div>
       </div>
     </div>
