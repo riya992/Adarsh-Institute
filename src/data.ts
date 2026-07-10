@@ -2,6 +2,31 @@ import { CourseCategory, FAQItem } from "./types";
 
 export const COURSE_CATEGORIES: CourseCategory[] = [
   {
+    id: "skill-india",
+    title: "Computer Education Skill India Program",
+    description: "National skill development computer training programs designed for employment readiness.",
+    eligibilitySummary: "Skill Training: Open to All",
+    courses: [
+      { name: "Tally Prime ERP", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "CCC (Course on Computer Concepts)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Basic Computer Course (BCC)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Desktop Publishing (DTP)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "DCA (Diploma in Computer Applications)", duration: "12 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "DCSHN (Diploma in Computer Software, Hardware and Networking)", duration: "15 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "DCA + English Spoken Course", duration: "15 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] }
+    ],
+    faqs: [
+      {
+        question: "Who can enroll in Skill India courses?",
+        answer: "These courses are open to all students, job seekers, and working professionals looking to build practical computer skills."
+      },
+      {
+        question: "Are certificates provided?",
+        answer: "Yes, standard completion certificates are awarded upon finishing the practical exams."
+      }
+    ]
+  },
+  {
     id: "regular",
     title: "Regular Courses",
     description: "Highly focused, skill-based curriculum with hands-on lab sessions, standard examinations, and industry certification.",

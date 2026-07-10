@@ -38,6 +38,7 @@ export default function Eligibility() {
 
   // Categories mapping to quickly find category titles
   const categoriesMap: Record<string, string> = {
+    "skill-india": "Computer Education Skill India Program",
     regular: "Regular Courses",
     distance: "Distance Learning",
     ug: "Undergraduate (UG) Programmes",
@@ -53,6 +54,8 @@ export default function Eligibility() {
   const getCategoryIcon = (id: string) => {
     const baseClass = "w-8 h-8 transition-colors duration-300";
     switch (id) {
+      case "skill-india":
+        return <Sparkles className={`${baseClass} text-amber-500 animate-pulse`} />;
       case "regular":
         return <BookOpen className={`${baseClass} text-red-500`} />;
       case "distance":
@@ -132,8 +135,8 @@ export default function Eligibility() {
               </h2>
             </div>
 
-            {/* 5 Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" id="eligibility-cards-grid">
+            {/* 6 Cards Grid (Skill India, Regular, Distance, UG, PG, Diploma) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="eligibility-cards-grid">
               {CATEGORIES_DATA.map((category) => (
                 <div
                   key={category.id}
@@ -334,19 +337,33 @@ export default function Eligibility() {
                 {/* Eligibility & Highlights Row */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                   
-                  {/* Eligibility Card (Crisp white bg, dark text) */}
+                  {/* Eligibility Card / Course Highlights Box (Crisp white bg, dark text) */}
                   <div className="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md text-slate-900">
                     <h3 className="font-display font-black text-base uppercase tracking-wider mb-4 text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                      <Shield className="w-5 h-5 text-primary-600" /> Eligibility Criteria
+                      <Shield className="w-5 h-5 text-primary-600" /> {currentView.categoryId === "skill-india" ? "Course Highlights & Objectives" : "Eligibility Criteria"}
                     </h3>
-                    <ul className="space-y-3 list-none pl-0">
-                      {courseDetails.eligibility.map((req, idx) => (
-                        <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
-                          <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" strokeWidth={3} />
-                          <span>{req}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {currentView.categoryId === "skill-india" ? (
+                      <div className="space-y-3">
+                        <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">This Program Highlights:</p>
+                        <ul className="space-y-2 list-none pl-0">
+                          {courseDetails.eligibility.map((req, idx) => (
+                            <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
+                              <Check className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" strokeWidth={3} />
+                              <span>{req}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : (
+                      <ul className="space-y-3 list-none pl-0">
+                        {courseDetails.eligibility.map((req, idx) => (
+                          <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
+                            <Check className="w-4 h-4 text-green-600 shrink-0 mt-0.5" strokeWidth={3} />
+                            <span>{req}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
 
                   {/* Highlights Grid (lg:col-span-7) */}

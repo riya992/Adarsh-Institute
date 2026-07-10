@@ -27,6 +27,21 @@ export interface CourseDetail {
 
 export const CATEGORIES_DATA: CourseCategory[] = [
   {
+    id: "skill-india",
+    title: "Computer Education Skill India Program",
+    description: "National skill development computer training programs designed for employment readiness.",
+    iconId: "skill-india",
+    courses: [
+      { id: "skill-tally", name: "Tally Prime ERP", description: "3-month professional accounting training with GST and financial reporting." },
+      { id: "skill-ccc", name: "CCC (Course on Computer Concepts)", description: "3-month basic digital literacy and office automation course." },
+      { id: "skill-bcc", name: "Basic Computer Course (BCC)", description: "3-month fundamental computing, internet, and operating systems training." },
+      { id: "skill-dtp", name: "Desktop Publishing (DTP)", description: "3-month graphic designing, page layouts, and document printing course." },
+      { id: "skill-dca", name: "DCA (Diploma in Computer Applications)", description: "12-month comprehensive computer applications and programming diploma." },
+      { id: "skill-dcshn", name: "DCSHN (Diploma in Computer Software, Hardware and Networking)", description: "15-month advanced training in software apps, hardware repair, and routing." },
+      { id: "skill-dca-english", name: "DCA + English Spoken Course", description: "15-month integrated computing applications training with spoken English fluency." }
+    ]
+  },
+  {
     id: "regular",
     title: "Regular Courses",
     description: "Highly focused skill development and certification programs with practical sandbox learning modules.",
@@ -286,7 +301,17 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
   // Duration selection
   let duration = "3 Years (6 Semesters)";
   
-  if (normalizedName.includes("Integrated")) {
+  if (categoryId === "skill-india") {
+    if (normalizedName.includes("DCA + English")) {
+      duration = "15 Months";
+    } else if (normalizedName.includes("DCSHN")) {
+      duration = "15 Months";
+    } else if (normalizedName.includes("DCA")) {
+      duration = "12 Months";
+    } else {
+      duration = "3 Months";
+    }
+  } else if (normalizedName.includes("Integrated")) {
     duration = "5 Years (10 Semesters)";
   } else if (normalizedName.includes("B.Tech") && normalizedName.includes("Lateral")) {
     duration = "3 Years (6 Semesters)";
@@ -343,7 +368,57 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
     "Minimum 50% aggregate marks in the qualifying board examination."
   ];
 
-  if (categoryId === "pg" || normalizedName.startsWith("M.")) {
+  if (categoryId === "skill-india") {
+    if (normalizedName.includes("Tally")) {
+      eligibility = [
+        "Computerized business accounting foundations",
+        "GST reconciliation, invoice creations & tax returns filing",
+        "Ledger maintaining, trial balances & financial reporting protocols"
+      ];
+    } else if (normalizedName.includes("CCC")) {
+      eligibility = [
+        "Fundamental digital literacy and operating system controls",
+        "Secure web searching, email communications & attachments management",
+        "E-Governance services portals, digital signatures & online transactions"
+      ];
+    } else if (normalizedName.includes("Basic Computer")) {
+      eligibility = [
+        "Keyboard typing layouts and shortcuts training",
+        "Document composition, layout formatting & word processor editors",
+        "Spreadsheet calculations, formulas execution & presentation slideshow layouts"
+      ];
+    } else if (normalizedName.includes("Desktop Publishing")) {
+      eligibility = [
+        "Graphic templates layout, pamphlet and poster printing design",
+        "Vector illustrations drawing, logo creation & image adjustments",
+        "Working knowledge of PageMaker, Photoshop, and CorelDraw tools"
+      ];
+    } else if (normalizedName.startsWith("DCA (Diploma")) {
+      eligibility = [
+        "Structured data structures, programming logs & web scripts design",
+        "Database administrators management and queries execution",
+        "Standard digital office suites and system file operations automation"
+      ];
+    } else if (normalizedName.startsWith("DCSHN")) {
+      eligibility = [
+        "PC hardware hardware assembling, components connections & diagnostic tools",
+        "Operating systems installations, formatting & device drivers setting",
+        "LAN networks routing cables, switch ports & network sharing configurations"
+      ];
+    } else if (normalizedName.includes("English Spoken")) {
+      eligibility = [
+        "Vocal conversation fluency, pronunciation and grammar building",
+        "Integrated software applications skills combined with active spoken practices",
+        "Professional workspace communication ethics, public speaking, and resume builders"
+      ];
+    } else {
+      eligibility = [
+        "Practical sandbox learning and direct employment skills",
+        "Hands-on laboratory training with state-of-the-art workstations",
+        "Interactive workshops and industry standard certifications"
+      ];
+    }
+  } else if (categoryId === "pg" || normalizedName.startsWith("M.")) {
     eligibility = [
       "Completed Bachelor's degree in a relevant discipline from a recognized university.",
       "Minimum 50% aggregate marks (or equivalent CGPA) in the graduation exam."
