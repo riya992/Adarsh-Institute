@@ -12,8 +12,8 @@ export default function Logo({ className = "", variant = "light", compact = fals
 
   // Respect the compact flag to size the logo image appropriately
   const dimensions = compact 
-    ? "h-12 sm:h-14 w-auto object-contain" 
-    : "h-16 sm:h-20 w-auto object-contain";
+    ? "h-16 sm:h-18 w-auto object-contain" 
+    : "h-20 sm:h-28 w-auto object-contain";
 
   return (
     <div 
