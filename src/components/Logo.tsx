@@ -12,12 +12,12 @@ export default function Logo({ className = "", variant = "light", compact = fals
 
   // Respect the compact flag to size the logo image appropriately
   const dimensions = compact 
-    ? "h-10 sm:h-12 w-auto object-contain rounded-lg" 
-    : "h-14 sm:h-16 w-auto object-contain rounded-lg";
+    ? "h-12 sm:h-14 w-auto object-contain" 
+    : "h-16 sm:h-20 w-auto object-contain";
 
   return (
     <div 
-      className={`flex items-center justify-center bg-white dark:bg-slate-950 p-1 rounded-xl shadow-sm border border-slate-200/50 dark:border-slate-850 ${className}`} 
+      className={`flex items-center justify-center ${className}`} 
       id={compact ? "adarsh-brand-logo-compact" : "adarsh-brand-logo"}
     >
       <img
