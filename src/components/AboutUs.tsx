@@ -39,7 +39,7 @@ export default function AboutUs() {
             Our Legacy, Affiliation & Impact
           </span>
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-            About Adarsh Computers
+            Welcome to Adarsh Computers Institute
           </h2>
           <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
             A trusted hub of professional digital learning empowering students with certified skills, high-end practical labs, and global recognition.
