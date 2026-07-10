@@ -197,10 +197,10 @@ export const FAQ_ITEMS: FAQItem[] = [
 ];
 
 export const CONTACT_INFO = {
-  address: "Adarsh Building, Computer Legacy Block, Tech City, Sector 62",
+  address: "First Floor, near Safiabad Road, mode, Narela, Delhi, 110040",
   phone: "+91 92126 21301",
   email: "info@adarshinstitute.edu",
-  website: "www.adarshinstitute.edu",
+  website: "www.adarshinstitute.in",
   instagram: "https://www.instagram.com/adarsh_computereducationnarela?igsh=bnhodXlqbzB5Mnls",
   whatsappGroup: "https://chat.whatsapp.com/invite/AdarshComputerLegacyCircle",
   facebook: "https://www.facebook.com/share/1DTAQXq9eC/",
