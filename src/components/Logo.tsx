@@ -8,7 +8,7 @@ interface LogoProps {
 
 export default function Logo({ className = "", variant = "light", compact = false }: LogoProps) {
   // Use Vite's new URL() helper to load the asset as a string without triggering TS module resolution errors
-  const logoImg = new URL("../assets/images/adarsh_logo_1783586865466.jpg", import.meta.url).href;
+  const logoImg = new URL("../assets/images/adarsh_logo.png", import.meta.url).href;
 
   // Respect the compact flag to size the logo image appropriately
   const dimensions = compact 
