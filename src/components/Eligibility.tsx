@@ -22,13 +22,14 @@ import {
   BookMarked
 } from "lucide-react";
 import { CATEGORIES_DATA, getCourseDetails, CourseCategory, CourseBrief } from "../courseCatalogData";
+import { ActiveTab } from "../types";
 
 type CurrentView = 
   | { type: "programs" }
   | { type: "category"; categoryId: string }
   | { type: "course"; categoryId: string; courseId: string; courseName: string };
 
-export default function Eligibility() {
+export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: ActiveTab) => void }) {
   const [currentView, setCurrentView] = useState<CurrentView>({ type: "programs" });
 
   // Scroll to the main section top whenever the view changes
@@ -434,7 +435,12 @@ export default function Eligibility() {
                   </p>
                   <button
                     onClick={() => {
-                      document.getElementById("enrollment-section")?.scrollIntoView({ behavior: "smooth" });
+                      if (setActiveTab) {
+                        setActiveTab("enroll");
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      } else {
+                        document.getElementById("enrollment-section")?.scrollIntoView({ behavior: "smooth" });
+                      }
                     }}
                     className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-primary-600 to-accent-500 text-white font-semibold text-xs uppercase tracking-wider hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-md cursor-pointer self-start sm:self-auto"
                   >

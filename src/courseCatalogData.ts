@@ -32,10 +32,19 @@ export const CATEGORIES_DATA: CourseCategory[] = [
     description: "National skill development computer training programs designed for employment readiness.",
     iconId: "skill-india",
     courses: [
-      { id: "skill-tally", name: "Tally Prime ERP", description: "3-month professional accounting training with GST and financial reporting." },
-      { id: "skill-ccc", name: "CCC (Course on Computer Concepts)", description: "3-month basic digital literacy and office automation course." },
+      { id: "skill-tally", name: "Tally Prime", description: "3-month professional accounting training with GST, payroll, and financial reporting." },
+      { id: "skill-office", name: "Office Automation (Basic)", description: "Basic office automation covering MS-Word, MS-Excel, MS-PowerPoint, Paint, WordPad and Notepad." },
+      { id: "skill-dtp", name: "Desktop Publishing (DTP)", description: "3-month graphic designing course using Photoshop for photo editing and CorelDraw for graphic designing." },
+      { id: "skill-webdesign", name: "Web Designing", description: "3-month web designing course covering HTML, CSS, and Flash MX for building websites." },
+      { id: "skill-spoken-english", name: "Spoken English", description: "3-month spoken English communication course for workplace, interviews, and daily life confidence." },
+      { id: "skill-digital-marketing", name: "Digital Marketing", description: "3-month comprehensive course on SEO, social media, Google Ads, and content strategy." },
+      { id: "skill-c", name: "C Programming", description: "2-month foundational programming course covering syntax, pointers, and file handling in C." },
+      { id: "skill-cpp", name: "C++ Programming", description: "2-month object-oriented programming course covering classes, inheritance, and STL in C++." },
+      { id: "skill-java", name: "Core Java", description: "3-month Java programming course covering OOP, collections, exception handling, and JDBC." },
+      { id: "skill-python", name: "Python", description: "3-month Python programming course covering scripting, data handling, and automation." },
+      { id: "skill-mysql", name: "MySQL", description: "2-month database course covering SQL queries, joins, stored procedures, and optimization." },
+      { id: "skill-dsa", name: "DSA (Data Structures & Algorithms)", description: "3-month course covering arrays, linked lists, trees, graphs, sorting, and searching algorithms." },
       { id: "skill-bcc", name: "Basic Computer Course (BCC)", description: "3-month fundamental computing, internet, and operating systems training." },
-      { id: "skill-dtp", name: "Desktop Publishing (DTP)", description: "3-month graphic designing, page layouts, and document printing course." },
       { id: "skill-dca", name: "DCA (Diploma in Computer Applications)", description: "12-month comprehensive computer applications and programming diploma." },
       { id: "skill-dcshn", name: "DCSHN (Diploma in Computer Software, Hardware and Networking)", description: "15-month advanced training in software apps, hardware repair, and routing." },
       { id: "skill-dca-english", name: "DCA + English Spoken Course", description: "15-month integrated computing applications training with spoken English fluency." }
@@ -339,10 +348,14 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
     duration = "6 Months (Fast-track)";
   } else if (normalizedName === "DCA" || normalizedName.includes("DCA")) {
     duration = "6 Months (Single Semester)";
-  } else if (normalizedName === "Tally Prime ERP") {
+  } else if (normalizedName === "Tally Prime") {
     duration = "3 Months (Fast-track)";
-  } else if (normalizedName === "CCC") {
+  } else if (normalizedName === "Digital Marketing") {
+    duration = "3 Months (Fast-track)";
+  } else if (normalizedName === "C Programming" || normalizedName === "C++ Programming" || normalizedName === "MySQL" || normalizedName.includes("Office Automation")) {
     duration = "2 Months (Fast-track)";
+  } else if (normalizedName === "Core Java" || normalizedName === "Python" || normalizedName.includes("DSA") || normalizedName === "Web Designing" || normalizedName === "Spoken English" || normalizedName.includes("Desktop Publishing")) {
+    duration = "3 Months (Fast-track)";
   } else if (categoryId === "pg") {
     duration = "2 Years (4 Semesters)";
   } else if (categoryId === "diploma" || normalizedName.toLowerCase().includes("diploma")) {
@@ -375,6 +388,48 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
         "GST reconciliation, invoice creations & tax returns filing",
         "Ledger maintaining, trial balances & financial reporting protocols"
       ];
+    } else if (normalizedName.includes("Digital Marketing")) {
+      eligibility = [
+        "SEO, SEM & Google Analytics fundamentals",
+        "Social media management: Facebook, Instagram & LinkedIn Ads",
+        "Content marketing, email campaigns & performance tracking"
+      ];
+    } else if (normalizedName === "C Programming") {
+      eligibility = [
+        "Variables, data types, operators & control flow in C",
+        "Functions, arrays, pointers & memory management",
+        "File handling, structures & preprocessor directives"
+      ];
+    } else if (normalizedName === "C++ Programming") {
+      eligibility = [
+        "OOP concepts: classes, objects, inheritance & polymorphism",
+        "Templates, exception handling & STL (Standard Template Library)",
+        "File I/O, operator overloading & multi-paradigm programming"
+      ];
+    } else if (normalizedName === "Core Java") {
+      eligibility = [
+        "Java OOP: classes, interfaces, packages & inheritance",
+        "Collections framework, exception handling & multithreading",
+        "JDBC connectivity, file I/O & basic GUI with Swing"
+      ];
+    } else if (normalizedName === "Python") {
+      eligibility = [
+        "Python syntax, data types, loops & functions",
+        "Lists, tuples, dictionaries, sets & file handling",
+        "Modules, OOP in Python, NumPy & automation scripting"
+      ];
+    } else if (normalizedName === "MySQL") {
+      eligibility = [
+        "DDL, DML, DQL commands: CREATE, INSERT, SELECT & UPDATE",
+        "Joins, subqueries, views, indexes & stored procedures",
+        "Database normalization, transactions & user management"
+      ];
+    } else if (normalizedName.includes("DSA")) {
+      eligibility = [
+        "Arrays, linked lists, stacks, queues & hashing",
+        "Trees, graphs, heaps & dynamic programming",
+        "Sorting & searching algorithms with time/space complexity analysis"
+      ];
     } else if (normalizedName.includes("CCC")) {
       eligibility = [
         "Fundamental digital literacy and operating system controls",
@@ -387,11 +442,32 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
         "Document composition, layout formatting & word processor editors",
         "Spreadsheet calculations, formulas execution & presentation slideshow layouts"
       ];
+    } else if (normalizedName.includes("Office Automation")) {
+      eligibility = [
+        "Paint – basic drawing, sketching & image tools",
+        "WordPad & Notepad – text editing and document creation",
+        "MS-Word – professional document formatting & mail merge",
+        "MS-Excel – spreadsheets, formulas, charts & data analysis",
+        "MS-PowerPoint – presentations, animations & slide design"
+      ];
     } else if (normalizedName.includes("Desktop Publishing")) {
       eligibility = [
-        "Graphic templates layout, pamphlet and poster printing design",
-        "Vector illustrations drawing, logo creation & image adjustments",
-        "Working knowledge of PageMaker, Photoshop, and CorelDraw tools"
+        "Photoshop – photo editing, retouching & image manipulation",
+        "CorelDraw – graphic designing, vector art & logo creation",
+        "Pamphlet, poster & visiting card layout designing"
+      ];
+    } else if (normalizedName === "Web Designing" || normalizedName.includes("Web Design")) {
+      eligibility = [
+        "HTML – web page structure, tags, forms & hyperlinks",
+        "CSS – styling, layouts, colors, fonts & responsive design",
+        "Flash MX – animations, interactive graphics & web elements"
+      ];
+    } else if (normalizedName === "Spoken English" || (normalizedName.includes("Spoken") && !normalizedName.includes("DCA"))) {
+      eligibility = [
+        "Pronunciation training, phonetics & accent neutralization",
+        "Grammar building, vocabulary enrichment & sentence formation",
+        "Interview skills, group discussion & professional communication",
+        "Public speaking, presentation delivery & workplace English"
       ];
     } else if (normalizedName.startsWith("DCA (Diploma")) {
       eligibility = [
@@ -487,6 +563,26 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
   let careerOpportunities = ["General Executive", "Academic Researcher", "Competitive Exam Aspirant", "Public Policy Assistant"];
   if (isTech) {
     careerOpportunities = ["Software Developer", "Web Developer", "Data Analyst", "UI/UX Designer", "Cloud Support Engineer", "IT Systems Analyst"];
+  } else if (normalizedName === "Digital Marketing") {
+    careerOpportunities = ["SEO Analyst", "Social Media Manager", "Digital Marketing Executive", "Content Strategist", "PPC Specialist", "Brand Manager"];
+  } else if (normalizedName === "C Programming" || normalizedName === "C++ Programming") {
+    careerOpportunities = ["Systems Programmer", "Embedded Developer", "Game Developer", "Software Engineer", "Firmware Developer", "Application Developer"];
+  } else if (normalizedName === "Core Java") {
+    careerOpportunities = ["Java Developer", "Backend Engineer", "Android Developer", "Full Stack Developer", "Software Consultant", "API Developer"];
+  } else if (normalizedName === "Python") {
+    careerOpportunities = ["Python Developer", "Data Scientist", "ML Engineer", "Automation Tester", "Backend Developer", "AI Research Analyst"];
+  } else if (normalizedName === "MySQL") {
+    careerOpportunities = ["Database Administrator", "SQL Developer", "Data Analyst", "Backend Developer", "BI Analyst", "Data Engineer"];
+  } else if (normalizedName.includes("DSA")) {
+    careerOpportunities = ["Software Engineer", "Competitive Programmer", "Backend Developer", "Problem Solver", "Algorithm Engineer", "FAANG Aspirant"];
+  } else if (normalizedName.includes("Office Automation")) {
+    careerOpportunities = ["Data Entry Operator", "Office Assistant", "MIS Executive", "Computer Operator", "Administrative Assistant", "Back Office Executive"];
+  } else if (normalizedName.includes("Desktop Publishing")) {
+    careerOpportunities = ["Graphic Designer", "DTP Operator", "Photo Editor", "Print Media Designer", "Logo Designer", "Advertisement Layout Artist"];
+  } else if (normalizedName === "Web Designing" || normalizedName.includes("Web Design")) {
+    careerOpportunities = ["Web Designer", "Frontend Developer", "UI Designer", "HTML/CSS Developer", "Freelance Web Creator", "Digital Content Designer"];
+  } else if (normalizedName === "Spoken English" || (normalizedName.includes("Spoken") && !normalizedName.includes("DCA"))) {
+    careerOpportunities = ["Communication Trainer", "Customer Support Executive", "BPO/Call Centre Agent", "Corporate Presenter", "English Tutor", "HR & Recruitment Executive"];
   } else if (isManagement) {
     if (isAviation) {
       careerOpportunities = ["Airport Duty Manager", "Airline Operations Executive", "Aviation Logistics Planner", "Ground Handling Supervisor", "Cargo Analyst", "Customer Relations Lead"];

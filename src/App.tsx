@@ -87,7 +87,7 @@ export default function App() {
             <AboutUs />
 
             {/* Quick programmes teaser */}
-            <Eligibility />
+            <Eligibility setActiveTab={setActiveTab} />
 
             {/* Quick academia teaser */}
             <Academia />
@@ -123,7 +123,7 @@ export default function App() {
                 </div>
               </div>
             )}
-            <Eligibility />
+            <Eligibility setActiveTab={setActiveTab} />
           </div>
         )}
 

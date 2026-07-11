@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Grid, Image, Eye, X, Laptop, Award, BookOpen, Building, Sparkles } from "lucide-react";
 
-// Resolve custom Adarsh Institute infrastructure images
-const adarshEntrance = new URL("../assets/images/adarsh_entrance_1783592081494.jpg", import.meta.url).href;
-const adarshReceptionDesk = new URL("../assets/images/adarsh_reception_desk_1783592098744.jpg", import.meta.url).href;
-const adarshCorridor = new URL("../assets/images/adarsh_corridor_hallway_1783592113063.jpg", import.meta.url).href;
-const adarshLabStudents1 = new URL("../assets/images/adarsh_lab_students_1_1783592129241.jpg", import.meta.url).href;
-const adarshClassroomTeacher = new URL("../assets/images/adarsh_classroom_teacher_1783592141446.jpg", import.meta.url).href;
-const adarshLabStudents2 = new URL("../assets/images/adarsh_lab_students_2_1783592152496.jpg", import.meta.url).href;
-const adarshClassroomProjector = new URL("../assets/images/adarsh_classroom_projector_1783592164564.jpg", import.meta.url).href;
-const adarshLabGroup = new URL("../assets/images/adarsh_lab_group_1783592196550.jpg", import.meta.url).href;
-const adarshStudentCollab = new URL("../assets/images/adarsh_student_collab_1783592209845.jpg", import.meta.url).href;
-const adarshSeminarHall = new URL("../assets/images/adarsh_seminar_hall_1783592222349.jpg", import.meta.url).href;
-const adarshAwardCeremony = new URL("../assets/images/adarsh_award_ceremony_1783592240914.jpg", import.meta.url).href;
+// Real Adarsh Institute photos
+const realLabClass1 = new URL("../assets/images/real_lab_class_1.jpg", import.meta.url).href;
+const realSeminarHall = new URL("../assets/images/real_seminar_hall.jpg", import.meta.url).href;
+const realStudentsWriting1 = new URL("../assets/images/real_students_writing_1.jpg", import.meta.url).href;
+const realStudentsWriting2 = new URL("../assets/images/real_students_writing_2.jpg", import.meta.url).href;
+const realComputerLab = new URL("../assets/images/real_computer_lab.jpg", import.meta.url).href;
+const realWorkshopClass = new URL("../assets/images/real_workshop_class.jpg", import.meta.url).href;
+const realCorridor = new URL("../assets/images/real_corridor.jpg", import.meta.url).href;
+const realReception = new URL("../assets/images/real_reception.jpg", import.meta.url).href;
+const realEntranceInside = new URL("../assets/images/real_entrance_inside.jpg", import.meta.url).href;
+const realStaircase = new URL("../assets/images/real_staircase.jpg", import.meta.url).href;
 
 interface GalleryImage {
   id: string;
@@ -25,81 +24,74 @@ interface GalleryImage {
 
 const GALLERY_IMAGES: GalleryImage[] = [
   {
-    id: "entrance",
-    category: "classrooms",
-    title: "Adarsh Institute Entrance Staircase",
-    description: "Our professional welcoming entrance staircase displaying the Adarsh Computer Education board, courses, and credentials.",
-    imageUrl: adarshEntrance
-  },
-  {
-    id: "reception_desk",
-    category: "classrooms",
-    title: "Student Inquiry & Reception Desk",
-    description: "Our friendly reception lobby and admission inquiry counter helping students explore curriculum pathways and course schedules.",
-    imageUrl: adarshReceptionDesk
-  },
-  {
-    id: "corridor_hallway",
-    category: "classrooms",
-    title: "Academic Corridor Showcase",
-    description: "Bright, clean, and professional institute corridor with visible signboards for Counselling Office, Class Room 1, and emergency guides.",
-    imageUrl: adarshCorridor
-  },
-  {
-    id: "lab_students_1",
+    id: "real_lab_class_1",
     category: "labs",
-    title: "Main IT Computer Lab",
-    description: "Fully-equipped high-performance computing lab where students learn programming, accounting, and design on modern LCD monitors.",
-    imageUrl: adarshLabStudents1
+    title: "Computer Lab — Live Class Session",
+    description: "Faculty conducting a live hands-on computer class. Students actively working on systems with the teacher guiding from the front.",
+    imageUrl: realLabClass1
   },
   {
-    id: "lab_group",
-    category: "labs",
-    title: "Practical Software Lab Workspace",
-    description: "Spacious laboratory seating for active student batches to practice coding challenges, financial modeling, and web design.",
-    imageUrl: adarshLabGroup
-  },
-  {
-    id: "student_collab",
-    category: "library",
-    title: "Study Area & Reference Library",
-    description: "Dedicated study desks and resources encouraging student group learning, peer reference log checks, and interactive development discussions.",
-    imageUrl: adarshStudentCollab
-  },
-  {
-    id: "lab_students_2",
-    category: "labs",
-    title: "Hands-on Technical Practice",
-    description: "Students diligently coding, practicing database queries, and keeping detailed reference logs during their software training.",
-    imageUrl: adarshLabStudents2
-  },
-  {
-    id: "classroom_teacher",
+    id: "real_seminar_hall",
     category: "classrooms",
-    title: "Interactive Interactive Lecture",
-    description: "Experienced faculty explaining logic, database structures, and office automation concepts on the board in a dedicated classroom.",
-    imageUrl: adarshClassroomTeacher
+    title: "Seminar Hall — Projector Classroom",
+    description: "Our spacious seminar hall equipped with ceiling-mounted projector and smart screen for digital presentations and theory lectures.",
+    imageUrl: realSeminarHall
   },
   {
-    id: "classroom_projector",
+    id: "real_students_writing_1",
     category: "classrooms",
-    title: "Smart Projector Classroom",
-    description: "Modern classroom featuring hybrid display capability, ceiling-mounted projectors, and clean workspaces for optimized attention.",
-    imageUrl: adarshClassroomProjector
+    title: "Students During Exam / Class Notes",
+    description: "Students engaged in writing class notes and exam papers in our well-lit classroom — focused, disciplined, and ready to learn.",
+    imageUrl: realStudentsWriting1
   },
   {
-    id: "seminar_hall",
-    category: "events",
-    title: "Student Seminars & Presentations",
-    description: "Spacious interactive presentation hall where students demonstrate project work, participate in workshops, and attend guest seminars.",
-    imageUrl: adarshSeminarHall
+    id: "real_students_writing_2",
+    category: "classrooms",
+    title: "Practical Exam Session",
+    description: "Batch of students appearing for their internal practical exam in the classroom, showcasing the institute's structured assessment system.",
+    imageUrl: realStudentsWriting2
   },
   {
-    id: "award_ceremony",
-    category: "events",
-    title: "Achievements & Certification Awards",
-    description: "Celebrating student milestones, course completions, and diploma awards under high achievement benchmarks of Adarsh.",
-    imageUrl: adarshAwardCeremony
+    id: "real_computer_lab",
+    category: "labs",
+    title: "Main Computer Lab — Coding Session",
+    description: "Students working on programming and software tasks in our fully-equipped computer lab with dual-row workstations and modern systems.",
+    imageUrl: realComputerLab
+  },
+  {
+    id: "real_workshop_class",
+    category: "classrooms",
+    title: "EduBridge Workshop — Employment Session",
+    description: "Students attending an EduBridge4Employment workshop session, actively taking notes in our spacious classroom.",
+    imageUrl: realWorkshopClass
+  },
+  {
+    id: "real_corridor",
+    category: "classrooms",
+    title: "Institute Corridor — Fire Exit & Counselling",
+    description: "Well-lit institute corridor with clearly marked Fire Exit signs and Counselling Office door — ensuring safety and student support accessibility.",
+    imageUrl: realCorridor
+  },
+  {
+    id: "real_reception",
+    category: "classrooms",
+    title: "Reception & Admission Office",
+    description: "Our welcoming reception area with a front desk, comfortable seating, and all facilities for student admission and counselling.",
+    imageUrl: realReception
+  },
+  {
+    id: "real_entrance_inside",
+    category: "classrooms",
+    title: "Adarsh Institute — Front Entrance View",
+    description: "Inside view of the Adarsh Computer Education entrance showing the reception lobby, institute board, and the warm welcoming environment.",
+    imageUrl: realEntranceInside
+  },
+  {
+    id: "real_staircase",
+    category: "classrooms",
+    title: "Institute Staircase — Entrance & Sign Boards",
+    description: "The institute staircase leading up to the main floor, flanked by Adarsh Computer Education sign boards listing all courses offered.",
+    imageUrl: realStaircase
   }
 ];
 

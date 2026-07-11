@@ -17,12 +17,22 @@ ADARSH COMPUTER EDUCATION & IT INSTITUTE
 =========================================
 Our World-Class Computer Curriculum & Programmes:
 
-1. DCA (Diploma in Computer Applications) - 6 Months
-2. ADCA (Advanced Diploma in Computer Applications) - 1 Year
-3. Tally Prime ERP with GST - 3 Months
-4. CCC (Course on Computer Concepts) - 2 Months
-5. Under-Graduate Degrees (BCA, B.Sc CS, B.Com) - 3 Years
-6. Post-Graduate Degrees (MCA, M.Sc CS, MBA IT) - 2 Years
+1. Office Automation (Basic) - 2 Months
+2. DTP (Desktop Publishing) - 3 Months
+3. Tally Prime with GST - 3 Months
+4. Web Designing (HTML, CSS, Flash MX) - 3 Months
+5. Spoken English - 3 Months
+6. DCA (Diploma in Computer Applications) - 6 Months
+7. ADCA (Advanced Diploma in Computer Applications) - 1 Year
+8. Digital Marketing - 3 Months
+9. C Programming - 2 Months
+10. C++ Programming - 2 Months
+11. Core Java - 3 Months
+12. Python - 3 Months
+13. MySQL - 2 Months
+14. DSA (Data Structures & Algorithms) - 3 Months
+15. Under-Graduate Degrees (BCA, B.Sc CS, B.Com) - 3 Years
+16. Post-Graduate Degrees (MCA, M.Sc CS, MBA IT) - 2 Years
 
 Contact Helpline: ${CONTACT_INFO.phone}
 Email: ${CONTACT_INFO.email}

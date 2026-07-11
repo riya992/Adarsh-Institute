@@ -104,7 +104,7 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
             Begin Your Computer Legacy Today
           </h2>
           <p className="text-blue-200/70 text-sm sm:text-base max-w-xl mx-auto">
-            Fill out the digital enquiry format to unlock course eligibility lists, interactive syllabi, and secure your place.
+            Fill out the digital enquiry format to unlock course eligibility lists, interactive syllabus, and secure your place.
           </p>
         </div>
 

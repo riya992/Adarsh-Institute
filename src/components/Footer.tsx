@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Phone, Mail, Globe, Instagram, MessageSquare, Facebook, Youtube, Cpu, ChevronRight } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Instagram, MessageSquare, Facebook, Youtube, Cpu, ChevronRight, PhoneCall } from "lucide-react";
 import { CONTACT_INFO } from "../data";
 import { ActiveTab } from "../types";
 import Logo from "./Logo";
@@ -157,7 +157,55 @@ export default function Footer({ setActiveTab }: FooterProps) {
 
         </div>
 
-        {/* Divider & Copyright */}
+        {/* Helpline Desk Section */}
+        <div className="mt-10 p-6 rounded-2xl bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-950/40 dark:to-accent-950/30 border border-primary-100 dark:border-primary-900/40" id="helpline-desk">
+          <div className="flex items-center gap-2 mb-5">
+            <PhoneCall className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+            <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Helpline Desk</h4>
+            <span className="ml-2 text-[10px] font-semibold bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full uppercase tracking-wide">Available 9 AM – 7 PM</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+            <a href="tel:+919711375732" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
+              <div className="w-9 h-9 rounded-full bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-primary-600 dark:text-primary-400 group-hover:text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 97113 75732</p>
+              </div>
+            </a>
+
+            <a href="tel:+919953230176" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
+              <div className="w-9 h-9 rounded-full bg-accent-100 dark:bg-accent-900/40 flex items-center justify-center shrink-0 group-hover:bg-accent-600 group-hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-accent-600 dark:text-accent-400 group-hover:text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 99532 30176</p>
+              </div>
+            </a>
+
+            <a href="tel:+918512018845" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
+              <div className="w-9 h-9 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-green-600 dark:text-green-400 group-hover:text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 85120 18845</p>
+              </div>
+            </a>
+
+            <a href="tel:+919212621301" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
+              <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:text-white" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 92126 21301</p>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+
         <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
           <p>© 2026 Adarsh Institute. All Rights Reserved.</p>
           <div className="flex gap-4">

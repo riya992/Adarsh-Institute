@@ -75,7 +75,7 @@ export default function Hero({ setActiveTab, isLoggedIn }: HeroProps) {
               </div>
               <div className="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300">
                 <CheckCircle2 className="w-4.5 h-4.5 text-[#008744] shrink-0" />
-                <span>Government & Board Certified Syllabi</span>
+                <span>Government & Board Certified Syllabus</span>
               </div>
               <div className="flex items-center gap-2.5 text-xs text-slate-700 dark:text-slate-300">
                 <CheckCircle2 className="w-4.5 h-4.5 text-[#008744] shrink-0" />

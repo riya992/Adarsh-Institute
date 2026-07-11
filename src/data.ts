@@ -7,8 +7,18 @@ export const COURSE_CATEGORIES: CourseCategory[] = [
     description: "National skill development computer training programs designed for employment readiness.",
     eligibilitySummary: "Skill Training: Open to All",
     courses: [
-      { name: "Tally Prime ERP", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
-      { name: "CCC (Course on Computer Concepts)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Tally Prime", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Office Automation (Basic)", duration: "2 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Desktop Publishing (DTP)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Web Designing", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Spoken English", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Digital Marketing", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "C Programming", duration: "2 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "C++ Programming", duration: "2 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Core Java", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "Python", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "MySQL", duration: "2 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "DSA (Data Structures & Algorithms)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "Basic Computer Course (BCC)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "Desktop Publishing (DTP)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "DCA (Diploma in Computer Applications)", duration: "12 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
@@ -209,7 +219,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: "What is the duration of each course category?",
-    answer: "Regular short-term courses like Tally Prime or CCC last 2 to 3 months. Diplomas like DCA and ADCA span 6 to 12 months. Undergraduate degrees (BCA, B.Sc.) are strictly 3 years, and postgraduate programs (MCA, M.Sc.) are completed over 2 years."
+    answer: "Regular short-term courses like Tally Prime, Python, or Digital Marketing last 2 to 3 months. Diplomas like DCA and ADCA span 6 to 12 months. Undergraduate degrees (BCA, B.Sc.) are strictly 3 years, and postgraduate programs (MCA, M.Sc.) are completed over 2 years."
   },
   {
     question: "Can I apply online from other regions?",
@@ -222,7 +232,7 @@ export const FAQ_ITEMS: FAQItem[] = [
 ];
 
 export const CONTACT_INFO = {
-  address: "First Floor, near Safiabad Road, mode, Narela, Delhi, 110040",
+  address: "1st Floor, Near RK Sweets, Safiabad Road, Narela, Delhi 110040",
   phone: "+91 92126 21301",
   email: "info@adarshinstitute.edu",
   website: "www.adarshinstitute.in",

@@ -9,7 +9,7 @@ export default function Academia() {
       icon: <ClipboardList className="w-6 h-6 text-primary-600" />
     },
     {
-      title: "Interactive Digital Syllabi",
+      title: "Interactive Digital Syllabus",
       desc: "Our syllabus undergoes annual audits with premium technology partners, keeping pace with updates in Prime ERPs, web standards, and cloud systems.",
       icon: <Layers className="w-6 h-6 text-accent-500" />
     },

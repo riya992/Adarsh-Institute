@@ -157,6 +157,7 @@ export default function AboutUs() {
 
         </div>
 
+
         {/* 💬 Student Reviews & Testimonials Section */}
         <div id="student-reviews-section" className="pt-8">
           <div className="text-center space-y-3 mb-12">
