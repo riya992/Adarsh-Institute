@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Grid, Eye, X, Laptop, Building, Sparkles } from "lucide-react";
+import { Grid, Eye, X, Laptop, Building, Sparkles, Landmark } from "lucide-react";
 
 // Real Adarsh Institute photos
 const realLabClass1 = new URL("../assets/images/real_lab_class_1.jpg", import.meta.url).href;
@@ -10,13 +10,13 @@ const realStudentsWriting2 = new URL("../assets/images/real_students_writing_2.j
 const realComputerLab = new URL("../assets/images/real_computer_lab.jpg", import.meta.url).href;
 const realWorkshopClass = new URL("../assets/images/real_workshop_class.jpg", import.meta.url).href;
 const realCorridor = new URL("../assets/images/real_corridor.jpg", import.meta.url).href;
-const realReception = new URL("../assets/images/real_reception.jpg", import.meta.url).href;
-const realEntranceInside = new URL("../assets/images/real_entrance_inside.jpg", import.meta.url).href;
 const realStaircase = new URL("../assets/images/real_staircase.jpg", import.meta.url).href;
+const realWaitingArea = new URL("../assets/images/real_waiting_area.jpg", import.meta.url).href;
+const realFrontEntrance = new URL("../assets/images/real_front_entrance.jpg", import.meta.url).href;
 
 interface GalleryImage {
   id: string;
-  category: "all" | "labs" | "classrooms";
+  category: "all" | "labs" | "classrooms" | "infrastructure";
   title: string;
   description: string;
   imageUrl: string;
@@ -60,7 +60,7 @@ const GALLERY_IMAGES: GalleryImage[] = [
   },
   {
     id: "real_workshop_class",
-    category: "classrooms",
+    category: "infrastructure",
     title: "EduBridge Workshop — Employment Session",
     description: "Students attending an EduBridge4Employment workshop session, actively taking notes in our spacious classroom.",
     imageUrl: realWorkshopClass
@@ -73,30 +73,30 @@ const GALLERY_IMAGES: GalleryImage[] = [
     imageUrl: realCorridor
   },
   {
-    id: "real_reception",
-    category: "classrooms",
-    title: "Reception & Admission Office",
-    description: "Our welcoming reception area with a front desk, comfortable seating, and all facilities for student admission and counselling.",
-    imageUrl: realReception
-  },
-  {
-    id: "real_entrance_inside",
-    category: "classrooms",
-    title: "Adarsh Institute — Front Entrance View",
-    description: "Inside view of the Adarsh Computer Education entrance showing the reception lobby, institute board, and the warm welcoming environment.",
-    imageUrl: realEntranceInside
-  },
-  {
     id: "real_staircase",
-    category: "classrooms",
+    category: "infrastructure",
     title: "Institute Staircase — Entrance & Sign Boards",
     description: "The institute staircase leading up to the main floor, flanked by Adarsh Computer Education sign boards listing all courses offered.",
     imageUrl: realStaircase
+  },
+  {
+    id: "real_waiting_area",
+    category: "infrastructure",
+    title: "Student Waiting Area — Inside Campus",
+    description: "Students waiting inside the institute's comfortable lounge area before their batch begins — a welcoming space with proper seating and air cooling.",
+    imageUrl: realWaitingArea
+  },
+  {
+    id: "real_front_entrance",
+    category: "infrastructure",
+    title: "Adarsh Institute — Front Entrance & Course Boards",
+    description: "Night view of the Adarsh Computer Education front entrance displaying BCA, MCA, BBA, MBA and Diploma in Computer Software course boards prominently.",
+    imageUrl: realFrontEntrance
   }
 ];
 
 export default function Gallery() {
-  const [selectedCategory, setSelectedCategory] = useState<"all" | "labs" | "classrooms">("all");
+  const [selectedCategory, setSelectedCategory] = useState<"all" | "labs" | "classrooms" | "infrastructure">("all");
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   const filteredImages = selectedCategory === "all"
@@ -131,7 +131,8 @@ export default function Gallery() {
           {[
             { id: "all", label: "All Showcase", icon: Grid },
             { id: "labs", label: "Computer Labs", icon: Laptop },
-            { id: "classrooms", label: "Smart Classrooms", icon: Building }
+            { id: "classrooms", label: "Smart Classrooms", icon: Building },
+            { id: "infrastructure", label: "Infrastructure", icon: Landmark }
           ].map((cat) => {
             const Icon = cat.icon;
             const isActive = selectedCategory === cat.id;
@@ -194,7 +195,7 @@ export default function Gallery() {
                 <div className="p-5 flex-1 flex flex-col justify-between">
                   <div className="space-y-1.5">
                     <span className="text-[10px] font-sans font-bold text-emerald-700 dark:text-emerald-400 uppercase bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full inline-block">
-                      {image.category === "labs" ? "Computer Lab" : image.category === "classrooms" ? "Classrooms" : image.category === "library" ? "Study Center" : "Campus Events"}
+                      {image.category === "labs" ? "Computer Lab" : image.category === "classrooms" ? "Smart Classrooms" : image.category === "infrastructure" ? "Infrastructure" : "Gallery"}
                     </span>
                     <h3 className="font-display font-bold text-base text-slate-800 dark:text-slate-200 leading-snug group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
                       {image.title}
