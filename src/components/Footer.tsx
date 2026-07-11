@@ -22,9 +22,9 @@ export default function Footer({ setActiveTab }: FooterProps) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          
-          {/* Section 1: About (4 Cols) */}
-          <div className="md:col-span-4 space-y-6">
+
+          {/* Section 1: About (3 Cols) */}
+          <div className="md:col-span-3 space-y-6">
             <div className="inline-block">
               <Logo />
             </div>
@@ -76,11 +76,11 @@ export default function Footer({ setActiveTab }: FooterProps) {
             </div>
           </div>
 
-          {/* Section 2: Contact Details (4 Cols) */}
-          <div className="md:col-span-4 space-y-6">
+          {/* Section 2: Contact Details (3 Cols) */}
+          <div className="md:col-span-3 space-y-6">
             <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Contact details</h4>
             <div className="space-y-4 text-xs sm:text-sm" id="footer-contact-details">
-              
+
               <div className="flex gap-3 items-start">
                 <MapPin className="w-4 h-4 text-accent-600 dark:text-accent-400 mt-0.5 shrink-0" />
                 <span className="text-slate-600 dark:text-slate-400">{CONTACT_INFO.address}</span>
@@ -114,11 +114,43 @@ export default function Footer({ setActiveTab }: FooterProps) {
             </div>
           </div>
 
-          {/* Section 3: Quick Links (4 Cols) */}
-          <div className="md:col-span-4 space-y-6">
+          {/* Section 3: Helpline Desk (3 Cols) */}
+          <div className="md:col-span-3 space-y-6" id="helpline-desk">
+            <div className="flex items-center gap-2">
+              <PhoneCall className="w-4 h-4 text-primary-600 dark:text-primary-400" />
+              <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Helpline Desk</h4>
+              <span className="text-[10px] font-semibold bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full uppercase tracking-wide">9AM–7PM</span>
+            </div>
+            <div className="space-y-3 text-xs sm:text-sm">
+
+              <a href="tel:+919711375732" className="group flex items-center gap-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                <Phone className="w-4 h-4 text-primary-600 dark:text-primary-400 shrink-0" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400">+91 97113 75732</span>
+              </a>
+
+              <a href="tel:+919953230176" className="group flex items-center gap-3 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
+                <Phone className="w-4 h-4 text-accent-600 dark:text-accent-400 shrink-0" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-accent-600 dark:group-hover:text-accent-400">+91 99532 30176</span>
+              </a>
+
+              <a href="tel:+918512018845" className="group flex items-center gap-3 hover:text-green-600 dark:hover:text-green-400 transition-colors">
+                <Phone className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-green-600 dark:group-hover:text-green-400">+91 85120 18845</span>
+              </a>
+
+              <a href="tel:+919212621301" className="group flex items-center gap-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400">+91 92126 21301</span>
+              </a>
+
+            </div>
+          </div>
+
+          {/* Section 4: Quick Links (3 Cols) */}
+          <div className="md:col-span-3 space-y-6">
             <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Quick links</h4>
             <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm" id="footer-quick-links">
-              
+
               <button onClick={() => handleQuickLink("home")} className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white transition-all cursor-pointer text-left">
                 <ChevronRight className="w-3.5 h-3.5 text-primary-500" />
                 <span>Home</span>
@@ -155,54 +187,6 @@ export default function Footer({ setActiveTab }: FooterProps) {
             </div>
           </div>
 
-        </div>
-
-        {/* Helpline Desk Section */}
-        <div className="mt-10 p-6 rounded-2xl bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-950/40 dark:to-accent-950/30 border border-primary-100 dark:border-primary-900/40" id="helpline-desk">
-          <div className="flex items-center gap-2 mb-5">
-            <PhoneCall className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-            <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Helpline Desk</h4>
-            <span className="ml-2 text-[10px] font-semibold bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full uppercase tracking-wide">Available 9 AM – 7 PM</span>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-            <a href="tel:+919711375732" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
-              <div className="w-9 h-9 rounded-full bg-primary-100 dark:bg-primary-900/40 flex items-center justify-center shrink-0 group-hover:bg-primary-600 group-hover:text-white transition-colors">
-                <Phone className="w-4 h-4 text-primary-600 dark:text-primary-400 group-hover:text-white" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 97113 75732</p>
-              </div>
-            </a>
-
-            <a href="tel:+919953230176" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
-              <div className="w-9 h-9 rounded-full bg-accent-100 dark:bg-accent-900/40 flex items-center justify-center shrink-0 group-hover:bg-accent-600 group-hover:text-white transition-colors">
-                <Phone className="w-4 h-4 text-accent-600 dark:text-accent-400 group-hover:text-white" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 99532 30176</p>
-              </div>
-            </a>
-
-            <a href="tel:+918512018845" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
-              <div className="w-9 h-9 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center shrink-0 group-hover:bg-green-600 group-hover:text-white transition-colors">
-                <Phone className="w-4 h-4 text-green-600 dark:text-green-400 group-hover:text-white" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 85120 18845</p>
-              </div>
-            </a>
-
-            <a href="tel:+919212621301" className="group flex items-center gap-3 p-3 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 hover:border-primary-400 dark:hover:border-primary-600 hover:shadow-md transition-all">
-              <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:text-white" />
-              </div>
-              <div>
-                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">+91 92126 21301</p>
-              </div>
-            </a>
-
-          </div>
         </div>
 
 

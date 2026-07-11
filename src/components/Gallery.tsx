@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Grid, Image, Eye, X, Laptop, Award, BookOpen, Building, Sparkles } from "lucide-react";
+import { Grid, Eye, X, Laptop, Building, Sparkles } from "lucide-react";
 
 // Real Adarsh Institute photos
 const realLabClass1 = new URL("../assets/images/real_lab_class_1.jpg", import.meta.url).href;
@@ -16,7 +16,7 @@ const realStaircase = new URL("../assets/images/real_staircase.jpg", import.meta
 
 interface GalleryImage {
   id: string;
-  category: "all" | "labs" | "classrooms" | "library" | "events";
+  category: "all" | "labs" | "classrooms";
   title: string;
   description: string;
   imageUrl: string;
@@ -96,7 +96,7 @@ const GALLERY_IMAGES: GalleryImage[] = [
 ];
 
 export default function Gallery() {
-  const [selectedCategory, setSelectedCategory] = useState<"all" | "labs" | "classrooms" | "library" | "events">("all");
+  const [selectedCategory, setSelectedCategory] = useState<"all" | "labs" | "classrooms">("all");
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
   const filteredImages = selectedCategory === "all"
@@ -131,9 +131,7 @@ export default function Gallery() {
           {[
             { id: "all", label: "All Showcase", icon: Grid },
             { id: "labs", label: "Computer Labs", icon: Laptop },
-            { id: "classrooms", label: "Smart Classrooms", icon: Building },
-            { id: "library", label: "Study & Library", icon: BookOpen },
-            { id: "events", label: "Events & Awards", icon: Award }
+            { id: "classrooms", label: "Smart Classrooms", icon: Building }
           ].map((cat) => {
             const Icon = cat.icon;
             const isActive = selectedCategory === cat.id;
