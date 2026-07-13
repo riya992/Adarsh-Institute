@@ -96,7 +96,7 @@ function getHighlightIcon(index: number) {
 }
 
 // Shared course card
-function CourseCard({ course, onClick }: { course: { id: string; name: string; description: string }; onClick: () => void }) {
+function CourseCard({ course, onClick }: { key?: React.Key; course: { id: string; name: string; description: string }; onClick: () => void }) {
   return (
     <div
       onClick={onClick}

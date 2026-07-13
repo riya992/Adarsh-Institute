@@ -32,6 +32,9 @@ export const CATEGORIES_DATA: CourseCategory[] = [
     description: "National skill development computer training programs designed for employment readiness.",
     iconId: "skill-india",
     courses: [
+      { id: "skill-dca", name: "DCA (Diploma in Computer Applications)", description: "12-month comprehensive computer applications and programming diploma." },
+      { id: "skill-dcs", name: "DCS (Diploma in Computer Software)", description: "12-month advanced training in software apps, hardware repair, and routing." },
+      { id: "skill-dca-english", name: "DCA + English Spoken Course", description: "15-month integrated computing applications training with spoken English fluency." },
       { id: "skill-tally", name: "Tally Prime", description: "3-month professional accounting training with GST, payroll, and financial reporting." },
       { id: "skill-office", name: "Office Automation (Basic)", description: "Basic office automation covering MS-Word, MS-Excel, MS-PowerPoint, Paint, WordPad and Notepad." },
       { id: "skill-dtp", name: "Desktop Publishing (DTP)", description: "3-month graphic designing course using Photoshop for photo editing and CorelDraw for graphic designing." },
@@ -44,10 +47,7 @@ export const CATEGORIES_DATA: CourseCategory[] = [
       { id: "skill-python", name: "Python", description: "3-month Python programming course covering scripting, data handling, and automation." },
       { id: "skill-mysql", name: "MySQL", description: "2-month database course covering SQL queries, joins, stored procedures, and optimization." },
       { id: "skill-dsa", name: "DSA (Data Structures & Algorithms)", description: "3-month course covering arrays, linked lists, trees, graphs, sorting, and searching algorithms." },
-      { id: "skill-bcc", name: "Basic Computer Course (BCC)", description: "3-month fundamental computing, internet, and operating systems training." },
-      { id: "skill-dca", name: "DCA (Diploma in Computer Applications)", description: "12-month comprehensive computer applications and programming diploma." },
-      { id: "skill-dcshn", name: "DCSHN (Diploma in Computer Software, Hardware and Networking)", description: "15-month advanced training in software apps, hardware repair, and routing." },
-      { id: "skill-dca-english", name: "DCA + English Spoken Course", description: "15-month integrated computing applications training with spoken English fluency." }
+      { id: "skill-bcc", name: "Basic Computer Course (BCC)", description: "3-month fundamental computing, internet, and operating systems training." }
     ]
   },
   {
@@ -313,8 +313,8 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
   if (categoryId === "skill-india") {
     if (normalizedName.includes("DCA + English")) {
       duration = "15 Months";
-    } else if (normalizedName.includes("DCSHN")) {
-      duration = "15 Months";
+    } else if (normalizedName.includes("DCS")) {
+      duration = "12 Months";
     } else if (normalizedName.includes("DCA")) {
       duration = "12 Months";
     } else {
@@ -475,9 +475,9 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
         "Database administrators management and queries execution",
         "Standard digital office suites and system file operations automation"
       ];
-    } else if (normalizedName.startsWith("DCSHN")) {
+    } else if (normalizedName.startsWith("DCS")) {
       eligibility = [
-        "PC hardware hardware assembling, components connections & diagnostic tools",
+        "PC hardware assembling, components connections & diagnostic tools",
         "Operating systems installations, formatting & device drivers setting",
         "LAN networks routing cables, switch ports & network sharing configurations"
       ];

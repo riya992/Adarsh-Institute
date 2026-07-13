@@ -7,6 +7,9 @@ export const COURSE_CATEGORIES: CourseCategory[] = [
     description: "National skill development computer training programs designed for employment readiness.",
     eligibilitySummary: "Skill Training: Open to All",
     courses: [
+      { name: "DCA (Diploma in Computer Applications)", duration: "12 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "DCS (Diploma in Computer Software)", duration: "12 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
+      { name: "DCA + English Spoken Course", duration: "15 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "Tally Prime", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "Office Automation (Basic)", duration: "2 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "Desktop Publishing (DTP)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
@@ -19,11 +22,7 @@ export const COURSE_CATEGORIES: CourseCategory[] = [
       { name: "Python", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "MySQL", duration: "2 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
       { name: "DSA (Data Structures & Algorithms)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
-      { name: "Basic Computer Course (BCC)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
-      { name: "Desktop Publishing (DTP)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
-      { name: "DCA (Diploma in Computer Applications)", duration: "12 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
-      { name: "DCSHN (Diploma in Computer Software, Hardware and Networking)", duration: "15 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] },
-      { name: "DCA + English Spoken Course", duration: "15 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] }
+      { name: "Basic Computer Course (BCC)", duration: "3 Months", fee: "", eligibility: "Skill Training: Open to All", description: "", syllabus: [] }
     ],
     faqs: [
       {
