@@ -44,6 +44,11 @@ export default function App() {
     }
   }, []);
 
+  // Keep homepage at top on initial load
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleLoginSuccess = (name: string) => {
     setIsLoggedIn(true);
     setUsername(name);

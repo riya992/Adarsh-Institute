@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   BookOpen, Globe, GraduationCap, Trophy, BookCheck,
   ArrowRight, ArrowLeft, Plus, Minus, Calendar, Users,
@@ -117,10 +117,6 @@ function CourseCard({ course, onClick }: { key?: React.Key; course: { id: string
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: ActiveTab) => void }) {
   const [currentView, setCurrentView] = useState<CurrentView>({ type: "programs" });
-
-  useEffect(() => {
-    document.getElementById("programmes-section")?.scrollIntoView({ behavior: "smooth" });
-  }, [currentView]);
 
   // Resolve the actual CATEGORIES_DATA entry (distance-ug/pg → "distance")
   const resolveCategory = (categoryId: string) =>

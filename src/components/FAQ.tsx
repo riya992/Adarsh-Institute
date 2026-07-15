@@ -3,7 +3,7 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 import { FAQ_ITEMS } from "../data";
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleIndex = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -62,7 +62,7 @@ export default function FAQ() {
                     isOpen ? "max-h-[300px] border-t border-slate-100 dark:border-slate-850 opacity-100 py-5 px-6" : "max-h-0 opacity-0 pointer-events-none"
                   }`}
                 >
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal whitespace-pre-line">
                     {item.answer}
                   </p>
                 </div>

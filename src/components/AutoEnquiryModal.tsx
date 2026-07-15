@@ -28,14 +28,13 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
   const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Auto-open after 1.5 seconds on load if not already closed/submitted in this session
+  // Auto-open after 1.5 seconds on load unless:
+  // 1. User is already logged in (already submitted enquiry)
+  // 2. User dismissed/submitted it before (localStorage persists across sessions)
   useEffect(() => {
-    if (isLoggedIn) return; // Don't show if already logged in
-
-    const isClosed = sessionStorage.getItem("adarsh_enquiry_modal_closed");
-    const isSubmitted = localStorage.getItem("adarsh_is_logged_in") === "true";
-
-    if (!isClosed && !isSubmitted) {
+    if (isLoggedIn) return; // Already enquired/logged in
+    const isDismissed = localStorage.getItem("adarsh_enquiry_submitted");
+    if (!isDismissed) {
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 1500);
@@ -53,7 +52,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
 
   const handleClose = () => {
     setIsOpen(false);
-    sessionStorage.setItem("adarsh_enquiry_modal_closed", "true");
+    localStorage.setItem("adarsh_enquiry_submitted", "true");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -100,7 +99,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
 
       setIsSubmitting(false);
       setSuccessMessage(`Congratulations ${name}! Enquiry submitted successfully.`);
-      sessionStorage.setItem("adarsh_enquiry_modal_closed", "true");
+      localStorage.setItem("adarsh_enquiry_submitted", "true");
 
       setTimeout(() => {
         onSuccess(name);

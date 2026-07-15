@@ -206,7 +206,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   },
   {
     question: "What documents are required for registration?",
-    answer: "To finalize admission, you will need scanned copies of: 1) Your 10th & 12th Marksheets (and graduation marksheet if applying for PG), 2) Government-issued ID proof (e.g., Aadhaar Card or Passport), 3) Passport-sized photographs, and 4) Transfer/Migration Certificate from your previous school or university."
+    answer: "1. 2 passport size photos\n2. Aadhaar card photocopy"
   },
   {
     question: "Are online classes and hybrid modes available?",
