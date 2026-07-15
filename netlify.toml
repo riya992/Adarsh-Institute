@@ -2,6 +2,10 @@
   command = "npm install && npx vite build"
   publish = "dist"
 
+[build.environment]
+  VITE_SUPABASE_URL = "https://voaeevhqquvptqihtlvi.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZvYWVldmhxcXV2cHRxaWh0bHZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM5MzU0MzAsImV4cCI6MjA5OTUxMTQzMH0.lSv5cj1BdwtgR70Ag8pq3ELo-ts90vqy9eLlIGoidzk"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
