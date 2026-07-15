@@ -121,11 +121,11 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
   return (
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
-      style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(6px)" }}
+      style={{ backgroundColor: "rgba(0,0,0,0.75)", backdropFilter: "blur(8px)" }}
       id="enquiry-modal-overlay"
     >
       <div
-        className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative"
+        className="bg-white dark:bg-zinc-950 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative border border-red-900/30 dark:border-red-800/40"
         style={{ animation: "modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1) both" }}
         id="auto-enquiry-modal-container"
       >
@@ -136,11 +136,11 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
           }
         `}</style>
 
-        {/* Top gradient banner */}
-        <div className="relative bg-gradient-to-br from-blue-700 via-indigo-700 to-purple-700 text-white px-6 pt-6 pb-8 overflow-hidden">
+        {/* Top gradient banner — Dark Red to Green */}
+        <div className="relative text-white px-6 pt-6 pb-8 overflow-hidden" style={{ background: "linear-gradient(135deg, #7f1d1d 0%, #991b1b 40%, #14532d 100%)" }}>
           {/* Decorative blobs */}
-          <div className="absolute -top-8 -right-8 w-36 h-36 rounded-full bg-white/10 blur-2xl" />
-          <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full bg-purple-400/20 blur-2xl" />
+          <div className="absolute -top-8 -right-8 w-36 h-36 rounded-full blur-2xl" style={{ background: "rgba(220,38,38,0.25)" }} />
+          <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full blur-2xl" style={{ background: "rgba(21,128,61,0.3)" }} />
 
           {/* Close button */}
           <button
@@ -154,7 +154,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
 
           {/* Badge */}
           <div className="flex items-center gap-2 mb-3">
-            <span className="bg-yellow-400/20 border border-yellow-400/30 text-yellow-300 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+            <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border" style={{ background: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)", color: "#bbf7d0" }}>
               🎓 Admissions Open 2026–27
             </span>
           </div>
@@ -162,7 +162,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
           <h3 className="text-xl font-extrabold tracking-tight mb-1">
             Take Your First Step to Success!
           </h3>
-          <p className="text-blue-100/80 text-xs leading-relaxed">
+          <p className="text-red-100/80 text-xs leading-relaxed">
             Fill this quick form &amp; secure your certified batch slot with 1:1 Lab access!
           </p>
 
@@ -170,18 +170,18 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
           <div className="flex items-center gap-4 mt-4">
             {["Free Counselling", "Instant Callback", "Scholarship Check"].map((item) => (
               <div key={item} className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-green-300 shrink-0" />
-                <span className="text-[10px] text-blue-100/90">{item}</span>
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" style={{ color: "#86efac" }} />
+                <span className="text-[10px] text-green-100/90">{item}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Form area */}
-        <div className="px-6 py-5">
+        <div className="px-6 py-5 dark:bg-zinc-950">
           {successMessage ? (
             <div className="py-10 text-center space-y-3" id="modal-success-screen">
-              <div className="inline-flex p-4 bg-emerald-500/10 text-emerald-500 rounded-full border border-emerald-500/20">
+              <div className="inline-flex p-4 rounded-full border" style={{ background: "rgba(21,128,61,0.15)", borderColor: "rgba(21,128,61,0.3)", color: "#22c55e" }}>
                 <CheckCircle2 className="w-12 h-12" />
               </div>
               <h4 className="font-bold text-xl text-slate-900 dark:text-white">Enquiry Submitted! 🎉</h4>
@@ -191,8 +191,8 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4" id="modal-enquiry-form">
               {errorMessage && (
-                <div className="flex items-center gap-2 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 text-xs p-3 rounded-xl border border-red-200 dark:border-red-500/20" id="modal-error-message">
-                  <AlertCircle className="w-4 h-4 shrink-0" />
+                <div className="flex items-center gap-2 text-xs p-3 rounded-xl border" style={{ background: "rgba(127,29,29,0.15)", borderColor: "rgba(220,38,38,0.35)", color: "#fca5a5" }} id="modal-error-message">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
                   <span>{errorMessage}</span>
                 </div>
               )}
@@ -211,7 +211,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
                       placeholder="e.g., Riya Sharma"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-red-900/40 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500 transition-all"
                     />
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
                       placeholder="student@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-red-900/40 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500 transition-all"
                     />
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
                       placeholder="e.g., 9876543210"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                      className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-red-900/40 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500 transition-all"
                     />
                   </div>
                 </div>
@@ -260,7 +260,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
                     <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
+                      className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-red-900/40 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-600 dark:focus:ring-green-500 transition-all appearance-none cursor-pointer"
                     >
                       <option value="" disabled>Select State</option>
                       {INDIAN_STATES.map(s => (
@@ -301,8 +301,8 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full text-white font-bold text-sm uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
-                style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
+                className="w-full text-white font-bold text-sm uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 hover:opacity-90"
+                style={{ background: "linear-gradient(135deg, #991b1b 0%, #15803d 100%)" }}
                 id="modal-submit-button"
               >
                 {isSubmitting ? (
