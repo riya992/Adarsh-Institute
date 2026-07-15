@@ -1,4 +1,4 @@
-export type ActiveTab = 'home' | 'about' | 'programmes' | 'academia' | 'gallery' | 'faq' | 'enroll';
+export type ActiveTab = 'home' | 'about' | 'programmes' | 'academia' | 'gallery' | 'faq' | 'enroll' | 'admin';
 
 export interface Course {
   name: string;

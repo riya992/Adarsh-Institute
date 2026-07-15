@@ -12,6 +12,7 @@ import Chatbot from "./components/Chatbot";
 import RightFloatingBar from "./components/RightFloatingBar";
 import AutoEnquiryModal from "./components/AutoEnquiryModal";
 import Footer from "./components/Footer";
+import AdminPanel from "./components/AdminPanel";
 import { ActiveTab } from "./types";
 import { Sparkles, Trophy, BookCheck, ShieldAlert, Cpu } from "lucide-react";
 
@@ -47,6 +48,19 @@ export default function App() {
   // Keep homepage at top on initial load
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const openHiddenAdminPanel = () => {
+      if (window.location.hash === "#control-desk-92126") {
+        setActiveTab("admin");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    openHiddenAdminPanel();
+    window.addEventListener("hashchange", openHiddenAdminPanel);
+    return () => window.removeEventListener("hashchange", openHiddenAdminPanel);
   }, []);
 
   const handleLoginSuccess = (name: string) => {
@@ -149,6 +163,12 @@ export default function App() {
             <EnrollmentForm onSuccess={handleLoginSuccess} setActiveTab={setActiveTab} />
           </div>
         )}
+
+        {activeTab === "admin" && (
+          <div id="tab-admin-content" className="animate-in fade-in duration-500">
+            <AdminPanel />
+          </div>
+        )}
       </main>
 
       {/* 💬 Floating WhatsApp Button & AI Conversational Chatbot */}
@@ -158,7 +178,9 @@ export default function App() {
       <RightFloatingBar />
 
       {/* 🔮 Automatic Enquiry Modal on website open */}
-      <AutoEnquiryModal onSuccess={handleLoginSuccess} isLoggedIn={isLoggedIn} />
+      {activeTab !== "admin" && (
+        <AutoEnquiryModal onSuccess={handleLoginSuccess} isLoggedIn={isLoggedIn} />
+      )}
 
       {/* 📍 Premium Footer */}
       <Footer setActiveTab={setActiveTab} />

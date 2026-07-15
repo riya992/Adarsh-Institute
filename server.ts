@@ -3,12 +3,14 @@ import path from "path";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
+import { fetchEnquiries, saveEnquiry, validateEnquiryPayload } from "./server/supabaseAdmin";
 
+dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 // Create Express app
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
 
@@ -125,6 +127,40 @@ Keep answers professional, elegant, and concise. Format lists with clean bullet 
   } catch (error: any) {
     console.error("Error in /api/chat:", error);
     res.status(500).json({ error: "Failed to communicate with AI Assistant", details: error.message });
+  }
+});
+
+app.post("/api/submit-enquiry", async (req, res) => {
+  try {
+    const payload = validateEnquiryPayload(req.body);
+    await saveEnquiry(payload);
+    res.json({ ok: true });
+  } catch (error: any) {
+    console.error("Error in /api/submit-enquiry:", error.message);
+    res.status(400).json({ error: error.message || "Unable to submit enquiry." });
+  }
+});
+
+app.post("/api/admin/enquiries", async (req, res) => {
+  try {
+    const { password } = req.body;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (!adminPassword) {
+      res.status(500).json({ error: "ADMIN_PASSWORD is not configured on the server." });
+      return;
+    }
+
+    if (!password || password !== adminPassword) {
+      res.status(401).json({ error: "Invalid admin password." });
+      return;
+    }
+
+    const enquiries = await fetchEnquiries();
+    res.json({ enquiries });
+  } catch (error: any) {
+    console.error("Error in /api/admin/enquiries:", error);
+    res.status(500).json({ error: "Failed to load admin enquiries.", details: error.message });
   }
 });
 

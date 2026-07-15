@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { GraduationCap, LogOut, Menu, X, Cpu, UserCheck, Sun, Moon, Sparkles } from "lucide-react";
+import { LogOut, Menu, X, UserCheck, Sun, Moon, Sparkles } from "lucide-react";
 import { ActiveTab } from "../types";
 import Logo from "./Logo";
 
