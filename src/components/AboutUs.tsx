@@ -164,23 +164,13 @@ export default function AboutUs() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:w-auto shrink-0">
-              <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-150 dark:border-slate-800 text-center flex flex-col items-center justify-center min-w-[220px]">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-orange-500 via-white to-green-500 p-0.5 flex items-center justify-center shadow-sm mb-3">
-                  <div className="w-full h-full bg-white dark:bg-slate-900 rounded-full flex items-center justify-center text-orange-600 font-extrabold text-xs">
-                    Skill India
-                  </div>
-                </div>
-                <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs tracking-wide uppercase">Affiliated By</h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1">Skill India Program</p>
-              </div>
-
-              <div className="bg-slate-50 dark:bg-slate-950 p-5 rounded-2xl border border-slate-150 dark:border-slate-800 text-center flex flex-col items-center justify-center min-w-[220px]">
-                <div className="w-12 h-12 rounded-full bg-primary-650 p-0.5 flex items-center justify-center shadow-sm mb-3 text-white font-black text-xs font-mono">
-                  NSDC
-                </div>
-                <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs tracking-wide uppercase">Authorised Center</h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-1">NSDC Training Partner</p>
+            <div className="flex items-center justify-center w-full md:w-auto shrink-0">
+              <div className="bg-white dark:bg-white rounded-2xl p-4 shadow-md border border-slate-200 dark:border-slate-300 flex items-center justify-center">
+                <img
+                  src={new URL("../assets/images/skill_india_nsdc_logos.jpg", import.meta.url).href}
+                  alt="Skill India & NSDC Logo"
+                  className="h-20 sm:h-24 w-auto object-contain"
+                />
               </div>
             </div>
           </div>

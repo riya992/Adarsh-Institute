@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { X, User, Mail, Phone, MapPin, BookOpen, Star, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
 import { COURSE_CATEGORIES } from "../data";
+import { submitEnquiry } from "../lib/submitEnquiry";
 
 interface AutoEnquiryModalProps {
   onSuccess: (username: string) => void;
@@ -55,7 +56,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
     sessionStorage.setItem("adarsh_enquiry_modal_closed", "true");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
     setSuccessMessage("");
@@ -87,16 +88,32 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
       return;
     }
 
-    setTimeout(() => {
+    try {
+      await submitEnquiry({
+        name,
+        email,
+        phone,
+        state,
+        course,
+        source: "modal_form",
+      });
+
       setIsSubmitting(false);
       setSuccessMessage(`Congratulations ${name}! Enquiry submitted successfully.`);
       sessionStorage.setItem("adarsh_enquiry_modal_closed", "true");
-      
+
       setTimeout(() => {
         onSuccess(name);
         setIsOpen(false);
       }, 1500);
-    }, 1200);
+    } catch (err) {
+      setIsSubmitting(false);
+      setErrorMessage(
+        err instanceof Error
+          ? `Submission failed: ${err.message}. Please try again.`
+          : "Something went wrong. Please try again."
+      );
+    }
   };
 
   if (!isOpen) return null;

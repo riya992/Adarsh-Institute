@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { User, Mail, Phone, MapPin, BookOpen, ArrowRight, CheckCircle, Sparkles, AlertCircle } from "lucide-react";
 import { ActiveTab } from "../types";
 import { COURSE_CATEGORIES } from "../data";
+import { submitEnquiry } from "../lib/submitEnquiry";
 
 interface EnrollmentFormProps {
   onSuccess: (username: string) => void;
@@ -37,7 +38,7 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
     }))
   );
 
-  const handleEnquirySubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
     setSuccessMessage("");
@@ -70,21 +71,34 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
       return;
     }
 
-    // Simulate Network Request
-    setTimeout(() => {
+    try {
+      await submitEnquiry({
+        name,
+        email,
+        phone,
+        state,
+        course,
+        source: "enrollment_form",
+      });
+
       setIsSubmitting(false);
       setSuccessMessage(`Thank you, ${name}! Your enquiry has been submitted successfully.`);
-      
-      // Call parenting handlers
+
       setTimeout(() => {
         onSuccess(name);
         setActiveTab("programmes");
-        // Scroll to eligibility list automatically
         setTimeout(() => {
           document.getElementById("programmes-section")?.scrollIntoView({ behavior: "smooth" });
         }, 300);
       }, 1500);
-    }, 1200);
+    } catch (err) {
+      setIsSubmitting(false);
+      setErrorMessage(
+        err instanceof Error
+          ? `Submission failed: ${err.message}. Please try again or call +91 92126 21301.`
+          : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
