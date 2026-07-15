@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { X, User, Mail, Phone, MapPin, BookOpen, Star, Sparkles, CheckCircle2, AlertCircle } from "lucide-react";
+import { X, User, Mail, Phone, MapPin, BookOpen, Sparkles, CheckCircle2, AlertCircle, GraduationCap } from "lucide-react";
 import { COURSE_CATEGORIES } from "../data";
 import { submitEnquiry } from "../lib/submitEnquiry";
 
@@ -9,10 +9,10 @@ interface AutoEnquiryModalProps {
 }
 
 const INDIAN_STATES = [
-  "Delhi", "Haryana", "Uttar Pradesh", "Punjab", "Rajasthan", "Bihar", 
-  "Madhya Pradesh", "Maharashtra", "Karnataka", "Andhra Pradesh", 
-  "Assam", "Chandigarh", "Chhattisgarh", "Gujarat", "Himachal Pradesh", 
-  "Jammu & Kashmir", "Jharkhand", "Kerala", "Odisha", "Tamil Nadu", 
+  "Delhi", "Haryana", "Uttar Pradesh", "Punjab", "Rajasthan", "Bihar",
+  "Madhya Pradesh", "Maharashtra", "Karnataka", "Andhra Pradesh",
+  "Assam", "Chandigarh", "Chhattisgarh", "Gujarat", "Himachal Pradesh",
+  "Jammu & Kashmir", "Jharkhand", "Kerala", "Odisha", "Tamil Nadu",
   "Telangana", "Uttarakhand", "West Bengal", "Other"
 ];
 
@@ -28,22 +28,25 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
   const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Auto-open after 1.5 seconds on load unless:
-  // 1. User is already logged in (already submitted enquiry)
-  // 2. User dismissed/submitted it before (localStorage persists across sessions)
+  // Auto-open after 2 seconds — show every new visit unless already submitted this session
   useEffect(() => {
-    if (isLoggedIn) return; // Already enquired/logged in
-    const isDismissed = localStorage.getItem("adarsh_enquiry_submitted");
-    if (!isDismissed) {
-      const timer = setTimeout(() => {
-        setIsOpen(true);
-      }, 1500);
-      return () => clearTimeout(timer);
-    }
+    // Don't show if user is already logged in
+    if (isLoggedIn) return;
+
+    // Show once per session (sessionStorage clears when tab closes)
+    const shownThisSession = sessionStorage.getItem("adarsh_modal_shown");
+    if (shownThisSession) return;
+
+    const timer = setTimeout(() => {
+      setIsOpen(true);
+      sessionStorage.setItem("adarsh_modal_shown", "true");
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [isLoggedIn]);
 
-  // Extract all courses dynamically for select dropdown
-  const allCourses = COURSE_CATEGORIES.flatMap(category => 
+  // All courses flat list for dropdown
+  const allCourses = COURSE_CATEGORIES.flatMap(category =>
     category.courses.map(c => ({
       name: c.name,
       category: category.title
@@ -52,7 +55,6 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
 
   const handleClose = () => {
     setIsOpen(false);
-    localStorage.setItem("adarsh_enquiry_submitted", "true");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -99,12 +101,11 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
 
       setIsSubmitting(false);
       setSuccessMessage(`Congratulations ${name}! Enquiry submitted successfully.`);
-      localStorage.setItem("adarsh_enquiry_submitted", "true");
 
       setTimeout(() => {
         onSuccess(name);
         setIsOpen(false);
-      }, 1500);
+      }, 2000);
     } catch (err) {
       setIsSubmitting(false);
       setErrorMessage(
@@ -118,120 +119,148 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
-      <div 
-        className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800 shadow-2xl relative animate-in zoom-in-95 duration-300"
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(6px)" }}
+      id="enquiry-modal-overlay"
+    >
+      <div
+        className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative"
+        style={{ animation: "modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1) both" }}
         id="auto-enquiry-modal-container"
       >
-        {/* Banner with rotating/pulsing stars */}
-        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-accent-600 text-white p-6 relative overflow-hidden">
-          {/* Absolutes decorative blobs */}
-          <div className="absolute top-[-30%] right-[-10%] w-32 h-32 rounded-full bg-white/10 blur-xl" />
-          <div className="absolute bottom-[-40%] left-[-10%] w-24 h-24 rounded-full bg-accent-400/20 blur-xl" />
+        <style>{`
+          @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.88) translateY(24px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+          }
+        `}</style>
+
+        {/* Top gradient banner */}
+        <div className="relative bg-gradient-to-br from-blue-700 via-indigo-700 to-purple-700 text-white px-6 pt-6 pb-8 overflow-hidden">
+          {/* Decorative blobs */}
+          <div className="absolute -top-8 -right-8 w-36 h-36 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full bg-purple-400/20 blur-2xl" />
 
           {/* Close button */}
-          <button 
+          <button
             onClick={handleClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white bg-black/10 hover:bg-black/20 p-2 rounded-full transition-all cursor-pointer focus:outline-none"
+            className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-all cursor-pointer focus:outline-none"
             title="Close"
             id="close-enquiry-modal"
           >
             <X className="w-4 h-4" />
           </button>
 
-          {/* Header Title with animated Stars */}
-          <div className="flex items-center gap-2 mb-2">
-            <span className="flex items-center justify-center p-1.5 bg-white/10 rounded-lg animate-wiggle">
-              <Sparkles className="w-5 h-5 text-amber-300 animate-star-spin-pulse" />
-            </span>
-            <span className="text-[10px] font-bold tracking-widest uppercase text-accent-300 bg-white/10 px-2.5 py-1 rounded-full border border-white/5">
-              ADMISSIONS OPEN 2026-27
+          {/* Badge */}
+          <div className="flex items-center gap-2 mb-3">
+            <span className="bg-yellow-400/20 border border-yellow-400/30 text-yellow-300 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+              🎓 Admissions Open 2026–27
             </span>
           </div>
-          <h3 className="font-display font-extrabold text-lg sm:text-xl tracking-tight">
+
+          <h3 className="text-xl font-extrabold tracking-tight mb-1">
             Take Your First Step to Success!
           </h3>
-          <p className="text-white/80 text-xs mt-1 leading-relaxed">
-            Fill this fast enquiry form & secure your certified batch slot with 1:1 Lab Node access!
+          <p className="text-blue-100/80 text-xs leading-relaxed">
+            Fill this quick form &amp; secure your certified batch slot with 1:1 Lab access!
           </p>
+
+          {/* Icon row */}
+          <div className="flex items-center gap-4 mt-4">
+            {["Free Counselling", "Instant Callback", "Scholarship Check"].map((item) => (
+              <div key={item} className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-green-300 shrink-0" />
+                <span className="text-[10px] text-blue-100/90">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Content & Form */}
-        <div className="p-6">
+        {/* Form area */}
+        <div className="px-6 py-5">
           {successMessage ? (
-            <div className="py-8 text-center space-y-3" id="modal-success-screen">
-              <div className="inline-flex p-3 bg-emerald-500/10 text-emerald-500 rounded-full border border-emerald-500/20">
-                <CheckCircle2 className="w-10 h-10 animate-bounce" />
+            <div className="py-10 text-center space-y-3" id="modal-success-screen">
+              <div className="inline-flex p-4 bg-emerald-500/10 text-emerald-500 rounded-full border border-emerald-500/20">
+                <CheckCircle2 className="w-12 h-12" />
               </div>
-              <h4 className="font-display font-bold text-lg text-slate-900 dark:text-white">Enquiry Submitted!</h4>
-              <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">{successMessage}</p>
-              <div className="text-[10px] text-slate-400">Loading certificate courses...</div>
+              <h4 className="font-bold text-xl text-slate-900 dark:text-white">Enquiry Submitted! 🎉</h4>
+              <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mx-auto">{successMessage}</p>
+              <p className="text-xs text-slate-400">Our team will contact you soon...</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4" id="modal-enquiry-form">
               {errorMessage && (
-                <div className="flex items-center gap-2 bg-red-500/10 text-red-600 dark:text-red-400 text-xs p-3 rounded-xl border border-red-500/20" id="modal-error-message">
+                <div className="flex items-center gap-2 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 text-xs p-3 rounded-xl border border-red-200 dark:border-red-500/20" id="modal-error-message">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}
 
-              {/* Grid fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Name + Email row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {/* Name */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Student Name</label>
+                  <label className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                    Student Name *
+                  </label>
                   <div className="relative">
-                    <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input 
-                      type="text" 
-                      placeholder="e.g., Riya Bhardwaj" 
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input
+                      type="text"
+                      placeholder="e.g., Riya Sharma"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Email */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Email Address</label>
+                  <label className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                    Email Address *
+                  </label>
                   <div className="relative">
-                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input 
-                      type="email" 
-                      placeholder="student@example.com" 
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input
+                      type="email"
+                      placeholder="student@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Phone */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">WhatsApp Phone No.</label>
+                  <label className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                    WhatsApp Number *
+                  </label>
                   <div className="relative">
-                    <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input 
-                      type="tel" 
-                      placeholder="e.g., 9876543210" 
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input
+                      type="tel"
+                      placeholder="e.g., 9876543210"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     />
                   </div>
                 </div>
 
                 {/* State */}
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">State / Region</label>
+                  <label className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                    State / Region *
+                  </label>
                   <div className="relative">
-                    <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <select 
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all appearance-none cursor-pointer"
+                      className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
                     >
                       <option value="" disabled>Select State</option>
                       {INDIAN_STATES.map(s => (
@@ -242,39 +271,58 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
                 </div>
               </div>
 
-              {/* Course selection */}
+              {/* Course — full width */}
               <div className="space-y-1">
-                <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Select Course to Pursue</label>
+                <label className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                  Course Interested In *
+                </label>
                 <div className="relative">
-                  <BookOpen className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                  <select 
+                  <GraduationCap className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <select
                     value={course}
                     onChange={(e) => setCourse(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary-500 transition-all appearance-none cursor-pointer"
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
                   >
-                    <option value="" disabled>Choose target course</option>
-                    {allCourses.map(c => (
-                      <option key={c.name} value={c.name} className="dark:bg-slate-900">
-                        {c.name} ({c.category})
-                      </option>
+                    <option value="" disabled>Choose your target course</option>
+                    {COURSE_CATEGORIES.map(category => (
+                      <optgroup key={category.id} label={`— ${category.title} —`} className="dark:bg-slate-900">
+                        {category.courses.map(c => (
+                          <option key={c.name} value={c.name} className="dark:bg-slate-900 font-normal">
+                            {c.name}
+                          </option>
+                        ))}
+                      </optgroup>
                     ))}
                   </select>
                 </div>
               </div>
 
-              {/* Submit Button */}
+              {/* Submit */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-primary-600 via-primary-700 to-accent-600 hover:from-primary-700 hover:to-accent-700 text-white font-sans font-bold text-xs uppercase tracking-widest py-3 px-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full text-white font-bold text-sm uppercase tracking-widest py-3.5 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
                 id="modal-submit-button"
               >
-                <span>{isSubmitting ? "Submitting Enquiry..." : "Submit Enquiry Now"}</span>
-                <Sparkles className="w-4 h-4 text-amber-300 animate-star-spin-pulse" />
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                    </svg>
+                    <span>Submitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Submit Enquiry Now</span>
+                    <Sparkles className="w-4 h-4 text-yellow-300" />
+                  </>
+                )}
               </button>
 
               <p className="text-[10px] text-slate-400 dark:text-slate-500 text-center leading-normal">
-                By submitting, you agree to receive automated contact regarding admission verification, fee structures, and batch slot confirmations.
+                By submitting, you agree to receive callbacks regarding admissions, batch slots, and scholarships.
               </p>
             </form>
           )}
