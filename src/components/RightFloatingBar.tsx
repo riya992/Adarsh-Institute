@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { MessageCircle, Phone, Instagram, Download, ChevronLeft, ChevronRight, Check, Facebook } from "lucide-react";
 import { CONTACT_INFO } from "../data";
 
+const adarshBrochure = new URL("../assets/images/adarsh_brochure.jpg", import.meta.url).href;
+
 export default function RightFloatingBar() {
   const [downloadSuccess, setDownloadSuccess] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -10,46 +12,12 @@ export default function RightFloatingBar() {
     e.preventDefault();
     setDownloadSuccess(true);
     
-    // Simulate brochure download
-    const brochureText = `
-=========================================
-ADARSH COMPUTER EDUCATION & IT INSTITUTE
-=========================================
-Our World-Class Computer Curriculum & Programmes:
-
-1. Office Automation (Basic) - 2 Months
-2. DTP (Desktop Publishing) - 3 Months
-3. Tally Prime with GST - 3 Months
-4. Web Designing (HTML, CSS, Flash MX) - 3 Months
-5. Spoken English - 3 Months
-6. DCA (Diploma in Computer Applications) - 6 Months
-7. ADCA (Advanced Diploma in Computer Applications) - 1 Year
-8. Digital Marketing - 3 Months
-9. C Programming - 2 Months
-10. C++ Programming - 2 Months
-11. Core Java - 3 Months
-12. Python - 3 Months
-13. MySQL - 2 Months
-14. DSA (Data Structures & Algorithms) - 3 Months
-15. Under-Graduate Degrees (BCA, B.Sc CS, B.Com) - 3 Years
-16. Post-Graduate Degrees (MCA, M.Sc CS, MBA IT) - 2 Years
-
-Contact Helpline: ${CONTACT_INFO.phone}
-Email: ${CONTACT_INFO.email}
-Address: ${CONTACT_INFO.address}
-=========================================
-Join the Legacy of Professional Excellence!
-`;
-    
-    const blob = new Blob([brochureText], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = url;
-    link.download = "Adarsh_Institute_Brochure_2026.txt";
+    link.href = adarshBrochure;
+    link.download = "Adarsh_Computer_Education_Brochure.jpg";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
 
     setTimeout(() => {
       setDownloadSuccess(false);
