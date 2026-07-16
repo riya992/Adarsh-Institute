@@ -23,6 +23,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
   const [phone, setPhone] = useState("");
   const [state, setState] = useState("");
   const [course, setCourse] = useState("");
+  const [studyMode, setStudyMode] = useState<"Regular" | "Distance">("Regular");
 
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -45,12 +46,15 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
     return () => clearTimeout(timer);
   }, [isLoggedIn]);
 
-  // All courses flat list for dropdown
-  const allCourses = COURSE_CATEGORIES.flatMap(category =>
-    category.courses.map(c => ({
-      name: c.name,
-      category: category.title
-    }))
+  // Get Skill India courses
+  const skillIndiaCourses = COURSE_CATEGORIES.find(cat => cat.id === "skill-india")?.courses || [];
+
+  // Get unique Regular and Distance courses mixed together
+  const degreeCourses = Array.from(
+    new Set(
+      COURSE_CATEGORIES.filter(cat => cat.id === "regular" || cat.id === "distance")
+        .flatMap(cat => cat.courses.map(c => c.name))
+    )
   );
 
   const handleClose = () => {
@@ -90,12 +94,15 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
     }
 
     try {
+      const isDegree = degreeCourses.includes(course);
+      const submittedCourse = isDegree ? `${course} (${studyMode})` : course;
+
       await submitEnquiry({
         name,
         email,
         phone,
         state,
-        course,
+        course: submittedCourse,
         source: "modal_form",
       });
 
@@ -284,17 +291,55 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
                     className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-red-900/50 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all appearance-none cursor-pointer"
                   >
                     <option value="" disabled>Choose your target course</option>
-                    {COURSE_CATEGORIES.map(category => (
-                      <optgroup key={category.id} label={`— ${category.title} —`} className="dark:bg-slate-900">
-                        {category.courses.map(c => (
-                          <option key={c.name} value={c.name} className="dark:bg-slate-900 font-normal">
-                            {c.name}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
+                    <optgroup label="— Skill India Program —" className="dark:bg-slate-900 font-bold text-slate-500">
+                      {skillIndiaCourses.map(c => (
+                        <option key={c.name} value={c.name} className="dark:bg-slate-900 font-normal">
+                          {c.name}
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="— Degree Courses —" className="dark:bg-slate-900 font-bold text-slate-500">
+                      {degreeCourses.map(name => (
+                        <option key={name} value={name} className="dark:bg-slate-900 font-normal">
+                          {name}
+                        </option>
+                      ))}
+                    </optgroup>
                   </select>
                 </div>
+
+                {/* Regular/Distance Mode Selection (Conditional) */}
+                {course && degreeCourses.includes(course) && (
+                  <div className="mt-3 space-y-1.5 animate-fadeIn">
+                    <label className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                      Study Mode
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setStudyMode("Regular")}
+                        className={`py-2 px-4 rounded-xl text-xs font-semibold border transition-all duration-300 cursor-pointer ${
+                          studyMode === "Regular"
+                            ? "bg-red-50 dark:bg-red-950/30 border-red-500 text-red-600 dark:text-red-400 font-bold"
+                            : "bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-red-900/20 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800"
+                        }`}
+                      >
+                        Regular
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setStudyMode("Distance")}
+                        className={`py-2 px-4 rounded-xl text-xs font-semibold border transition-all duration-300 cursor-pointer ${
+                          studyMode === "Distance"
+                            ? "bg-red-50 dark:bg-red-950/30 border-red-500 text-red-600 dark:text-red-400 font-bold"
+                            : "bg-slate-50 dark:bg-zinc-900 border-slate-200 dark:border-red-900/20 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800"
+                        }`}
+                      >
+                        Distance
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Submit */}
