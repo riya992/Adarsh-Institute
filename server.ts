@@ -93,7 +93,11 @@ Frequently Asked Questions (FAQ) Context:
 - Placement: 100% placement assistance with top IT companies. We have a dedicated placement cell.
 - Classes: Hybrid mode is available (flexible online & on-campus legacy labs).
 
-Keep answers professional, elegant, and concise. Format lists with clean bullet points. When students ask about registration, strongly encourage them to click the "Enroll Now" button at the top or bottom of the website.`;
+CRITICAL RULE:
+- Answer ONLY what the user asks. Do not provide any extra, unsolicited, or unrelated information.
+- Keep answers professional, elegant, and extremely concise. 
+- Do not append taglines, helpline numbers, address, or lists of other courses unless specifically asked by the user.
+- When students ask about registration, strongly encourage them to click the "Enroll Now" button at the top or bottom of the website.`;
 
     // Map history to Google GenAI schema format
     const formattedContents: any[] = [];
