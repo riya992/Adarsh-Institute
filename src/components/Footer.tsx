@@ -46,8 +46,7 @@ export default function Footer({ setActiveTab }: FooterProps) {
               <a
                 href={CONTACT_INFO.whatsappGroup}
                 target="_blank"
-                referrerPolicy="no-referrer"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="p-2 rounded-lg bg-slate-200/50 dark:bg-white/5 hover:bg-green-600 hover:text-white transition-all text-slate-500 dark:text-slate-400 cursor-pointer"
                 title="Join our WhatsApp Group"
               >

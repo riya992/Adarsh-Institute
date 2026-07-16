@@ -91,8 +91,7 @@ Join the Legacy of Professional Excellence!
         <a
           href={CONTACT_INFO.whatsappGroup}
           target="_blank"
-          referrerPolicy="no-referrer"
-          rel="noopener noreferrer"
+          rel="noopener"
           className="group relative flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white transition-all duration-300 cursor-pointer"
           title="WhatsApp Enquiry"
           id="sidebar-whatsapp"
