@@ -284,7 +284,7 @@ export default function AutoEnquiryModal({ onSuccess, isLoggedIn }: AutoEnquiryM
                     className="w-full bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-red-900/50 rounded-xl pl-9 pr-3 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all appearance-none cursor-pointer"
                   >
                     <option value="" disabled>Choose your target course</option>
-                    {COURSE_CATEGORIES.map(category => (
+                    {COURSE_CATEGORIES.filter(category => category.id !== "ug" && category.id !== "pg").map(category => (
                       <optgroup key={category.id} label={`— ${category.title} —`} className="dark:bg-slate-900">
                         {category.courses.map(c => (
                           <option key={c.name} value={c.name} className="dark:bg-slate-900 font-normal">

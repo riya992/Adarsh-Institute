@@ -282,7 +282,7 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                     className="block w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="bg-primary-950 text-slate-400">Select Target Course</option>
-                    {COURSE_CATEGORIES.map((category) => (
+                    {COURSE_CATEGORIES.filter(category => category.id !== "ug" && category.id !== "pg").map((category) => (
                       <optgroup key={category.id} label={category.title} className="bg-primary-950 text-accent-400 font-bold">
                         {category.courses.map((c) => (
                           <option key={c.name} value={c.name} className="bg-primary-950 text-white font-normal">
