@@ -24,22 +24,18 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
   const [phone, setPhone] = useState("");
   const [state, setState] = useState("");
   const [course, setCourse] = useState("");
-  const [studyMode, setStudyMode] = useState<"Regular" | "Distance">("Regular");
   
   // Status states
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Get Skill India courses
-  const skillIndiaCourses = COURSE_CATEGORIES.find(cat => cat.id === "skill-india")?.courses || [];
-
-  // Get unique Regular and Distance courses mixed together
-  const degreeCourses = Array.from(
-    new Set(
-      COURSE_CATEGORIES.filter(cat => cat.id === "regular" || cat.id === "distance")
-        .flatMap(cat => cat.courses.map(c => c.name))
-    )
+  // Extract all courses dynamically for the select dropdown
+  const allCourses = COURSE_CATEGORIES.flatMap(category => 
+    category.courses.map(c => ({
+      name: c.name,
+      category: category.title
+    }))
   );
 
   const handleEnquirySubmit = async (e: React.FormEvent) => {
@@ -76,15 +72,12 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
     }
 
     try {
-      const isDegree = degreeCourses.includes(course);
-      const submittedCourse = isDegree ? `${course} (${studyMode})` : course;
-
       await submitEnquiry({
         name,
         email,
         phone,
         state,
-        course: submittedCourse,
+        course,
         source: "enrollment_form",
       });
 
@@ -289,20 +282,15 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                     className="block w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="bg-primary-950 text-slate-400">Select Target Course</option>
-                    <optgroup label="Skill India Program" className="bg-primary-950 text-accent-400 font-bold">
-                      {skillIndiaCourses.map((c) => (
-                        <option key={c.name} value={c.name} className="bg-primary-950 text-white font-normal">
-                          {c.name}
-                        </option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Degree Courses (Regular & Distance)" className="bg-primary-950 text-accent-400 font-bold">
-                      {degreeCourses.map((name) => (
-                        <option key={name} value={name} className="bg-primary-950 text-white font-normal">
-                          {name}
-                        </option>
-                      ))}
-                    </optgroup>
+                    {COURSE_CATEGORIES.map((category) => (
+                      <optgroup key={category.id} label={category.title} className="bg-primary-950 text-accent-400 font-bold">
+                        {category.courses.map((c) => (
+                          <option key={c.name} value={c.name} className="bg-primary-950 text-white font-normal">
+                            {c.name} ({c.duration})
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-blue-300">
                     <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -310,39 +298,6 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                     </svg>
                   </div>
                 </div>
-
-                {/* Regular/Distance Mode Selection (Conditional) */}
-                {course && degreeCourses.includes(course) && (
-                  <div className="mt-3 space-y-1.5 animate-fadeIn">
-                    <label className="block text-[11px] font-semibold text-blue-200 uppercase tracking-wider">
-                      Study Mode
-                    </label>
-                    <div className="grid grid-cols-2 gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setStudyMode("Regular")}
-                        className={`py-2 px-4 rounded-xl text-xs font-semibold border transition-all duration-300 cursor-pointer ${
-                          studyMode === "Regular"
-                            ? "bg-primary-500/25 border-primary-400 text-white shadow-md shadow-primary-500/10"
-                            : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
-                        }`}
-                      >
-                        Regular
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setStudyMode("Distance")}
-                        className={`py-2 px-4 rounded-xl text-xs font-semibold border transition-all duration-300 cursor-pointer ${
-                          studyMode === "Distance"
-                            ? "bg-primary-500/25 border-primary-400 text-white shadow-md shadow-primary-500/10"
-                            : "bg-white/5 border-white/10 text-slate-300 hover:bg-white/10"
-                        }`}
-                      >
-                        Distance
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Submit Button */}
