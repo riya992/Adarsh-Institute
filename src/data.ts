@@ -236,7 +236,7 @@ export const CONTACT_INFO = {
   email: "adarsh2010education@gmail.com",
   website: "www.adarshinstitute.in",
   instagram: "https://www.instagram.com/adarsh_computereducationnarela?igsh=bnhodXlqbzB5Mnls",
-  whatsappGroup: "https://chat.whatsapp.com/Lb3KoW5S31n2hv5NK4KylH?s=sw&p=a&ilr=4&amv=1",
+  whatsappGroup: "https://chat.whatsapp.com/Lb3KoW5S31n2hv5NK4KylH?s=cl&p=a&ilr=4&amv=1",
   facebook: "https://www.facebook.com/share/1DTAQXq9eC/",
   youtube: "https://youtube.com/c/AdarshInstituteLegacy"
 };
