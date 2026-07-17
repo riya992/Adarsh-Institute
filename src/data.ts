@@ -199,11 +199,11 @@ export const COURSE_CATEGORIES: CourseCategory[] = [
   },
   {
     id: "digital-marketing-section",
-    title: "Digital Marketing Program",
+    title: "Digital Marketing + AI Program",
     description: "Flagship 12-month comprehensive digital marketing training program designed to turn you into a certified growth expert.",
     eligibilitySummary: "Eligibility: Open to All",
     courses: [
-      { name: "Master Diploma in Digital Marketing (MDDM)", duration: "12 Months", fee: "", eligibility: "Open to All", description: "Flagship 12-month course teaching SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing and more.", syllabus: [] }
+      { name: "Master Diploma in Digital Marketing + AI (MDDM + AI)", duration: "12 Months", fee: "", eligibility: "Open to All", description: "Flagship 12-month course teaching SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing and more.", syllabus: [] }
     ],
     faqs: [
       {
@@ -213,6 +213,25 @@ export const COURSE_CATEGORIES: CourseCategory[] = [
       {
         question: "Will I learn website building?",
         answer: "Yes, you will learn to build websites on Google Sites, Wix, and WordPress as part of the Web Designing module."
+      }
+    ]
+  },
+  {
+    id: "data-analytics-section",
+    title: "Data Analytics Program",
+    description: "Learn to inspect, clean, transform, and model data to discover useful information and support decision-making.",
+    eligibilitySummary: "Eligibility: Open to All",
+    courses: [
+      { name: "Professional Diploma in Data Analytics (PDDA)", duration: "4-6 Months", fee: "", eligibility: "Open to All", description: "Learn to build models, interactive dashboards, and optimize queries with Advance Excel, Power BI, Python, and MySQL.", syllabus: [] }
+    ],
+    faqs: [
+      {
+        question: "What tools are covered in this program?",
+        answer: "You will master Advance Excel, Power BI, Python (specifically data libraries like Pandas and NumPy), and MySQL databases."
+      },
+      {
+        question: "Do I need a coding background?",
+        answer: "No coding background is required! We teach database querying and Python analysis in a beginner-friendly manner."
       }
     ]
   }

@@ -282,11 +282,20 @@ export const CATEGORIES_DATA: CourseCategory[] = [
   },
   {
     id: "digital-marketing-section",
-    title: "Digital Marketing Program",
+    title: "Digital Marketing + AI Program",
     description: "Flagship 12-month comprehensive digital marketing training program designed to turn you into a certified growth expert.",
     iconId: "digital-marketing-section",
     courses: [
-      { id: "dm-mddm", name: "Master Diploma in Digital Marketing (MDDM)", description: "Flagship 12-month course teaching SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing and more." }
+      { id: "dm-mddm", name: "Master Diploma in Digital Marketing + AI (MDDM + AI)", description: "Flagship 12-month course teaching SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing and more." }
+    ]
+  },
+  {
+    id: "data-analytics-section",
+    title: "Data Analytics Program",
+    description: "Learn to inspect, clean, transform, and model data to discover useful information and support decision-making.",
+    iconId: "data-analytics-section",
+    courses: [
+      { id: "da-pdda", name: "Professional Diploma in Data Analytics (PDDA)", description: "Flagship 4-6 month course teaching Advance Excel, Power BI, Python, MySQL and more." }
     ]
   }
 ];
@@ -302,7 +311,7 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
   const normalizedName = courseName;
   if (courseId === "dm-mddm" || categoryId === "digital-marketing-section" || normalizedName.toLowerCase().includes("mddm") || normalizedName.toLowerCase().includes("master diploma in digital marketing")) {
     return {
-      name: "Master Diploma in Digital Marketing (MDDM)",
+      name: "Master Diploma in Digital Marketing + AI (MDDM + AI)",
       tagline: "Become a certified digital marketing professional and growth strategist.",
       introduction: "A complete, industry-standard 12-month program that covers the entire spectrum of online marketing, search visibility, brand campaign execution, and website building.",
       about: "An intensive 12-month program where you will master SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing, and more. The curriculum combines core theory with live sandboxed campaigns to deliver hands-on marketing expertise.",
@@ -347,7 +356,56 @@ export function getCourseDetails(courseId: string, categoryId: string, courseNam
         },
         {
           question: "What certification will I receive?",
-          answer: "You will receive a Master Diploma in Digital Marketing (MDDM) certificate from Adarsh Institute, along with guidance to clear free global certifications from Google, HubSpot, and Meta."
+          answer: "You will receive a Master Diploma in Digital Marketing + AI (MDDM + AI) certificate from Adarsh Institute, along with guidance to clear free global certifications from Google, HubSpot, and Meta."
+        }
+      ]
+    };
+  }
+  if (courseId === "da-pdda" || categoryId === "data-analytics-section" || normalizedName.toLowerCase().includes("pdda") || normalizedName.toLowerCase().includes("data analytics")) {
+    return {
+      name: "Professional Diploma in Data Analytics (PDDA)",
+      tagline: "Turn raw data into business intelligence and strategic growth decisions.",
+      introduction: "A comprehensive 4-6 month professional training program designed to teach you the most high-demand data analysis tools and methodologies used in modern business environments.",
+      about: "An intensive program where you will master Advance Excel, Power BI, Python, MySQL, and more. You will learn data modeling, cleaning, interactive dashboard creation, and query optimization through hands-on business intelligence case studies.",
+      duration: "4-6 Months",
+      eligibility: [
+        "Advance Excel: Pivot tables, macros, and financial modeling tools",
+        "Power BI: Interactive dashboard designs and DAX functions",
+        "Python: Scripting, Pandas, NumPy, and data manipulation",
+        "MySQL: Relational database schemas, joins, and indexing",
+        "Data cleaning, transforming, and validation methodologies",
+        "Business intelligence reporting and decision analysis metrics"
+      ],
+      highlights: [
+        "Advance Excel: Pivot tables, macros, and financial modeling tools.",
+        "Power BI: Interactive dashboard designs and DAX functions.",
+        "Python: Scripting, Pandas, NumPy, and data manipulation.",
+        "MySQL: Relational database schemas, joins, and indexing.",
+        "Data cleaning, transforming, and validation methodologies.",
+        "Business intelligence reporting and decision analysis metrics."
+      ],
+      careerOpportunities: [
+        "Data Analyst",
+        "Business Intelligence (BI) Analyst",
+        "Data Visualization Specialist",
+        "Analytics Consultant",
+        "Reporting Engineer",
+        "Operations Analyst",
+        "Database Coordinator",
+        "Financial Data Analyst"
+      ],
+      faqs: [
+        {
+          question: "What tools are covered in this program?",
+          answer: "You will master Advance Excel, Power BI, Python (specifically data libraries like Pandas and NumPy), and MySQL databases."
+        },
+        {
+          question: "Do I need a coding background?",
+          answer: "No coding background is required! We teach database querying and Python analysis in a beginner-friendly manner."
+        },
+        {
+          question: "What certification is awarded?",
+          answer: "You will receive a Professional Diploma in Data Analytics (PDDA) certificate upon successfully completing the course project."
         }
       ]
     };
