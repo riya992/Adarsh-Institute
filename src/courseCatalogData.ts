@@ -279,6 +279,15 @@ export const CATEGORIES_DATA: CourseCategory[] = [
         ]
       }
     ]
+  },
+  {
+    id: "digital-marketing-section",
+    title: "Digital Marketing Program",
+    description: "Flagship 12-month comprehensive digital marketing training program designed to turn you into a certified growth expert.",
+    iconId: "digital-marketing-section",
+    courses: [
+      { id: "dm-mddm", name: "Master Diploma in Digital Marketing (MDDM)", description: "Flagship 12-month course teaching SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing and more." }
+    ]
   }
 ];
 
@@ -289,9 +298,60 @@ CATEGORIES_DATA.forEach(category => {
   }
 });
 
-// Dynamic content generator to generate high-quality text-based course details
 export function getCourseDetails(courseId: string, categoryId: string, courseName: string): CourseDetail {
   const normalizedName = courseName;
+  if (courseId === "dm-mddm" || categoryId === "digital-marketing-section" || normalizedName.toLowerCase().includes("mddm") || normalizedName.toLowerCase().includes("master diploma in digital marketing")) {
+    return {
+      name: "Master Diploma in Digital Marketing (MDDM)",
+      tagline: "Become a certified digital marketing professional and growth strategist.",
+      introduction: "A complete, industry-standard 12-month program that covers the entire spectrum of online marketing, search visibility, brand campaign execution, and website building.",
+      about: "An intensive 12-month program where you will master SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing, and more. The curriculum combines core theory with live sandboxed campaigns to deliver hands-on marketing expertise.",
+      duration: "12 Months",
+      eligibility: [
+        "SEO (Search Engine Optimization) & Web Rankings",
+        "SEM (Search Engine Marketing) & PPC Google Ads",
+        "SMM (Social Media Marketing) on Meta, LinkedIn & Twitter",
+        "Web Designing (No-Code Website & Landing Page Creation)",
+        "Email Marketing Automation & Inbound Lead Funnels",
+        "Web Analytics & Conversion Tracking (Google Analytics)",
+        "YouTube Marketing, Video SEO & Content Strategy"
+      ],
+      highlights: [
+        "Google Sites integration & landing page layouts.",
+        "Wix website design & template customization.",
+        "WordPress CMS installation, themes, plugins & blog management.",
+        "SEO keyword planning, audit tools, and rank tracking.",
+        "Meta Ads Manager, pixel setup, and paid campaigns.",
+        "Google Analytics tracking, conversion tracking & reports.",
+        "Email newsletter campaigns & marketing funnel setup.",
+        "YouTube video SEO, optimization, and content creation."
+      ],
+      careerOpportunities: [
+        "Digital Marketing Manager",
+        "SEO Analyst / Specialist",
+        "Social Media Manager (SMM)",
+        "PPC & Performance Marketer",
+        "Content Marketing Manager",
+        "Web Analytics Executive",
+        "E-commerce Specialist",
+        "Freelance Digital Consultant"
+      ],
+      faqs: [
+        {
+          question: "Do I need prior coding knowledge for the web designing module?",
+          answer: "No coding knowledge is required! We will teach you how to build professional websites using premium no-code website builders like Google Sites, Wix, and WordPress."
+        },
+        {
+          question: "Will I get hands-on experience?",
+          answer: "Yes, you will work on live project simulations, set up search ads, configure analytics tracking, and optimize content for search engines."
+        },
+        {
+          question: "What certification will I receive?",
+          answer: "You will receive a Master Diploma in Digital Marketing (MDDM) certificate from Adarsh Institute, along with guidance to clear free global certifications from Google, HubSpot, and Meta."
+        }
+      ]
+    };
+  }
   const isAviation = normalizedName.toLowerCase().includes("aviation") || normalizedName.toLowerCase().includes("cpl") || normalizedName.toLowerCase().includes("pilot");
   const isManagement = normalizedName.toLowerCase().includes("bba") || normalizedName.toLowerCase().includes("mba") || normalizedName.toLowerCase().includes("management");
   const isCommerce = normalizedName.toLowerCase().includes("com") || normalizedName.toLowerCase().includes("tally");

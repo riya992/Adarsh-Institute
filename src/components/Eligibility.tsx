@@ -3,7 +3,7 @@ import {
   BookOpen, Globe, GraduationCap, Trophy, BookCheck,
   ArrowRight, ArrowLeft, Plus, Minus, Calendar, Users,
   Award, Shield, Check, ChevronRight, Sparkles,
-  School, HeartPulse, Wrench, BookMarked
+  School, HeartPulse, Wrench, BookMarked, Megaphone
 } from "lucide-react";
 import { CATEGORIES_DATA, getCourseDetails } from "../courseCatalogData";
 import { ActiveTab } from "../types";
@@ -64,6 +64,7 @@ const LABELS: Record<string, string> = {
   diploma: "Diploma Programmes",
   "distance-ug": "Distance UG Programmes",
   "distance-pg": "Distance PG Programmes",
+  "digital-marketing-section": "Digital Marketing Program",
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -76,6 +77,7 @@ function getCategoryIcon(id: string) {
     case "ug":          return <GraduationCap className={`${cls} text-rose-500`} />;
     case "pg":          return <Trophy    className={`${cls} text-sky-500`} />;
     case "diploma":     return <BookCheck className={`${cls} text-amber-500`} />;
+    case "digital-marketing-section": return <Megaphone className={`${cls} text-violet-500 animate-pulse`} />;
     default:            return <BookCheck className={`${cls} text-amber-500`} />;
   }
 }
@@ -205,8 +207,8 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="eligibility-cards-grid">
-              {CATEGORIES_DATA.filter(c => ["skill-india", "regular", "distance"].includes(c.id)).map((cat) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="eligibility-cards-grid">
+              {CATEGORIES_DATA.filter(c => ["skill-india", "regular", "distance", "digital-marketing-section"].includes(c.id)).map((cat) => (
                 <div
                   key={cat.id}
                   onClick={() =>
@@ -404,7 +406,7 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 <div className="lg:col-span-5 bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-md text-slate-900">
                   <h3 className="font-display font-black text-base uppercase tracking-wider mb-4 text-slate-900 border-b border-slate-100 pb-3 flex items-center gap-2">
-                    <Shield className="w-5 h-5 text-primary-600" /> {effectiveCatId === "skill-india" ? "Course Highlights & Objectives" : "Eligibility Criteria"}
+                    <Shield className="w-5 h-5 text-primary-600" /> {["skill-india", "digital-marketing-section"].includes(effectiveCatId) ? "Course Highlights & Objectives" : "Eligibility Criteria"}
                   </h3>
                   <ul className="space-y-3 list-none pl-0">
                     {courseDetails.eligibility.map((req, idx) => (

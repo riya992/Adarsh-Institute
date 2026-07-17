@@ -196,6 +196,25 @@ export const COURSE_CATEGORIES: CourseCategory[] = [
         answer: "Yes, eligible ITI or equivalent qualified students can apply for lateral entry where applicable."
       }
     ]
+  },
+  {
+    id: "digital-marketing-section",
+    title: "Digital Marketing Program",
+    description: "Flagship 12-month comprehensive digital marketing training program designed to turn you into a certified growth expert.",
+    eligibilitySummary: "Eligibility: Open to All",
+    courses: [
+      { name: "Master Diploma in Digital Marketing (MDDM)", duration: "12 Months", fee: "", eligibility: "Open to All", description: "Flagship 12-month course teaching SEO, SEM, SMM, Web Designing, Email Marketing, Inbound Marketing, Web Analytics, YouTube Marketing and more.", syllabus: [] }
+    ],
+    faqs: [
+      {
+        question: "Who can enroll in this program?",
+        answer: "Anyone who has passed 10th or 12th grade with basic computer familiarity can enroll."
+      },
+      {
+        question: "Will I learn website building?",
+        answer: "Yes, you will learn to build websites on Google Sites, Wix, and WordPress as part of the Web Designing module."
+      }
+    ]
   }
 ];
 
