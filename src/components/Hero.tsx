@@ -142,13 +142,13 @@ export default function Hero({ setActiveTab, isLoggedIn }: HeroProps) {
             </div>
 
             {/* Floating Glassmorphic Badge 2: Government Approved Certificate (Bottom-Right) */}
-            <div className="absolute -bottom-4 -right-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80 p-3 rounded-xl shadow-lg flex items-center gap-3 animate-float-delayed max-w-[210px]">
-              <div className="bg-[#008744]/10 dark:bg-emerald-950/40 p-2 rounded-lg text-[#008744] dark:text-emerald-400 shrink-0">
-                <Award className="w-5 h-5 animate-pulse" />
+            <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-emerald-50 via-white to-emerald-50 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/60 backdrop-blur-md border-2 border-[#008744]/35 dark:border-emerald-500/35 p-3.5 rounded-xl shadow-xl shadow-emerald-900/15 dark:shadow-emerald-950/30 flex items-center gap-3 max-w-[220px]">
+              <div className="bg-[#008744] p-2.5 rounded-lg text-white shrink-0 shadow-md shadow-emerald-700/20">
+                <Award className="w-5 h-5" />
               </div>
               <div>
-                <span className="block font-display font-bold text-xs text-slate-800 dark:text-slate-100">Government Approved</span>
-                <span className="block text-[9px] text-slate-500 dark:text-slate-400 leading-tight">ISO 9001:2015 Standards Vetted</span>
+                <span className="block font-display font-extrabold text-xs text-[#006b36] dark:text-emerald-300">Government Approved</span>
+                <span className="block text-[9px] font-medium text-slate-600 dark:text-slate-300 leading-tight mt-0.5">ISO 9001:2015 Standards Vetted</span>
               </div>
             </div>
 
