@@ -272,7 +272,7 @@ export const CONTACT_INFO = {
   address: "1st Floor, Near RK Sweets, Safiabad Road, Narela, Delhi 110040",
   phone: "+91 92126 21301",
   email: "adarsh2010education@gmail.com",
-  website: "www.adarshinstitute.in",
+  website: "www.adarsheducation.in",
   instagram: "https://www.instagram.com/adarsh_computereducationnarela?igsh=bnhodXlqbzB5Mnls",
   whatsappGroup: "https://chat.whatsapp.com/Lb3KoW5S31n2hv5NK4KylH?s=cl&p=a&ilr=4&amv=1",
   facebook: "https://www.facebook.com/share/1DTAQXq9eC/",
