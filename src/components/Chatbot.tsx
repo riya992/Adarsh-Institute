@@ -27,6 +27,14 @@ export default function Chatbot() {
     "Are scholarships available?"
   ];
 
+  const getChatEndpoint = () => {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      return "/api/chat";
+    }
+
+    return "/.netlify/functions/chat";
+  };
+
   useEffect(() => {
     // Scroll chatbot body to bottom on message change
     if (scrollRef.current) {
@@ -59,13 +67,17 @@ export default function Chatbot() {
           text: m.text
         }));
 
-      const response = await fetch("/api/chat", {
+      const response = await fetch(getChatEndpoint(), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: textToSend, history })
       });
 
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Chat service is unavailable.");
+      }
       
       setIsTyping(false);
       setMessages((prev) => [
@@ -85,7 +97,7 @@ export default function Chatbot() {
         {
           id: Math.random().toString(),
           role: "assistant",
-          text: "I encountered a transient connection issue. Please make sure the dev server is active and the API key is configured. You can also directly contact our Admissions Counselor via phone or WhatsApp!",
+          text: "I could not connect to Adarsh AI right now. Please try again in a moment, or contact our Admissions Counselor via phone or WhatsApp.",
           timestamp: new Date()
         }
       ]);
