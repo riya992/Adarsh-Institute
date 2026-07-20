@@ -194,8 +194,8 @@ export default function AboutUs() {
               For over two decades, we have focused on bridging the digital divide by nurturing technical experts. By combining standard university degree streams (BCA, MCA, B.Sc) with fast-track job-oriented certifications (Tally Prime, DCA, ADCA), we have proudly empowered over <strong>5,000+ students</strong> to secure prominent placements in top corporate firms and qualify for essential state and central government services.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              <div className="flex gap-3 items-center">
-                <div className="w-10 h-10 rounded-xl bg-primary-100 dark:bg-primary-950/40 text-primary-600 dark:text-red-400 flex items-center justify-center shrink-0">
+              <div className="flex gap-3 items-center rounded-2xl border border-red-200/80 dark:border-red-900/50 bg-gradient-to-r from-red-50 to-white dark:from-red-950/30 dark:to-slate-900 p-4 shadow-sm">
+                <div className="w-11 h-11 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0 shadow-md shadow-red-600/20">
                   <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
@@ -203,8 +203,8 @@ export default function AboutUs() {
                   <p className="text-xs text-slate-500 dark:text-slate-400">100% practical lab curricula</p>
                 </div>
               </div>
-              <div className="flex gap-3 items-center">
-                <div className="w-10 h-10 rounded-xl bg-primary-100 dark:bg-primary-950/40 text-primary-600 dark:text-red-400 flex items-center justify-center shrink-0">
+              <div className="flex gap-3 items-center rounded-2xl border border-emerald-200/80 dark:border-emerald-900/50 bg-gradient-to-r from-emerald-50 to-white dark:from-emerald-950/25 dark:to-slate-900 p-4 shadow-sm">
+                <div className="w-11 h-11 rounded-xl bg-[#008744] text-white flex items-center justify-center shrink-0 shadow-md shadow-emerald-700/20">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>

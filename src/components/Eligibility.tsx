@@ -3,7 +3,8 @@ import {
   BookOpen, Globe, GraduationCap, Trophy, BookCheck,
   ArrowRight, ArrowLeft, Plus, Minus, Calendar, Users,
   Award, Shield, Check, ChevronRight, Sparkles,
-  School, HeartPulse, Wrench, BookMarked, Megaphone, BarChart3
+  School, Wrench, BookMarked, Megaphone, ChartNoAxesCombined,
+  BadgeCheck, Landmark, MonitorSmartphone, BriefcaseBusiness
 } from "lucide-react";
 import { CATEGORIES_DATA, getCourseDetails } from "../courseCatalogData";
 import { ActiveTab } from "../types";
@@ -72,15 +73,15 @@ const LABELS: Record<string, string> = {
 function getCategoryIcon(id: string) {
   const cls = "w-8 h-8 transition-colors duration-300";
   switch (id) {
-    case "skill-india": return <Sparkles className={`${cls} text-amber-500 animate-pulse`} />;
-    case "regular":     return <BookOpen  className={`${cls} text-red-500`} />;
-    case "distance":    return <Globe     className={`${cls} text-emerald-500 animate-pulse`} />;
-    case "ug":          return <GraduationCap className={`${cls} text-rose-500`} />;
-    case "pg":          return <Trophy    className={`${cls} text-sky-500`} />;
-    case "diploma":     return <BookCheck className={`${cls} text-amber-500`} />;
-    case "digital-marketing-section": return <Megaphone className={`${cls} text-violet-500 animate-pulse`} />;
-    case "data-analytics-section": return <BarChart3 className={`${cls} text-teal-500 animate-pulse`} />;
-    default:            return <BookCheck className={`${cls} text-amber-500`} />;
+    case "skill-india": return <BadgeCheck className={`${cls} text-amber-600 dark:text-amber-400`} />;
+    case "regular":     return <Landmark className={`${cls} text-red-600 dark:text-red-400`} />;
+    case "distance":    return <MonitorSmartphone className={`${cls} text-emerald-600 dark:text-emerald-400`} />;
+    case "ug":          return <GraduationCap className={`${cls} text-rose-600 dark:text-rose-400`} />;
+    case "pg":          return <BriefcaseBusiness className={`${cls} text-blue-600 dark:text-blue-400`} />;
+    case "diploma":     return <BookCheck className={`${cls} text-amber-600 dark:text-amber-400`} />;
+    case "digital-marketing-section": return <Megaphone className={`${cls} text-violet-600 dark:text-violet-400`} />;
+    case "data-analytics-section": return <ChartNoAxesCombined className={`${cls} text-teal-600 dark:text-teal-400`} />;
+    default:            return <BookCheck className={`${cls} text-amber-600 dark:text-amber-400`} />;
   }
 }
 
@@ -104,13 +105,13 @@ function CourseCard({ course, onClick }: { key?: React.Key; course: { id: string
   return (
     <div
       onClick={onClick}
-      className="bg-slate-900/30 hover:bg-slate-800/40 border border-slate-850 hover:border-slate-700 rounded-2xl p-6 flex flex-col justify-between hover:shadow-lg transition-all cursor-pointer group"
+      className="bg-white dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800/60 border border-slate-200 dark:border-slate-800 hover:border-red-300 dark:hover:border-slate-700 rounded-2xl p-6 flex flex-col justify-between hover:shadow-lg transition-all cursor-pointer group"
     >
       <div className="space-y-2">
-        <span className="font-bold text-sm text-slate-200 group-hover:text-white transition-colors block">{course.name}</span>
-        <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">{course.description}</p>
+        <span className="font-bold text-sm text-slate-800 dark:text-slate-200 group-hover:text-red-700 dark:group-hover:text-white transition-colors block">{course.name}</span>
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">{course.description}</p>
       </div>
-      <div className="mt-4 flex items-center text-[11px] font-semibold text-primary-400 group-hover:text-white transition-colors pt-2 border-t border-slate-850/60 w-full justify-between">
+      <div className="mt-4 flex items-center text-[11px] font-semibold text-primary-600 dark:text-primary-400 group-hover:text-red-700 dark:group-hover:text-white transition-colors pt-2 border-t border-slate-200 dark:border-slate-800/60 w-full justify-between">
         <span>View Details</span>
         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
       </div>
@@ -138,13 +139,13 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
   const Breadcrumb = () => {
     if (currentView.type === "programs") return null;
     return (
-      <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-400 mb-8 select-none bg-slate-950/20 w-fit px-4 py-2 rounded-xl border border-slate-800/40">
+      <nav className="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 mb-8 select-none bg-white/80 dark:bg-slate-950/20 w-fit px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800/40">
         <button onClick={() => setCurrentView({ type: "programs" })} className="hover:text-primary-500 transition-colors cursor-pointer">
           Programs
         </button>
 
         {currentView.type === "sub-select" && (
-          <><ChevronRight className="w-3.5 h-3.5" /><span className="text-white font-bold">{LABELS[currentView.parentId]}</span></>
+          <><ChevronRight className="w-3.5 h-3.5" /><span className="text-slate-900 dark:text-white font-bold">{LABELS[currentView.parentId]}</span></>
         )}
 
         {currentView.type === "category" && (
@@ -156,7 +157,7 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
               </button></>
             )}
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-white font-bold">{LABELS[currentView.categoryId] ?? currentView.categoryId}</span>
+            <span className="text-slate-900 dark:text-white font-bold">{LABELS[currentView.categoryId] ?? currentView.categoryId}</span>
           </>
         )}
 
@@ -176,7 +177,7 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
               {LABELS[currentView.categoryId] ?? currentView.categoryId}
             </button>
             <ChevronRight className="w-3.5 h-3.5" />
-            <span className="text-white font-bold">{currentView.courseName}</span>
+            <span className="text-slate-900 dark:text-white font-bold">{currentView.courseName}</span>
           </>
         )}
       </nav>
@@ -191,8 +192,8 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
   };
 
   return (
-    <section id="programmes-section" className="py-24 bg-slate-900 dark:bg-slate-950 relative transition-colors duration-300 overflow-hidden min-h-[700px]">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary-950/10 rounded-full blur-[120px] pointer-events-none" />
+    <section id="programmes-section" className="py-24 bg-slate-50 dark:bg-slate-950 relative transition-colors duration-300 overflow-hidden min-h-[700px]">
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-red-100/40 dark:bg-primary-950/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <Breadcrumb />
@@ -201,10 +202,10 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
         {currentView.type === "programs" && (
           <div className="space-y-16 animate-in fade-in duration-500">
             <div className="text-center space-y-4">
-              <span className="text-xs font-bold text-primary-500 dark:text-red-400 uppercase tracking-widest bg-primary-950/50 border border-primary-900/60 px-4 py-2 rounded-full">
+              <span className="text-xs font-bold text-primary-700 dark:text-red-400 uppercase tracking-widest bg-primary-100 dark:bg-primary-950/50 border border-primary-200 dark:border-primary-900/60 px-4 py-2 rounded-full">
                 Course Catalog &amp; Pathways
               </span>
-              <h2 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
+              <h2 className="font-display font-black text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight">
                 Eligibility Criteria &amp; Programmes
               </h2>
             </div>
@@ -218,18 +219,18 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
                       ? setCurrentView({ type: "sub-select", parentId: cat.id })
                       : setCurrentView({ type: "category", categoryId: cat.id })
                   }
-                  className="bg-slate-900/40 hover:bg-slate-800/60 rounded-2xl p-6 border border-slate-800 hover:border-primary-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
+                  className="bg-white dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary-300 dark:hover:border-primary-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
                   id={`eligibility-card-${cat.id}`}
                 >
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="space-y-4">
-                    <div className="bg-slate-950 p-3.5 rounded-xl inline-block group-hover:bg-primary-950/40 transition-colors border border-slate-800">
+                    <div className="bg-slate-100 dark:bg-slate-950 p-3.5 rounded-xl inline-block group-hover:bg-red-50 dark:group-hover:bg-primary-950/40 transition-colors border border-slate-200 dark:border-slate-800">
                       {getCategoryIcon(cat.id)}
                     </div>
-                    <h3 className="font-display font-bold text-base text-slate-200 group-hover:text-white transition-colors">{cat.title}</h3>
-                    <p className="text-[11px] text-slate-400 leading-relaxed min-h-[50px]">{cat.description}</p>
+                    <h3 className="font-display font-bold text-base text-slate-800 dark:text-slate-200 group-hover:text-primary-700 dark:group-hover:text-white transition-colors">{cat.title}</h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed min-h-[50px]">{cat.description}</p>
                   </div>
-                  <div className="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold text-primary-400 group-hover:text-white bg-slate-950 hover:bg-primary-600 transition-all duration-300 text-center border border-slate-850">
+                  <div className="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold text-primary-700 dark:text-primary-400 group-hover:text-white bg-red-50 dark:bg-slate-950 group-hover:bg-primary-600 transition-all duration-300 text-center border border-red-100 dark:border-slate-800">
                     Explore courses <ArrowRight className="w-3.5 h-3.5 inline-block ml-1 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </div>
@@ -241,19 +242,19 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
         {/* ══ STEP 2: Sub-select (Diploma / UG / PG) ═══════════════════════ */}
         {currentView.type === "sub-select" && (
           <div className="space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-500">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800 gap-4">
               <div className="flex items-center gap-3">
-                <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                <div className="bg-white dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
                   {getCategoryIcon(currentView.parentId)}
                 </div>
                 <div>
-                  <h3 className="font-display font-black text-2xl text-white">{LABELS[currentView.parentId]}</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">Select a programme category to explore courses</p>
+                  <h3 className="font-display font-black text-2xl text-slate-900 dark:text-white">{LABELS[currentView.parentId]}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Select a programme category to explore courses</p>
                 </div>
               </div>
               <button
                 onClick={() => setCurrentView({ type: "programs" })}
-                className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
+                className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-primary-700 dark:hover:text-white bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
               >
                 <ArrowLeft className="w-4 h-4" /> All Programs
               </button>
@@ -271,17 +272,17 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
                       setCurrentView({ type: "category", categoryId: sub.id, parentId: currentView.parentId, filteredCourseIds: ds?.filteredIds });
                     }
                   }}
-                  className="bg-slate-900/40 hover:bg-slate-800/60 rounded-2xl p-6 border border-slate-800 hover:border-primary-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
+                  className="bg-white dark:bg-slate-900/40 hover:bg-slate-50 dark:hover:bg-slate-800/60 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 hover:border-primary-300 dark:hover:border-primary-500/50 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group relative overflow-hidden cursor-pointer"
                 >
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-600 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                   <div className="space-y-4">
-                    <div className="bg-slate-950 p-3.5 rounded-xl inline-block group-hover:bg-primary-950/40 transition-colors border border-slate-800">
+                    <div className="bg-slate-100 dark:bg-slate-950 p-3.5 rounded-xl inline-block group-hover:bg-red-50 dark:group-hover:bg-primary-950/40 transition-colors border border-slate-200 dark:border-slate-800">
                       {getCategoryIcon(sub.icon)}
                     </div>
-                    <h3 className="font-display font-bold text-base text-slate-200 group-hover:text-white transition-colors">{sub.label}</h3>
-                    <p className="text-[11px] text-slate-400 leading-relaxed min-h-[50px]">{sub.description}</p>
+                    <h3 className="font-display font-bold text-base text-slate-800 dark:text-slate-200 group-hover:text-primary-700 dark:group-hover:text-white transition-colors">{sub.label}</h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed min-h-[50px]">{sub.description}</p>
                   </div>
-                  <div className="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold text-primary-400 group-hover:text-white bg-slate-950 hover:bg-primary-600 transition-all duration-300 text-center border border-slate-850">
+                  <div className="mt-6 w-full py-2.5 rounded-xl text-xs font-semibold text-primary-700 dark:text-primary-400 group-hover:text-white bg-red-50 dark:bg-slate-950 group-hover:bg-primary-600 transition-all duration-300 text-center border border-red-100 dark:border-slate-800">
                     View Courses <ArrowRight className="w-3.5 h-3.5 inline-block ml-1 transition-transform group-hover:translate-x-0.5" />
                   </div>
                 </div>
@@ -298,14 +299,14 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
 
           return (
             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-500">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-slate-200 dark:border-slate-800 gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                  <div className="bg-white dark:bg-slate-950 p-3 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
                     {getCategoryIcon(currentView.categoryId.replace("distance-", ""))}
                   </div>
                   <div>
-                    <h3 className="font-display font-black text-2xl text-white">{label}</h3>
-                    <p className="text-xs text-slate-400 mt-0.5">{cat.description}</p>
+                    <h3 className="font-display font-black text-2xl text-slate-900 dark:text-white">{label}</h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{cat.description}</p>
                   </div>
                 </div>
                 <button
@@ -314,7 +315,7 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
                       ? setCurrentView({ type: "sub-select", parentId: currentView.parentId })
                       : setCurrentView({ type: "programs" })
                   }
-                  className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-primary-700 dark:hover:text-white bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 self-start sm:self-auto"
                 >
                   <ArrowLeft className="w-4 h-4" /> {backLabel(currentView)}
                 </button>
@@ -369,7 +370,7 @@ export default function Eligibility({ setActiveTab }: { setActiveTab?: (tab: Act
               <div className="flex justify-start">
                 <button
                   onClick={() => setCurrentView({ type: "category", categoryId: currentView.categoryId, parentId: currentView.parentId, filteredCourseIds: currentView.filteredCourseIds })}
-                  className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white bg-slate-900 border border-slate-850 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-primary-700 dark:hover:text-white bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   <ArrowLeft className="w-4 h-4" /> Back to {label}
                 </button>

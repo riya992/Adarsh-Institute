@@ -102,50 +102,51 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
   };
 
   return (
-    <section id="enrollment-section" className="py-20 bg-gradient-to-b from-primary-950 to-primary-900 text-white relative overflow-hidden">
+    <section id="enrollment-section" className="py-20 sm:py-24 bg-gradient-to-br from-slate-950 via-[#0f2747] to-slate-950 text-white relative overflow-hidden">
       {/* Background visual flourishes */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 right-[-10%] w-[40%] h-[40%] rounded-full bg-accent-500/10 blur-[100px]" />
-        <div className="absolute bottom-10 left-[-10%] w-[35%] h-[35%] rounded-full bg-primary-500/10 blur-[120px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.08)_1px,transparent_1px)] bg-[size:26px_26px] opacity-35" />
+        <div className="absolute top-1/4 right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-500/15 blur-[100px]" />
+        <div className="absolute bottom-10 left-[-10%] w-[35%] h-[35%] rounded-full bg-red-500/15 blur-[120px]" />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center space-y-4 mb-12">
-          <span className="text-xs font-semibold text-accent-400 uppercase tracking-widest bg-accent-500/10 px-3.5 py-1.5 rounded-full border border-accent-500/20">
+          <span className="inline-flex text-xs font-bold text-emerald-300 uppercase tracking-widest bg-emerald-500/15 px-4 py-2 rounded-full border border-emerald-400/30 shadow-sm">
             Adarsh Admission Enquiry Portal
           </span>
           <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-white">
             Begin Your Computer Legacy Today
           </h2>
-          <p className="text-blue-200/70 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-slate-200 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Fill out the digital enquiry format to unlock course eligibility lists, interactive syllabus, and secure your place.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch max-w-4xl mx-auto">
           {/* Info Panel / Trust factors (Left side) */}
-          <div className="md:col-span-5 bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col justify-between relative overflow-hidden">
+          <div className="md:col-span-5 bg-slate-900/75 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/15 flex flex-col justify-between relative overflow-hidden shadow-2xl">
             <div className="space-y-6">
               <h3 className="font-display font-bold text-lg text-white">Enquiry Benefits</h3>
               
               <div className="space-y-4">
                 <div className="flex gap-3">
                   <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
-                  <p className="text-xs text-blue-200/80">
+                  <p className="text-xs text-slate-300 leading-relaxed">
                     <strong className="text-white block mb-0.5">Instant Counselling Callback</strong>
                     Get contacted by a senior computer instructor to discuss batch times and career opportunities.
                   </p>
                 </div>
                 <div className="flex gap-3">
                   <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
-                  <p className="text-xs text-blue-200/80">
+                  <p className="text-xs text-slate-300 leading-relaxed">
                     <strong className="text-white block mb-0.5">Free Syllabus & Placement Guide</strong>
                     Receive complete, modular PDF breakdowns of your selected program.
                   </p>
                 </div>
                 <div className="flex gap-3">
                   <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
-                  <p className="text-xs text-blue-200/80">
+                  <p className="text-xs text-slate-300 leading-relaxed">
                     <strong className="text-white block mb-0.5">Scholarship Assessment</strong>
                     Check automatically if you are eligible for tuition waivers and legacy discounts.
                   </p>
@@ -158,39 +159,41 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
               <span className="block text-[11px] uppercase tracking-wider text-accent-300 font-semibold mb-1">
                 Admissions Desk
               </span>
-              <p className="text-xs italic text-blue-300/80">
+              <p className="text-xs italic text-slate-300 leading-relaxed">
                 "Our digital helpdesk streamlines registrations instantly. Fill in your genuine details to lock preferred computer lab slots."
               </p>
             </div>
           </div>
 
           {/* Form Container (Right side) */}
-          <div className="md:col-span-7 glass-card-dark rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl relative">
-            <h3 className="font-display font-bold text-lg text-white mb-6 border-b border-white/5 pb-3 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-accent-400" />
+          <div className="md:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-2xl shadow-slate-950/30 relative">
+            <h3 className="font-display font-bold text-lg text-slate-900 mb-6 border-b border-slate-200 pb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-red-50 text-primary-600 flex items-center justify-center">
+                <Sparkles className="w-4 h-4" />
+              </span>
               Admission Enquiry Form
             </h3>
 
             <form onSubmit={handleEnquirySubmit} className="space-y-5" id="enroll-form">
               {/* Error & Success States */}
               {errorMessage && (
-                <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/30 text-red-200 text-xs p-3 rounded-xl">
-                  <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-xs p-3 rounded-xl">
+                  <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
               )}
               {successMessage && (
-                <div className="flex items-center gap-2 bg-green-500/15 border border-green-500/30 text-green-200 text-xs p-3 rounded-xl">
-                  <CheckCircle className="w-4 h-4 text-green-400 shrink-0" />
+                <div className="flex items-center gap-2 bg-green-50 border border-green-200 text-green-700 text-xs p-3 rounded-xl">
+                  <CheckCircle className="w-4 h-4 text-green-600 shrink-0" />
                   <span>{successMessage}</span>
                 </div>
               )}
 
               {/* Student Name */}
               <div className="space-y-1.5" id="field-student-name">
-                <label className="block text-xs font-medium text-blue-200">Student Name</label>
+                <label className="block text-xs font-bold text-slate-700">Student Name</label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-blue-300">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <User className="w-4 h-4" />
                   </div>
                   <input
@@ -199,16 +202,16 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                     placeholder="e.g. Rahul Sharma"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-blue-300/40 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="block w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
                   />
                 </div>
               </div>
 
               {/* Email Address */}
               <div className="space-y-1.5" id="field-student-email">
-                <label className="block text-xs font-medium text-blue-200">Email Address</label>
+                <label className="block text-xs font-bold text-slate-700">Email Address</label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-blue-300">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Mail className="w-4 h-4" />
                   </div>
                   <input
@@ -217,16 +220,16 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                     placeholder="student@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-blue-300/40 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="block w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
                   />
                 </div>
               </div>
 
               {/* Phone Number */}
               <div className="space-y-1.5" id="field-student-phone">
-                <label className="block text-xs font-medium text-blue-200">Phone Number</label>
+                <label className="block text-xs font-bold text-slate-700">Phone Number</label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-blue-300">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <Phone className="w-4 h-4" />
                   </div>
                   <input
@@ -235,23 +238,23 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                     placeholder="+91 92126 XXXXX"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-blue-300/40 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                    className="block w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all"
                   />
                 </div>
               </div>
 
               {/* State */}
               <div className="space-y-1.5" id="field-student-state">
-                <label className="block text-xs font-medium text-blue-200">State</label>
+                <label className="block text-xs font-bold text-slate-700">State</label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-blue-300">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <select
                     required
                     value={state}
                     onChange={(e) => setState(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none cursor-pointer"
+                    className="block w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="bg-primary-950 text-slate-400">Select State</option>
                     {INDIAN_STATES.map((st) => (
@@ -260,7 +263,7 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                       </option>
                     ))}
                   </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-blue-300">
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                     <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                     </svg>
@@ -270,16 +273,16 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
 
               {/* Target Course */}
               <div className="space-y-1.5" id="field-student-course">
-                <label className="block text-xs font-medium text-blue-200">Target Course</label>
+                <label className="block text-xs font-bold text-slate-700">Target Course</label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-blue-300">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                     <BookOpen className="w-4 h-4" />
                   </div>
                   <select
                     required
                     value={course}
                     onChange={(e) => setCourse(e.target.value)}
-                    className="block w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all appearance-none cursor-pointer"
+                    className="block w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-red-500/30 focus:border-red-500 transition-all appearance-none cursor-pointer"
                   >
                     <option value="" disabled className="bg-primary-950 text-slate-400">Select Target Course</option>
                     {COURSE_CATEGORIES.filter(category => category.id !== "ug" && category.id !== "pg").map((category) => (
@@ -292,7 +295,7 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
                       </optgroup>
                     ))}
                   </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-blue-300">
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                     <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                       <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                     </svg>
@@ -304,7 +307,7 @@ export default function EnrollmentForm({ onSuccess, setActiveTab }: EnrollmentFo
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-primary-600 to-accent-500 hover:from-primary-700 hover:to-accent-600 text-white font-sans font-semibold text-sm tracking-wider uppercase py-3.5 rounded-xl shadow-lg hover:shadow-primary-600/20 transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-primary-600 to-red-700 hover:from-red-700 hover:to-primary-600 text-white font-sans font-bold text-sm tracking-wider uppercase py-4 rounded-xl shadow-lg shadow-red-600/20 hover:shadow-red-600/30 transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 id="submit-auth-button"
               >
                 {isSubmitting ? (

@@ -50,19 +50,19 @@ export default function Academia() {
             </div>
 
             <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm text-center space-y-2 hover:shadow-md transition-all">
-              <span className="block font-display font-extrabold text-3xl text-accent-500 dark:text-amber-400">1:1</span>
+              <span className="block font-display font-extrabold text-3xl text-primary-600 dark:text-red-400">1:1</span>
               <span className="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Node Allocation</span>
               <p className="text-[10px] text-slate-500 dark:text-slate-400">Every single student gets an independent high-spec workstation.</p>
             </div>
 
             <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm text-center space-y-2 hover:shadow-md transition-all">
-              <span className="block font-display font-extrabold text-3xl text-green-500 dark:text-emerald-400">24/7</span>
+              <span className="block font-display font-extrabold text-3xl text-primary-600 dark:text-red-400">24/7</span>
               <span className="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Digital Portal</span>
               <p className="text-[10px] text-slate-500 dark:text-slate-400">Instant access to lecture materials, task checklists, and class videos.</p>
             </div>
 
             <div className="bg-white dark:bg-slate-950 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm text-center space-y-2 hover:shadow-md transition-all">
-              <span className="block font-display font-extrabold text-3xl text-purple-500 dark:text-purple-400">100%</span>
+              <span className="block font-display font-extrabold text-3xl text-primary-600 dark:text-red-400">100%</span>
               <span className="block text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Internal Lab Vetting</span>
               <p className="text-[10px] text-slate-500 dark:text-slate-400">All student projects are peer-reviewed in on-campus sandbox hubs.</p>
             </div>

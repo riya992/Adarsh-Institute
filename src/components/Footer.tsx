@@ -16,7 +16,7 @@ export default function Footer({ setActiveTab }: FooterProps) {
   };
 
   return (
-    <footer id="main-footer" className="bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300 border-t border-slate-200 dark:border-slate-900 relative overflow-hidden transition-colors duration-300">
+    <footer id="main-footer" className="bg-slate-950 text-slate-300 border-t border-slate-900 relative overflow-hidden transition-colors duration-300">
       {/* Background radial accent */}
       <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-accent-600/5 blur-[100px] pointer-events-none" />
 
@@ -77,19 +77,19 @@ export default function Footer({ setActiveTab }: FooterProps) {
 
           {/* Section 2: Contact Details (3 Cols) */}
           <div className="md:col-span-3 space-y-6">
-            <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Contact details</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-wider text-white">Contact details</h4>
             <div className="space-y-4 text-xs sm:text-sm" id="footer-contact-details">
 
               <div className="flex gap-3 items-start">
                 <MapPin className="w-4 h-4 text-accent-600 dark:text-accent-400 mt-0.5 shrink-0" />
-                <span className="text-slate-600 dark:text-slate-400">{CONTACT_INFO.address}</span>
+                <span className="text-slate-400">{CONTACT_INFO.address}</span>
               </div>
 
               <div className="flex gap-3 items-center">
                 <Phone className="w-4 h-4 text-accent-600 dark:text-accent-400 shrink-0" />
                 <div className="flex flex-col">
                   <span className="text-[10px] text-accent-600 dark:text-accent-400 font-semibold uppercase tracking-wider">Enquiry Now</span>
-                  <a href={`tel:${CONTACT_INFO.phone.replace(/\s+/g, "")}`} className="text-slate-800 dark:text-slate-200 font-bold hover:text-primary-600 dark:hover:text-white transition-colors">
+                  <a href={`tel:${CONTACT_INFO.phone.replace(/\s+/g, "")}`} className="text-slate-200 font-bold hover:text-white transition-colors">
                     {CONTACT_INFO.phone}
                   </a>
                   <span className="text-[11px] text-slate-500 dark:text-slate-500">Available 9 AM - 7 PM</span>
@@ -117,29 +117,29 @@ export default function Footer({ setActiveTab }: FooterProps) {
           <div className="md:col-span-3 space-y-6" id="helpline-desk">
             <div className="flex items-center gap-2">
               <PhoneCall className="w-4 h-4 text-primary-600 dark:text-primary-400" />
-              <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Helpline Desk</h4>
+              <h4 className="font-display font-bold text-sm uppercase tracking-wider text-white">Helpline Desk</h4>
               <span className="text-[10px] font-semibold bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full uppercase tracking-wide">9AM–7PM</span>
             </div>
             <div className="space-y-3 text-xs sm:text-sm">
 
               <a href="tel:+919711375732" className="group flex items-center gap-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                <Phone className="w-4 h-4 text-primary-600 dark:text-primary-400 shrink-0" />
-                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-primary-600 dark:group-hover:text-primary-400">+91 97113 75732</span>
+                <Phone className="w-4 h-4 text-green-500 dark:text-green-400 shrink-0" />
+                <span className="text-slate-300 font-semibold group-hover:text-green-400">+91 97113 75732</span>
               </a>
 
               <a href="tel:+919953230176" className="group flex items-center gap-3 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
-                <Phone className="w-4 h-4 text-accent-600 dark:text-accent-400 shrink-0" />
-                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-accent-600 dark:group-hover:text-accent-400">+91 99532 30176</span>
+                <Phone className="w-4 h-4 text-green-500 dark:text-green-400 shrink-0" />
+                <span className="text-slate-300 font-semibold group-hover:text-green-400">+91 99532 30176</span>
               </a>
 
               <a href="tel:+918512018845" className="group flex items-center gap-3 hover:text-green-600 dark:hover:text-green-400 transition-colors">
-                <Phone className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
-                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-green-600 dark:group-hover:text-green-400">+91 85120 18845</span>
+                <Phone className="w-4 h-4 text-green-500 dark:text-green-400 shrink-0" />
+                <span className="text-slate-300 font-semibold group-hover:text-green-400">+91 85120 18845</span>
               </a>
 
               <a href="tel:+919212621301" className="group flex items-center gap-3 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
-                <span className="text-slate-700 dark:text-slate-300 font-semibold group-hover:text-blue-600 dark:group-hover:text-blue-400">+91 92126 21301</span>
+                <Phone className="w-4 h-4 text-green-500 dark:text-green-400 shrink-0" />
+                <span className="text-slate-300 font-semibold group-hover:text-green-400">+91 92126 21301</span>
               </a>
 
             </div>
@@ -147,7 +147,7 @@ export default function Footer({ setActiveTab }: FooterProps) {
 
           {/* Section 4: Quick Links (3 Cols) */}
           <div className="md:col-span-3 space-y-6">
-            <h4 className="font-display font-bold text-sm uppercase tracking-wider text-slate-900 dark:text-white">Quick links</h4>
+            <h4 className="font-display font-bold text-sm uppercase tracking-wider text-white">Quick links</h4>
             <div className="grid grid-cols-2 gap-3 text-xs sm:text-sm" id="footer-quick-links">
 
               <button onClick={() => handleQuickLink("home")} className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-white transition-all cursor-pointer text-left">
